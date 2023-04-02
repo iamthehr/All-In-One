@@ -10,6 +10,7 @@ import ContactsIcon from "@mui/icons-material/Contacts";
 import logoImg from "../media/logo.png";
 import { Container } from "@mui/system";
 import CustomButton from "./CustomButton";
+import Link from "next/link";
 import {
   Drawer,
   List,
@@ -103,13 +104,6 @@ export const Navbar = () => {
     },
   }));
 
-  // const NavbarLogo = styled("img")(({ theme }) => ({
-  //   cursor: "pointer",
-  //   [theme.breakpoints.down("md")]: {
-  //     display: "none",
-  //   },
-  // }));
-
   return (
     <NavbarContainer>
       <Box
@@ -150,13 +144,21 @@ export const Navbar = () => {
           gap: "1rem",
         }}
       >
-        <NavLink variant="body2">Login</NavLink>
+        <Link
+          href="/Login"
+          style={{ textDecoration: "none", color: "#5E616A" }}
+        >
+          Login{" "}
+        </Link>
 
-        <CustomButton
-          backgroundColor="#0F1B4C"
-          color="#fff"
-          buttonText="Signup"
-        />
+        <Link href="/Sign_up" style={{ textDecoration: "none" }}>
+          {" "}
+          <CustomButton
+            backgroundColor="#0F1B4C"
+            color="#fff"
+            buttonText="Signup"
+          />
+        </Link>
       </Box>
     </NavbarContainer>
   );
