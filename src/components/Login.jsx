@@ -22,8 +22,7 @@ function Copyright(props) {
       align="center"
       {...props}
     >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" href="/" sx={{ textDecoration: "none" }}>
         AllinONE
       </Link>{" "}
       {new Date().getFullYear()}
@@ -39,7 +38,7 @@ const theme = createTheme({
   },
 });
 
-export default function SignUp() {
+export default function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -51,7 +50,17 @@ export default function SignUp() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container
+        component="main"
+        maxWidth="xs"
+        sx={{
+          boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+          backdropFilter: "blur( 3px )",
+          webkitFbackdropFilter: " blur( 3px )",
+          borderRadius: "10px",
+          border: "1px solid rgba( 255, 255, 255, 0.18 )",
+        }}
+      >
         <CssBaseline />
         <Box
           sx={{

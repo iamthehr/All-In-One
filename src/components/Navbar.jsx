@@ -145,13 +145,13 @@ export const Navbar = () => {
         }}
       >
         <Link
-          href="/Login"
+          href="/Intermediate"
           style={{ textDecoration: "none", color: "#5E616A" }}
         >
           Login{" "}
         </Link>
 
-        <Link href="/Sign_up" style={{ textDecoration: "none" }}>
+        <Link href="/Intermediate" style={{ textDecoration: "none" }}>
           {" "}
           <CustomButton
             backgroundColor="#0F1B4C"

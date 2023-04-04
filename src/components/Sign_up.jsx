@@ -22,8 +22,7 @@ function Copyright(props) {
       align="center"
       {...props}
     >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" href="/" sx={{ textDecoration: "none" }}>
         AllinONE
       </Link>{" "}
       {new Date().getFullYear()}
@@ -51,7 +50,17 @@ export default function SignUp() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container
+        component="main"
+        maxWidth="xs"
+        sx={{
+          boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+          backdropFilter: "blur( 3px )",
+          webkitFbackdropFilter: " blur( 3px )",
+          borderRadius: "10px",
+          border: "1px solid rgba( 255, 255, 255, 0.18 )",
+        }}
+      >
         <CssBaseline />
         <Box
           sx={{
@@ -121,7 +130,7 @@ export default function SignUp() {
                   control={
                     <Checkbox value="allowExtraEmails" color="primary" />
                   }
-                  label="I want to receive inspiration, marketing promotions and updates via email."
+                  label="I want to receive updates via email."
                 />
               </Grid>
             </Grid>
@@ -136,7 +145,7 @@ export default function SignUp() {
             <CustomButton></CustomButton>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/Login" variant="body2">
+                <Link href="/Tabs" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>
