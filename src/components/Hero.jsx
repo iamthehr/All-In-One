@@ -6,6 +6,9 @@ import Navbar from "./Navbar";
 import CustomButton from "./CustomButton";
 import heroImg2 from "../media/heroImg.png";
 import Image from "next/image";
+import Aos from "aos";
+import "Aos/dist/aos.css";
+import { useEffect } from "react";
 
 const Hero = () => {
   const CustomBox = styled(Box)(({ theme }) => ({
@@ -19,6 +22,10 @@ const Hero = () => {
       textAlign: "center",
     },
   }));
+
+  useEffect(() => {
+    Aos.init({ duration: 800 });
+  }, []);
 
   const Title = styled(Typography)(({ theme }) => ({
     fontSize: "64px",
@@ -59,15 +66,17 @@ const Hero = () => {
               evolved over the years, sometimes by accident, sometimes on
               purpose (injected humour and the like).
             </Typography>
-            <CustomButton
-              backgroundColor="#0F1B4C"
-              color="#fff"
-              buttonText="Get started"
-              heroBtn={true}
-            />
+            <Box data-aos="fade-right">
+              <CustomButton
+                backgroundColor="#0F1B4C"
+                color="#fff"
+                buttonText="Get started"
+                heroBtn={true}
+              />
+            </Box>
           </Box>
 
-          <Box sx={{ flex: "1.25" }}>
+          <Box sx={{ flex: "1.25" }} data-aos="fade-left">
             <Image
               src={heroImg2}
               alt="heroImg"
