@@ -1,7 +1,7 @@
 import { Avatar, Box, Typography } from "@mui/material";
 import React from "react";
 
-const DoctorCard = () => {
+const DoctorCard = ({ name, qual, spec, handleOpen }) => {
   return (
     <Box
       //   onClick={handleFunction}
@@ -21,6 +21,7 @@ const DoctorCard = () => {
       py={2}
       mb={2}
       borderRadius={"2px"}
+      onClick={handleOpen}
     >
       <Avatar
         // marginRight
@@ -33,11 +34,11 @@ const DoctorCard = () => {
         src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
       />
       <Box>
-        <Typography>Dr Batra</Typography>
+        <Typography>{name}</Typography>
         <Typography fontSize="xs">
-          <b>General Physican</b>
+          <b>{spec}</b>
         </Typography>
-        <Typography fontSize="xs">MBBS,MD</Typography>
+        <Typography fontSize="xs">{qual}</Typography>
       </Box>
     </Box>
   );
