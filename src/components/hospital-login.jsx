@@ -22,8 +22,7 @@ function Copyright(props) {
       align="center"
       {...props}
     >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" href="/" sx={{ textDecoration: "none" }}>
         AllinONE
       </Link>{" "}
       {new Date().getFullYear()}
@@ -39,19 +38,29 @@ const theme = createTheme({
   },
 });
 
-export default function SignUp() {
+export default function Hlogin() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
-      email: data.get("email"),
+      HospitalID: data.get("HospitalID"),
       password: data.get("password"),
     });
   };
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container
+        component="main"
+        maxWidth="xs"
+        sx={{
+          boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+          backdropFilter: "blur( 3px )",
+          webkitFbackdropFilter: " blur( 3px )",
+          borderRadius: "10px",
+          border: "1px solid rgba( 255, 255, 255, 0.18 )",
+        }}
+      >
         <CssBaseline />
         <Box
           sx={{
@@ -65,7 +74,7 @@ export default function SignUp() {
             <DoubleArrowIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Login
+            Admin Login
           </Typography>
           <Box
             component="form"
@@ -78,10 +87,10 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
+                  id="HospitalID"
+                  label="HospitalID"
+                  name="HospitalID"
+                  autoComplete="HospitalID"
                 />
               </Grid>
               <Grid item xs={12}>

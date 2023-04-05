@@ -5,16 +5,15 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
+
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import CustomButton from "@/components/CustomButton";
-import AddIcon from "@mui/icons-material/Add";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import Link from "next/link";
+
 function Copyright(props) {
   return (
     <Typography
@@ -23,8 +22,11 @@ function Copyright(props) {
       align="center"
       {...props}
     >
-      {"Copyright © "}
-      <Link color="inherit" href="/">
+      <Link
+        color="inherit"
+        href="/"
+        style={{ textDecoration: "none", color: "#5C6066" }}
+      >
         AllinONE
       </Link>{" "}
       {new Date().getFullYear()}
@@ -40,19 +42,32 @@ const theme = createTheme({
   },
 });
 
-const AddDoctor = () => {
+export default function HsignUp() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
       email: data.get("email"),
       password: data.get("password"),
+      Name: data.get("name"),
+      ImageStyle: data.get("imageStyle"),
+      Cpassword: data.get("Cpassword"),
     });
   };
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container
+        component="main"
+        maxWidth="xs"
+        sx={{
+          boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+          backdropFilter: "blur( 3px )",
+          webkitFbackdropFilter: " blur( 3px )",
+          borderRadius: "10px",
+          border: "1px solid rgba( 255, 255, 255, 0.18 )",
+        }}
+      >
         <CssBaseline />
         <Box
           sx={{
@@ -63,10 +78,10 @@ const AddDoctor = () => {
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: "#0F1B4C" }}>
-            <AddIcon />
+            <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Add Doctor
+            Admin Sign up
           </Typography>
           <Box
             component="form"
@@ -75,111 +90,101 @@ const AddDoctor = () => {
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <TextField
                   autoComplete="given-name"
-                  name="firstName"
+                  name="Name"
                   required
                   fullWidth
-                  id="firstName"
-                  label="First Name"
+                  id="Name"
+                  label="Hospital Name"
                   autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="qualifications"
-                  label="Qualifications"
-                  name="qualifications"
-                  autoComplete="qualifications"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                {/* <TextField
-                  required
-                  fullWidth
-                  id="qualifications"
-                  label="Qualifications"
-                  name="qualifications"
-                  autoComplete="qualifications"
-                /> */}
-                <TextField
-                  required
-                  fullWidth
-                  id="yoe"
-                  label="Years of Experiance"
-                  type="number"
-                  InputProps={{
-                    inputProps: { min: 0 },
-                  }}
-                  autoComplete="yoe"
                 />
               </Grid>
 
               <Grid item xs={12}>
-                <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">
-                    Specialization
-                  </InputLabel>
-                  <Select
-                    labelId="Specialization"
-                    id="Specialization"
-                    // value={age}
-                    label="Specialization"
-                    // onChange={handleChange}
-                  >
-                    <MenuItem value={10}>Orthopedics</MenuItem>
-                    <MenuItem value={20}>General Surgery</MenuItem>
-                    <MenuItem value={20}>Pathology</MenuItem>
-                    <MenuItem value={20}>General Physician</MenuItem>
-                    {/* <MenuItem value={20}>General Surgery</MenuItem> */}
-                    {/* <MenuItem value={30}>Thirty</MenuItem> */}
-                  </Select>
-                </FormControl>
+                <TextField
+                  required
+                  fullWidth
+                  name="Address"
+                  label="Hospital Address"
+                  type="Address"
+                  id="password"
+                  autoComplete="new-password"
+                />
               </Grid>
-              {/* <Grid item xs={12}>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="new-password"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="Cpassword"
+                  label="Confirm Password"
+                  type="password"
+                  autoComplete="new-password"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Box sx={{ display: "flex", gap: "1em" }}>
+                  <Typography> Upload profile</Typography>
+                  <input type="file" id="file-input" name="ImageStyle" />
+                </Box>
+              </Grid>
+              <Grid item xs={12}>
                 <FormControlLabel
                   control={
                     <Checkbox value="allowExtraEmails" color="primary" />
                   }
-                  label="I want to receive inspiration, marketing promotions and updates via email."
+                  label="I want to receive updates via email."
                 />
-              </Grid> */}
+              </Grid>
             </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2, backgroundColor: "#0F1B4C", color: "#fff" }}
+            <Link
+              href="/Hospital"
+              variant="body2"
+              style={{ textDecoration: "none", color: "white" }}
             >
-              Add
-            </Button>
-            {/* <CustomButton></CustomButton> */}
-            {/* <Grid container justifyContent="flex-end">
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2, backgroundColor: "#0F1B4C", color: "#fff" }}
+              >
+                Sign Up
+              </Button>
+            </Link>
+
+            <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/Login" variant="body2">
-                  Already have an account? Sign in
+                <Link href="/Tabs-Hospital" style={{ color: "#0F1B4C" }}>
+                  Already have an account? Login
                 </Link>
               </Grid>
-            </Grid> */}
+            </Grid>
           </Box>
         </Box>
         <Copyright sx={{ mt: 5 }} />
       </Container>
     </ThemeProvider>
   );
-};
-
-export default AddDoctor;
+}

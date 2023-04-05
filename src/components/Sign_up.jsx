@@ -12,7 +12,6 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import CustomButton from "@/components/CustomButton";
 
 function Copyright(props) {
   return (
@@ -22,8 +21,7 @@ function Copyright(props) {
       align="center"
       {...props}
     >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" href="/" sx={{ textDecoration: "none" }}>
         AllinONE
       </Link>{" "}
       {new Date().getFullYear()}
@@ -44,14 +42,28 @@ export default function SignUp() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
+      firstname: data.get("firstname"),
+      lastname: data.get("lastname"),
+
       email: data.get("email"),
       password: data.get("password"),
+      Cpassword: data.get("Cpassword"),
     });
   };
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container
+        component="main"
+        maxWidth="xs"
+        sx={{
+          boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+          backdropFilter: "blur( 3px )",
+          webkitFbackdropFilter: " blur( 3px )",
+          borderRadius: "10px",
+          border: "1px solid rgba( 255, 255, 255, 0.18 )",
+        }}
+      >
         <CssBaseline />
         <Box
           sx={{
@@ -65,7 +77,7 @@ export default function SignUp() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            User Sign up
           </Typography>
           <Box
             component="form"
@@ -117,12 +129,29 @@ export default function SignUp() {
                 />
               </Grid>
               <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="Cpassword"
+                  label="Confirm Password"
+                  type="password"
+                  id="password"
+                  autoComplete="new-password"
+                />
+              </Grid>
+              <Grid item xs={12}>
                 <FormControlLabel
                   control={
                     <Checkbox value="allowExtraEmails" color="primary" />
                   }
-                  label="I want to receive inspiration, marketing promotions and updates via email."
+                  label="I want to receive updates via email."
                 />
+              </Grid>
+              <Grid item xs={12}>
+                <Box sx={{ display: "flex", gap: "1em" }}>
+                  <Typography> Upload profile</Typography>
+                  <input type="file" id="file-input" name="ImageStyle" />
+                </Box>
               </Grid>
             </Grid>
             <Button
@@ -133,10 +162,10 @@ export default function SignUp() {
             >
               Sign Up
             </Button>
-            <CustomButton></CustomButton>
+
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/Login" variant="body2">
+                <Link href="/Tabs-User" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>

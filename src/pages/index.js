@@ -7,6 +7,7 @@ import Aos from "aos";
 import "Aos/dist/aos.css";
 import { useEffect } from "react";
 
+
 export default function Home() {
   useEffect(() => {
     Aos.init({ duration: 800 });
@@ -21,6 +22,7 @@ export default function Home() {
       <div data-Aos="fade-left">
         <House2 />
       </div>
+
       <Footer />
     </>
   );
