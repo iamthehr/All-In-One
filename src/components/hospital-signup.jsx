@@ -5,13 +5,14 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
+
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Link from "next/link";
 
 function Copyright(props) {
   return (
@@ -21,7 +22,11 @@ function Copyright(props) {
       align="center"
       {...props}
     >
-      <Link color="inherit" href="/" sx={{ textDecoration: "none" }}>
+      <Link
+        color="inherit"
+        href="/"
+        style={{ textDecoration: "none", color: "#5C6066" }}
+      >
         AllinONE
       </Link>{" "}
       {new Date().getFullYear()}
@@ -37,16 +42,15 @@ const theme = createTheme({
   },
 });
 
-export default function SignUp() {
+export default function HsignUp() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
-      firstname: data.get("firstname"),
-      lastname: data.get("lastname"),
-
       email: data.get("email"),
       password: data.get("password"),
+      Name: data.get("name"),
+      ImageStyle: data.get("imageStyle"),
       Cpassword: data.get("Cpassword"),
     });
   };
@@ -77,7 +81,7 @@ export default function SignUp() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            User Sign up
+            Admin Sign up
           </Typography>
           <Box
             component="form"
@@ -86,25 +90,27 @@ export default function SignUp() {
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <TextField
                   autoComplete="given-name"
-                  name="firstName"
+                  name="Name"
                   required
                   fullWidth
-                  id="firstName"
-                  label="First Name"
+                  id="Name"
+                  label="Hospital Name"
                   autoFocus
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+
+              <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
+                  name="Address"
+                  label="Hospital Address"
+                  type="Address"
+                  id="password"
+                  autoComplete="new-password"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -135,9 +141,14 @@ export default function SignUp() {
                   name="Cpassword"
                   label="Confirm Password"
                   type="password"
-                  id="password"
                   autoComplete="new-password"
                 />
+              </Grid>
+              <Grid item xs={12}>
+                <Box sx={{ display: "flex", gap: "1em" }}>
+                  <Typography> Upload profile</Typography>
+                  <input type="file" id="file-input" name="ImageStyle" />
+                </Box>
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
@@ -147,26 +158,26 @@ export default function SignUp() {
                   label="I want to receive updates via email."
                 />
               </Grid>
-              <Grid item xs={12}>
-                <Box sx={{ display: "flex", gap: "1em" }}>
-                  <Typography> Upload profile</Typography>
-                  <input type="file" id="file-input" name="ImageStyle" />
-                </Box>
-              </Grid>
             </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2, backgroundColor: "#0F1B4C", color: "#fff" }}
+            <Link
+              href="/Hospital"
+              variant="body2"
+              style={{ textDecoration: "none", color: "white" }}
             >
-              Sign Up
-            </Button>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2, backgroundColor: "#0F1B4C", color: "#fff" }}
+              >
+                Sign Up
+              </Button>
+            </Link>
 
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/Tabs-User" variant="body2">
-                  Already have an account? Sign in
+                <Link href="/Tabs-Hospital" style={{ color: "#0F1B4C" }}>
+                  Already have an account? Login
                 </Link>
               </Grid>
             </Grid>

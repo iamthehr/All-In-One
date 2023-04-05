@@ -40,10 +40,10 @@ export default function LabTabs() {
             </TabList>
           </Box>
           <TabPanel value="1">
-            <Login />
+            <Login Use="User" />
           </TabPanel>
           <TabPanel value="2">
-            <SignUp />
+            <SignUp Use="User" />
           </TabPanel>
         </TabContext>
       </Box>

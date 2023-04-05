@@ -74,7 +74,7 @@ export default function Login() {
             <DoubleArrowIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Login
+            User Login
           </Typography>
           <Box
             component="form"
