@@ -67,7 +67,7 @@ const House = () => {
             >
               You can register your hospital/clinic/Lab here.
             </Typography>
-            <Link href="/Tabs" style={{ textDecoration: "none" }}>
+            <Link href="/Tabs-Hospital" style={{ textDecoration: "none" }}>
               <CustomButton
                 backgroundColor="#fff"
                 color="#17275F"
@@ -98,7 +98,7 @@ const House = () => {
             >
               Get access to our facilities.
             </Typography>
-            <Link href="/Tabs" style={{ textDecoration: "none" }}>
+            <Link href="/Tabs-User" style={{ textDecoration: "none" }}>
               <CustomButton
                 backgroundColor="#fff"
                 color="#17275F"

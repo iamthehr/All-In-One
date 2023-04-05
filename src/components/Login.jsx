@@ -38,7 +38,7 @@ const theme = createTheme({
   },
 });
 
-export default function Login() {
+export default function Login(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -74,7 +74,7 @@ export default function Login() {
             <DoubleArrowIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Login
+            {props.Use + " "}Login
           </Typography>
           <Box
             component="form"
