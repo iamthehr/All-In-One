@@ -12,6 +12,7 @@ const DoctorCard = ({ name, qual, spec, handleOpen }) => {
       }}
       style={{
         backgroundColor: "#E8E8E8",
+        borderRadius: "30px",
       }}
       width="100%"
       display={"flex"}

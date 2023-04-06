@@ -148,20 +148,29 @@ export default function SignUp() {
                 />
               </Grid>
               <Grid item xs={12}>
-                <Box sx={{ display: "flex", gap: "1em" }}>
-                  <Typography> Upload profile</Typography>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    flexWrap: "nowrap",
+                    gap: "0.3em",
+                  }}
+                >
+                  <Typography>Upload Profile</Typography>
                   <input type="file" id="file-input" name="ImageStyle" />
                 </Box>
               </Grid>
             </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2, backgroundColor: "#0F1B4C", color: "#fff" }}
-            >
-              Sign Up
-            </Button>
+            <Link href="/Hospital">
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2, backgroundColor: "#0F1B4C", color: "#fff" }}
+              >
+                Sign Up
+              </Button>
+            </Link>
 
             <Grid container justifyContent="flex-end">
               <Grid item>

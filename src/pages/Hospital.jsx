@@ -15,6 +15,7 @@ const theme = createTheme({
 function Hospital() {
   return (
     <ThemeProvider theme={theme}>
+      <Navbar />
       <Box
         display={"flex"}
         justifyContent={"center"}

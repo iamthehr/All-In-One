@@ -15,6 +15,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CustomButton from "@/components/CustomButton";
 import AddIcon from "@mui/icons-material/Add";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import Navbar2 from "@/components/Navbar2";
 function Copyright(props) {
   return (
     <Typography
@@ -52,6 +53,7 @@ const AddDoctor = () => {
 
   return (
     <ThemeProvider theme={theme}>
+      <Navbar2 />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -107,14 +109,16 @@ const AddDoctor = () => {
                 />
               </Grid>
               <Grid item xs={12}>
-                {/* <TextField
+                <TextField
                   required
                   fullWidth
-                  id="qualifications"
-                  label="Qualifications"
-                  name="qualifications"
-                  autoComplete="qualifications"
-                /> */}
+                  id="email"
+                  label="E-Mail"
+                  name="email"
+                  autoComplete="email"
+                />
+              </Grid>
+              {/* <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
@@ -126,7 +130,7 @@ const AddDoctor = () => {
                   }}
                   autoComplete="yoe"
                 />
-              </Grid>
+              </Grid> */}
 
               <Grid item xs={12}>
                 <FormControl fullWidth>
@@ -157,6 +161,19 @@ const AddDoctor = () => {
                   label="I want to receive inspiration, marketing promotions and updates via email."
                 />
               </Grid> */}
+              <Grid item xs={12}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    flexWrap: "nowrap",
+                    gap: "0.3em",
+                  }}
+                >
+                  <Typography>Upload Profile</Typography>
+                  <input type="file" id="file-input" name="ImageStyle" />
+                </Box>
+              </Grid>
             </Grid>
             <Button
               type="submit"

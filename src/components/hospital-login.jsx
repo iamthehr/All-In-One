@@ -106,14 +106,17 @@ export default function Hlogin() {
               </Grid>
               <Grid item xs={12}></Grid>
             </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2, backgroundColor: "#0F1B4C", color: "#fff" }}
-            >
-              Login
-            </Button>
+            <Link href="/Hospital">
+              {" "}
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2, backgroundColor: "#0F1B4C", color: "#fff" }}
+              >
+                Login
+              </Button>
+            </Link>
 
             <Grid container justifyContent="flex-end">
               <Grid item>
