@@ -5,7 +5,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
+import Link from "next/link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -21,7 +21,15 @@ function Copyright(props) {
       align="center"
       {...props}
     >
-      <Link color="inherit" href="/" sx={{ textDecoration: "none" }}>
+      <Link
+        color="inherit"
+        href="/"
+        style={{
+          textDecoration: "none",
+          textDecorationColor: "none",
+          color: "#83878c",
+        }}
+      >
         AllinONE
       </Link>{" "}
       {new Date().getFullYear()}
@@ -161,7 +169,7 @@ export default function SignUp() {
                 </Box>
               </Grid>
             </Grid>
-            <Link href="/Hospital">
+            <Link href="/User-homepage" variant="body2">
               <Button
                 type="submit"
                 fullWidth
@@ -174,7 +182,14 @@ export default function SignUp() {
 
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/Tabs-User" variant="body2">
+                <Link
+                  href="/Tabs-User"
+                  style={{
+                    textDecoration: "none",
+                    textDecorationColor: "none",
+                    color: "#90949a",
+                  }}
+                >
                   Already have an account? Sign in
                 </Link>
               </Grid>
