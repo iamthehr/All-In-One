@@ -41,7 +41,7 @@ const House = () => {
 
   return (
     <>
-      <div data-Aos="fade-right">
+      <div data-Aos="fade-right" id="Features">
         <CustomBox>
           <CustomContainer>
             <Box>

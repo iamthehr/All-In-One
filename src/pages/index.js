@@ -16,13 +16,17 @@ export default function Home() {
 
   return (
     <>
-      <Hero />
+      <div style={{ scrollBehavior: "smooth" }}>
+        <Hero />
 
-      <House />
-      <About />
+        <House />
+        <div id="About">
+          <About />
+        </div>
+        <div data-Aos="fade-up">
 
-      <div data-Aos="fade-up">
-        <Footer />
+          <Footer />
+        </div>
       </div>
     </>
   );
