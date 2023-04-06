@@ -12,6 +12,7 @@ import { Container } from "@mui/system";
 
 import {
   Drawer,
+  Link,
   List,
   ListItem,
   ListItemButton,
@@ -127,11 +128,18 @@ export const Navbar = () => {
         </Box>
 
         <NavbarLinksBox>
-          <NavLink variant="body2">Home</NavLink>
-          <NavLink variant="body2">Consult</NavLink>
-          <NavLink variant="body2">Lab-test</NavLink>
-
-          <NavLink variant="body2">Contact</NavLink>
+          <Link href="#consultdoc" sx={{ textDecoration: "none" }}>
+            <NavLink variant="body2">Home</NavLink>
+          </Link>
+          <Link href="#consultdoc" sx={{ textDecoration: "none" }}>
+            <NavLink variant="body2">Consult</NavLink>
+          </Link>
+          <Link href="#Booklabtest" sx={{ textDecoration: "none" }}>
+            <NavLink variant="body2">Lab-test</NavLink>
+          </Link>
+          <Link href="#contact" sx={{ textDecoration: "none" }}>
+            <NavLink variant="body2">Contact</NavLink>
+          </Link>
         </NavbarLinksBox>
       </Box>
     </NavbarContainer>

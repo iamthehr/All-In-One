@@ -1,30 +1,70 @@
 import React from 'react'
 import Navbar from '@/components/Nav3'
-import { Box, Button, Link, styled, Typography } from "@mui/material";
+import { Box, Button, styled, Typography } from "@mui/material";
 import { Container } from "@mui/system";
+import TextField from '@mui/material/TextField';
 
+import SearchIcon from '@mui/icons-material/Search';
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import DocardsNew from '@/components/DocardsNew';
+import Footer from '@/components/Footer';
+import Contact from '@/components/Contact';
 
-
-import CustomButton from "@/components/CustomButton";
-
-import Image from "next/image";
 import Aos from "aos";
 import "Aos/dist/aos.css";
 import { useEffect } from "react";
 
+
+
+const theme = createTheme({
+    palette: {
+        primary: { main: "#0F1B4C" },
+        secondary: { main: "#1da7e2" },
+    },
+});
+
+
+const Specialization = [
+    {
+        value: 'USD',
+        label: 'Physician',
+    },
+    {
+        value: 'EUR',
+        label: 'gand ka doctor',
+    },
+    {
+        value: 'BTC',
+        label: 'gand ka doctor number 2',
+    },
+    {
+        value: 'JPY',
+        label: ' gand ka doctor number 3',
+    },
+];
+const Test = [
+    {
+        value: '1',
+        label: 'bloodtest',
+    },
+    {
+        value: '2',
+        label: 'sugar',
+    },
+    {
+        value: '3',
+        label: 'lamp',
+    },
+    {
+        value: '4',
+        label: 'new blood test',
+    },
+];
+
+
 function User_homepage() {
 
-    const CustomBox = styled(Box)(({ theme }) => ({
-        display: "flex",
-        justifyContent: "center",
-        gap: theme.spacing(5),
-        marginTop: theme.spacing(3),
-        [theme.breakpoints.down("md")]: {
-            flexDirection: "column",
-            alignItems: "center",
-            textAlign: "center",
-        },
-    }));
+
 
     useEffect(() => {
         Aos.init({ duration: 800 });
@@ -47,13 +87,16 @@ function User_homepage() {
         },
     }));
     const CustomContainer = styled(Container)(({ theme }) => ({
-        backgroundColor: "#16495F",
+        backgroundColor: "#17275F",
         marginTop: "29px",
-        height: "400px",
+        height: "auto",
         borderRadius: "15px",
         display: "flex",
         justifyContent: "space-around",
         alignItems: "center",
+        flexDirection: "column",
+
+
 
         [theme.breakpoints.down("md")]: {
             height: "auto",
@@ -69,11 +112,12 @@ function User_homepage() {
 
 
         <>
-            <Box sx={{ backgroundColor: "#E6F0FF", minHeight: "100vh" }}>
-                <Container>
-                    <Navbar />
-                    <CustomBox>
-                        <Box sx={{ flex: "1" }}>
+            <ThemeProvider theme={theme}>
+                <Box sx={{ backgroundColor: "#E6F0FF", minHeight: "100vh", scrollBehavior: "smooth" }}>
+                    <Container>
+                        <Navbar />
+
+                        <Box >
                             <Typography
                                 variant="body2"
                                 sx={{
@@ -100,95 +144,176 @@ function User_homepage() {
 
                         </Box>
 
+                        <div id="Consultdoc">
 
-                    </CustomBox>
-                    <CustomContainer>
-
-                        <Box>
-                            <Typography
-                                sx={{ fontSize: "30px", color: "white", fontWeight: "700" }}
-                            >
-                                Consult with a doctor
-                            </Typography>
-
-                        </Box>
-                        <Box >
-                            <Typography sx={{
-                                fontSize: "40px",
-                                color: "white",
-                                fontWeight: "500",
-                            }}>
-                                Address
-                            </Typography>
-                            <Typography sx={{
-                                fontSize: "25px",
-                                color: "white",
-                                fontWeight: "500",
-                            }}>
-                                Filter out doctors
-                            </Typography>
-
-                        </Box>
+                            <CustomContainer>
 
 
+                                <Box sx={{ width: "100%", bgcolor: "#E6F0FF", paddingLeft: "3px", marginTop: "5px", borderRadius: "7px" }}>
 
-                    </CustomContainer>
-                    <CustomContainer>
+                                    <Typography
+                                        sx={{ fontSize: "30px", color: "black", fontWeight: "700", textAlign: "center" }}
+                                    >
+                                        CONSULT WITH A DOCTOR
+                                    </Typography>
+                                    <div
+                                        style={{
+                                            width: "100%",
+                                            height: "5px",
+                                            backgroundColor: "#000339",
+                                            margin: "0 auto",
+                                            marginBottom: "43px",
+                                        }}
+                                    ></div>
 
-                        <Box>
-                            <Typography
-                                sx={{ fontSize: "30px", color: "white", fontWeight: "700" }}
-                            >
-                                Consult with a doctor
-                            </Typography>
-                            {/* <Typography
-        sx={{
-            fontSize: "16px",
-            color: "#ccc",
-            fontWeight: "500",
-            my: 3,
-        }}
-    >
-        Checkout for nearby doctors.
-    </Typography> */}
-                            {/* <Link href="/#" style={{ textDecoration: "none" }}>
-        <CustomButton
-            backgroundColor="#fff"
-            color="#17275F"
-            buttonText="Checkout"
-            getStartedBtn={true}
-        />
-    </Link> */}
-                        </Box>
-                        <Box >
-                            <Typography sx={{
-                                fontSize: "40px",
-                                color: "white",
-                                fontWeight: "500",
-                            }}>
-                                Address
-                            </Typography>
-                            <Typography sx={{
-                                fontSize: "25px",
-                                color: "white",
-                                fontWeight: "500",
-                            }}>
-                                Filter out doctors
-                            </Typography>
+                                    <TextField
+
+                                        select
+                                        fullWidth
+                                        label="select specialization"
+                                        defaultValue="Specialization"
+                                        SelectProps={{
+                                            native: true
+
+                                        }}
+
+                                        helperText="  select the speciation of the doctor  "
+                                        variant="standard"
+                                    >
+                                        {Specialization.map((option) => (
+                                            <option key={option.value} value={option.value}>
+                                                {option.label}
+                                            </option>
+                                        ))}
+                                    </TextField>
 
 
 
 
+                                    <Button variant="contained" fullWidth endIcon={<SearchIcon />}>
+                                        Search
+                                    </Button>
+
+                                </Box>
+
+                                <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", borderRadius: "5px solid black" }} mt={3} >
+                                    <Box >
+                                        <Typography
+                                            sx={{ fontSize: "30px", color: "white", fontWeight: "700" }}
+                                        >
+                                            DOCTORS NEAR YOU
+                                        </Typography>
+                                        <div
+                                            style={{
+                                                width: "100%",
+                                                height: "5px",
+                                                backgroundColor: "#000339",
+                                                margin: "0 auto",
+                                                marginBottom: "43px",
+                                            }}
+                                        ></div>
+
+                                    </Box >
+                                    <Box sx={{ display: "flex", flexWrap: "wrap", gap: "3px", justifyContent: "center", alignItems: "center" }} marginLeft="15px" mt={8} mb={8} >
+
+
+                                        <DocardsNew name="Aditya" qual="Phd in mathematics" spec="Physician" distance="4km" Hospital_Name="TMH NAYSARAY" Adress="SAHFGHASFVJHASVGHDFJVGSAHDVASJHVDJASHV" />
+
+
+                                    </Box>
+
+                                </Box>
+
+                            </CustomContainer>
+                        </div>
+                        <div id="Booklabtest">
+                            <CustomContainer>
+
+
+                                <Box sx={{ width: "100%", bgcolor: "#E6F0FF", paddingLeft: "3px", marginTop: "5px", borderRadius: "7px" }}>
+
+                                    <Typography
+                                        sx={{ fontSize: "30px", color: "black", fontWeight: "700", textAlign: "center" }}
+                                    >
+                                        BOOK A LAB TEST
+                                    </Typography>
+                                    <div
+                                        style={{
+                                            width: "100%",
+                                            height: "5px",
+                                            backgroundColor: "#000339",
+                                            margin: "0 auto",
+                                            marginBottom: "43px",
+                                        }}
+                                    ></div>
+
+                                    <TextField
+
+                                        select
+                                        fullWidth
+                                        label="select test"
+                                        defaultValue="blood test"
+                                        SelectProps={{
+                                            native: true
+
+                                        }}
+
+                                        variant="standard"
+                                    >
+                                        {Test.map((option) => (
+                                            <option key={option.value} value={option.value}>
+                                                {option.label}
+                                            </option>
+                                        ))}
+                                    </TextField>
 
 
 
-                        </Box>
+
+                                    <Button variant="contained" fullWidth endIcon={<SearchIcon />}>
+                                        Search
+                                    </Button>
+
+                                </Box>
+
+                                <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", borderRadius: "5px solid black" }} mt={3} >
+                                    <Box >
+                                        <Typography
+                                            sx={{ fontSize: "30px", color: "white", fontWeight: "700" }}
+                                        >
+                                            LABS NEAR YOU
+                                        </Typography>
+                                        <div
+                                            style={{
+                                                width: "100%",
+                                                height: "5px",
+                                                backgroundColor: "#000339",
+                                                margin: "0 auto",
+                                                marginBottom: "43px",
+                                            }}
+                                        ></div>
+
+                                    </Box >
+                                    <Box sx={{ display: "flex", flexWrap: "wrap", gap: "3px", justifyContent: "center", alignItems: "center" }} marginLeft="15px" mt={8} mb={8} >
 
 
+                                        <DocardsNew name="Aditya" qual="Phd in mathematics" spec="Physician" distance="4km" Hospital_Name="TMH NAYSARAY" Adress="SAHFGHASFVJHASVGHDFJVGSAHDVASJHVDJASHV" />
 
-                    </CustomContainer>
-                </Container>
-            </Box>
+
+                                    </Box>
+
+                                </Box>
+
+                            </CustomContainer>
+                        </div>
+                    </Container>
+                </Box >
+                <div id="contact">
+                    <Contact />
+                </div>
+                <Footer />
+
+            </ThemeProvider >
         </>
     );
 
