@@ -2,7 +2,7 @@ import React from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CustomButton from "@/components/CustomButton";
 import { Box, Typography } from "@mui/material";
-import Navbar from "@/components/Navbar";
+import Nav3 from "@/components/Nav3";
 import Link from "next/link";
 
 const theme = createTheme({
@@ -15,7 +15,7 @@ const theme = createTheme({
 function Hospital() {
   return (
     <ThemeProvider theme={theme}>
-      <Navbar />
+      <Nav3 />
       <Box
         display={"flex"}
         justifyContent={"center"}
