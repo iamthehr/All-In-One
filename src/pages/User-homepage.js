@@ -87,7 +87,7 @@ function User_homepage() {
         },
     }));
     const CustomContainer = styled(Container)(({ theme }) => ({
-        backgroundColor: "#17275F",
+        backgroundColor: "#CBD7FF",
         marginTop: "29px",
         height: "auto",
         borderRadius: "15px",
@@ -217,7 +217,12 @@ function User_homepage() {
                                     <Box sx={{ display: "flex", flexWrap: "wrap", gap: "3px", justifyContent: "center", alignItems: "center" }} marginLeft="15px" mt={8} mb={8} >
 
 
-                                        <DocardsNew name="Aditya" qual="Phd in mathematics" spec="Physician" distance="4km" Hospital_Name="TMH NAYSARAY" Adress="SAHFGHASFVJHASVGHDFJVGSAHDVASJHVDJASHV" />
+                                        <DocardsNew name="Aditya" qual="MBBS" spec="Physician" distance="4km" Hospital_Name="TMH NAYSARAY" Adress="SAHFGHASFVJH" />
+                                        <DocardsNew name="Aditya" qual="MBBS" spec="Physician" distance="4km" Hospital_Name="TMH NAYSARAY" Adress="SAHFGHASFVJH" />
+                                        <DocardsNew name="Aditya" qual="MBBS" spec="Physician" distance="4km" Hospital_Name="TMH NAYSARAY" Adress="SAHFGHASFVJH" />
+                                        <DocardsNew name="Aditya" qual="MBBS" spec="Physician" distance="4km" Hospital_Name="TMH NAYSARAY" Adress="SAHFGHASFVJH" />
+                                        <DocardsNew name="Aditya" qual="MBBS" spec="Physician" distance="4km" Hospital_Name="TMH NAYSARAY" Adress="SAHFGHASFVJH" />
+                                        <DocardsNew name="Aditya" qual="MBBS" spec="Physician" distance="4km" Hospital_Name="TMH NAYSARAY" Adress="SAHFGHASFVEFG" />
 
 
                                     </Box>
@@ -226,7 +231,7 @@ function User_homepage() {
 
                             </CustomContainer>
                         </div>
-                        <div id="Booklabtest">
+                        {/* <div id="Booklabtest">
                             <CustomContainer>
 
 
@@ -298,6 +303,7 @@ function User_homepage() {
 
 
                                         <DocardsNew name="Aditya" qual="Phd in mathematics" spec="Physician" distance="4km" Hospital_Name="TMH NAYSARAY" Adress="SAHFGHASFVJHASVGHDFJVGSAHDVASJHVDJASHV" />
+                                        <DocardsNew name="Aditya" qual="Phd in mathematics" spec="Physician" distance="4km" Hospital_Name="TMH NAYSARAY" Adress="SAHFGHASFVJHASVGHDFJVGSAHDVASJHVDJASHV" />
 
 
                                     </Box>
@@ -305,7 +311,7 @@ function User_homepage() {
                                 </Box>
 
                             </CustomContainer>
-                        </div>
+                        </div> */}
                     </Container>
                 </Box >
                 <div id="contact">

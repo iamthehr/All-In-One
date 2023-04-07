@@ -75,6 +75,7 @@ const Schedule = () => {
       },
     ]);
   };
+
   return (
     <ThemeProvider theme={theme}>
       <LocalizationProvider dateAdapter={AdapterDayjs}>

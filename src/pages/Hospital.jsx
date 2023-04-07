@@ -1,11 +1,11 @@
 import React from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import CustomButton from "@/components/CustomButton";
+
 import { Box, Typography } from "@mui/material";
-import Nav3 from "@/components/Nav3";
-import Link from "next/link";
+
 import AdminSec1 from "@/components/AdminSec1";
 import AdminSec2 from "@/components/AdminSec2";
+import Navbar from "@/components/Navbar";
 
 const theme = createTheme({
   palette: {
