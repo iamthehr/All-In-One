@@ -4,6 +4,8 @@ import CustomButton from "@/components/CustomButton";
 import { Box, Typography } from "@mui/material";
 import Navbar from "@/components/Navbar";
 import Link from "next/link";
+import AdminSec1 from "@/components/AdminSec1";
+import AdminSec2 from "@/components/AdminSec2";
 
 const theme = createTheme({
   palette: {
@@ -16,7 +18,12 @@ function Hospital() {
   return (
     <ThemeProvider theme={theme}>
       <Navbar />
-      <Box
+      <Box display={"flex"} alignItems={"center"} justifyContent={"center"}>
+        <Typography variant="h1">Welcome!</Typography>
+      </Box>
+      <AdminSec1 />
+      <AdminSec2 />
+      {/* <Box
         display={"flex"}
         justifyContent={"center"}
         alignItems={"center"}
@@ -66,7 +73,7 @@ function Hospital() {
             />
           </Link>
         </Box>
-      </Box>
+      </Box> */}
     </ThemeProvider>
   );
 }

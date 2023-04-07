@@ -161,16 +161,14 @@ export default function SignUp() {
                 </Box>
               </Grid>
             </Grid>
-            <Link href="/Hospital">
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2, backgroundColor: "#0F1B4C", color: "#fff" }}
-              >
-                Sign Up
-              </Button>
-            </Link>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2, backgroundColor: "#0F1B4C", color: "#fff" }}
+            >
+              Sign Up
+            </Button>
 
             <Grid container justifyContent="flex-end">
               <Grid item>
