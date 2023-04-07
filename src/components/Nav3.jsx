@@ -9,10 +9,10 @@ import HomeIcon from "@mui/icons-material/Home";
 import ContactsIcon from "@mui/icons-material/Contacts";
 import logoImg from "../media/logo.png";
 import { Container } from "@mui/system";
-import CustomButton from "./CustomButton";
-import Link from "next/link";
+
 import {
   Drawer,
+  Link,
   List,
   ListItem,
   ListItemButton,
@@ -47,7 +47,7 @@ export const Navbar = () => {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {["Home", "Features", "AboutUs", "Contact"].map((text, index) => (
+        {["Home", "Consult", "Lab-test", "Contact"].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <ListItemIcon>
@@ -111,7 +111,7 @@ export const Navbar = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          gap: "2.5rem",
+          gap: "15rem",
         }}
       >
         <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -123,48 +123,24 @@ export const Navbar = () => {
           >
             {list("left")}
           </Drawer>
-          {/* <NavbarLogo src={logoImg} alt="logo" width={100} /> */}
+
           <Image src={logoImg} alt="logo" width={100} />
         </Box>
 
         <NavbarLinksBox>
-          <Link href="/" style={{ textDecoration: "none" }}>
+          <Link href="#consultdoc" sx={{ textDecoration: "none" }}>
             <NavLink variant="body2">Home</NavLink>
           </Link>
-          <Link href="#Features" style={{ textDecoration: "none" }}>
-            <NavLink variant="body2">Features</NavLink>
+          <Link href="#consultdoc" sx={{ textDecoration: "none" }}>
+            <NavLink variant="body2">Consult</NavLink>
           </Link>
-          <Link href="#About" style={{ textDecoration: "none" }}>
-            <NavLink variant="body2">AboutUs</NavLink>
+          <Link href="#Booklabtest" sx={{ textDecoration: "none" }}>
+            <NavLink variant="body2">Lab-test</NavLink>
           </Link>
-
-          <NavLink variant="body2">Contact</NavLink>
+          <Link href="#contact" sx={{ textDecoration: "none" }}>
+            <NavLink variant="body2">Contact</NavLink>
+          </Link>
         </NavbarLinksBox>
-      </Box>
-
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "1rem",
-        }}
-      >
-        <Link
-          href="/Intermediate"
-          style={{ textDecoration: "none", color: "#5E616A" }}
-        >
-          Login{" "}
-        </Link>
-
-        <Link href="/Intermediate" style={{ textDecoration: "none" }}>
-          {" "}
-          <CustomButton
-            backgroundColor="#0F1B4C"
-            color="#fff"
-            buttonText="Signup"
-          />
-        </Link>
       </Box>
     </NavbarContainer>
   );

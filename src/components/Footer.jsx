@@ -106,19 +106,6 @@ const Footer = () => {
           <Box>
             <Typography
               sx={{
-                fontSize: "15px",
-                color: "#1C1C1D",
-                fontWeight: "700",
-                mb: 2,
-              }}
-            >
-              About us
-            </Typography>
-          </Box>
-
-          <Box>
-            <Typography
-              sx={{
                 fontSize: "20px",
                 color: "#1C1C1D",
                 fontWeight: "700",

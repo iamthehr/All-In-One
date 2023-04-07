@@ -6,11 +6,11 @@ import CustomButton from "./CustomButton";
 import Link from "next/link";
 import Image from "next/image";
 
-const House2 = () => {
+const About = () => {
   const CustomContainer = styled(Container)(({ theme }) => ({
-    backgroundColor: "#17275F",
-    marginTop: "29px",
-    height: "416px",
+    backgroundColor: "#000336",
+    marginTop: "30px",
+    height: "30vh",
     borderRadius: "15px",
     display: "flex",
     justifyContent: "space-around",
@@ -19,16 +19,20 @@ const House2 = () => {
       height: "auto",
       flexDirection: "column",
       alignItems: "center",
-      padding: theme.spacing(3, 3, 0, 3),
-      width: "90%",
+      padding: theme.spacing(1, 1, 0, 1),
+      width: "100%",
     },
   }));
 
   const CustomBox = styled(Box)(({ theme }) => ({
-    padding: theme.spacing(1, 0, 10, 0),
+    padding: theme.spacing(1, 0, 1, 0),
     margin: theme.spacing(0, 1, 0, 1),
     [theme.breakpoints.down("md")]: {
-      padding: "0",
+      height: "auto",
+      flexDirection: "column",
+      alignItems: "center",
+      padding: theme.spacing(1, 1, 0, 1),
+      width: "100%",
     },
   }));
 
@@ -36,31 +40,22 @@ const House2 = () => {
     <CustomBox>
       <CustomContainer>
         <Box>
-          <Image src={lab} />
-        </Box>
-        <Box>
           <Typography
             sx={{ fontSize: "30px", color: "white", fontWeight: "700" }}
           >
-            Book a Lab test from home
+            About US
           </Typography>
           <Typography
             sx={{ fontSize: "16px", color: "#ccc", fontWeight: "500", my: 3 }}
           >
-            Checkout for nearby labs.
+            we are a team of programmers from nit jamshedpur. we are here to
+            build a new platform for the the users to get their Appointments and
+            test done without worrying about the crowd and waiting time.
           </Typography>
-          <Link href="/#" style={{ textDecoration: "none" }}>
-            <CustomButton
-              backgroundColor="#fff"
-              color="#17275F"
-              buttonText="Checkout"
-              getStartedBtn={true}
-            />
-          </Link>
         </Box>
       </CustomContainer>
     </CustomBox>
   );
 };
 
-export default House2;
+export default About;

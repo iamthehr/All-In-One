@@ -1,4 +1,4 @@
-import { Box, Button, styled, Typography } from "@mui/material";
+import { Box, Button, Link, styled, Typography } from "@mui/material";
 import { Container } from "@mui/system";
 import React from "react";
 import Navbar from "./Navbar";
@@ -67,12 +67,14 @@ const Hero = () => {
               purpose (injected humour and the like).
             </Typography>
             <Box data-aos="fade-right">
-              <CustomButton
-                backgroundColor="#0F1B4C"
-                color="#fff"
-                buttonText="Get started"
-                heroBtn={true}
-              />
+              <Link href="User-homepage" style={{ textDecoration: "none" }}>
+                <CustomButton
+                  backgroundColor="#0F1B4C"
+                  color="#fff"
+                  buttonText="Get started"
+                  heroBtn={true}
+                />
+              </Link>
             </Box>
           </Box>
 
