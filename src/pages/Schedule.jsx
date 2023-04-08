@@ -41,8 +41,7 @@ const style = {
 };
 
 const Schedule = () => {
-
-  const [searchTerm,setSearchTerm]=useState("")
+  const [searchTerm, setSearchTerm] = useState("");
 
   const [open, setOpen] = useState(false);
   const [startTime, setStartTime] = useState();
@@ -173,10 +172,15 @@ const Schedule = () => {
             <InputBase
               sx={{ ml: 1, flex: 1 }}
               placeholder="Search Doctor"
-              onChange={e=>setSearchTerm(e.target.value)}
+              onChange={(e) => setSearchTerm(e.target.value)}
               inputProps={{ "aria-label": "search google maps" }}
             />
-            <IconButton type="button" sx={{ p: "10px" }} aria-label="search" onClick={searchDoctor}>
+            <IconButton
+              type="button"
+              sx={{ p: "10px" }}
+              aria-label="search"
+              onClick={searchDoctor}
+            >
               <SearchIcon />
             </IconButton>
           </Paper>

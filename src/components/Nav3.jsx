@@ -23,7 +23,7 @@ import {
 import { useState } from "react";
 import Image from "next/image";
 
-export const Navbar = () => {
+export const Nav3 = () => {
   const [mobileMenu, setMobileMenu] = useState({
     left: false,
   });
@@ -146,4 +146,4 @@ export const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Nav3;
