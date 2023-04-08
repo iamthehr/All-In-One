@@ -13,6 +13,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Link from "next/link";
+import { useState } from "react";
+import axios from "axios";
 
 function Copyright(props) {
   return (
@@ -43,8 +45,16 @@ const theme = createTheme({
 });
 
 export default function HsignUp() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
+
+  const [hospital,setHospital]=useState("")
+  const [address,setAddress]=useState("")
+  const [email,setEmail]=useState("")
+  const [password,setPassword]=useState("")
+  const [cnfpassword,setcnfPassword]=useState("")
+  const [image,setImage]=useState("")
+
+  const handleSubmit = async() => {
+    /*event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
       email: data.get("email"),
@@ -52,7 +62,35 @@ export default function HsignUp() {
       Name: data.get("name"),
       ImageStyle: data.get("imageStyle"),
       Cpassword: data.get("Cpassword"),
-    });
+    });*/
+    if(!hospital || !address || !email || !password || !cnfpassword || !image){
+      alert("enter all credentials")
+      return
+    }
+    if(password!==cnfpassword){
+      alert('passwords do not match')
+      return 
+    }
+    const regex=/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
+    if(!email.match(regex)){
+      alert('enter valid email')
+      return 
+    }
+
+    const formData=new FormData()
+    formData.append('image',image)
+    formData.append('name',hospital)
+    formData.append('address',address)
+    formData.append('root_mail',email)
+    formData.append('root_pass',password)
+
+    let ans=await axios.post('http://localhost:5000/hospital/register',formData,{
+      headers:{
+        'Content-Type':'multipart/form-data'
+      }
+    })
+    console.log(ans)
+
   };
 
   return (
@@ -94,6 +132,7 @@ export default function HsignUp() {
                 <TextField
                   autoComplete="given-name"
                   name="Name"
+                  onChange={e=>setHospital(e.target.value)}
                   required
                   fullWidth
                   id="Name"
@@ -107,6 +146,7 @@ export default function HsignUp() {
                   required
                   fullWidth
                   name="Address"
+                  onChange={e=>setAddress(e.target.value)}
                   label="Hospital Address"
                   type="Address"
                   id="password"
@@ -118,6 +158,7 @@ export default function HsignUp() {
                   required
                   fullWidth
                   id="email"
+                  onChange={e=>setEmail(e.target.value)}
                   label="Email Address"
                   name="email"
                   autoComplete="email"
@@ -128,6 +169,7 @@ export default function HsignUp() {
                   required
                   fullWidth
                   name="password"
+                  onChange={e=>setPassword(e.target.value)}
                   label="Password"
                   type="password"
                   id="password"
@@ -139,6 +181,7 @@ export default function HsignUp() {
                   required
                   fullWidth
                   name="Cpassword"
+                  onChange={e=>setcnfPassword(e.target.value)}
                   label="Confirm Password"
                   type="password"
                   autoComplete="new-password"
@@ -147,7 +190,7 @@ export default function HsignUp() {
               <Grid item xs={12}>
                 <Box sx={{ display: "flex", gap: "1em" }}>
                   <Typography> Upload profile</Typography>
-                  <input type="file" id="file-input" name="ImageStyle" />
+                  <input type="file" id="file-input" name="ImageStyle" onChange={e=>setImage(e.target.files[0])}/>
                 </Box>
               </Grid>
               <Grid item xs={12}>
@@ -159,20 +202,17 @@ export default function HsignUp() {
                 />
               </Grid>
             </Grid>
-            <Link
-              href="/Hospital"
-              variant="body2"
-              style={{ textDecoration: "none", color: "white" }}
-            >
+            
               <Button
                 type="submit"
                 fullWidth
+                onClick={handleSubmit}
                 variant="contained"
                 sx={{ mt: 3, mb: 2, backgroundColor: "#0F1B4C", color: "#fff" }}
               >
                 Sign Up
               </Button>
-            </Link>
+            
 
             <Grid container justifyContent="flex-end">
               <Grid item>

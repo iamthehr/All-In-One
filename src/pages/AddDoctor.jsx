@@ -16,6 +16,9 @@ import CustomButton from "@/components/CustomButton";
 import AddIcon from "@mui/icons-material/Add";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import Navbar2 from "@/components/Navbar2";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
 function Copyright(props) {
   return (
     <Typography
@@ -42,13 +45,51 @@ const theme = createTheme({
 });
 
 const AddDoctor = () => {
-  const handleSubmit = (event) => {
+
+  const [fname,setFname]=useState("")
+  const [lname,setLname]=useState("")
+  const [qualifications,setQualifications]=useState("")
+  const [email,setEmail]=useState("")
+  const [specialization,setSpecialization]=useState("")
+  const [image,setImage]=useState("")
+
+ 
+
+  const handleSubmit = async(event) => {
+    const token=localStorage.getItem('token')
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    /*const data = new FormData(event.currentTarget);
     console.log({
       email: data.get("email"),
       password: data.get("password"),
-    });
+    });*/
+
+    if(!fname || ! lname || !qualifications || !email || !specialization || !image){
+      alert('please fill all the fields')
+      return
+    }
+
+    const regex=/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+    if(!email.match(regex)){
+      alert('enter valid email format')
+      return
+    }
+
+    const formData=new FormData()
+    formData.append('image',image)
+    formData.append('name',fname+" "+lname)
+    formData.append('qualifications',qualifications)
+    formData.append('email',email)
+    formData.append('speciality',specialization)
+
+    let ans=await axios.post('http://localhost:5000/mainpage/hospital/addDoctor/register',formData,{
+      headers:{
+        'Content-Type':'multipart/form-data',
+        'auth':token
+      }
+    })
+    //ans=await ans.json()
+    console.log(ans)
   };
 
   return (
@@ -91,6 +132,7 @@ const AddDoctor = () => {
                 <TextField
                   autoComplete="given-name"
                   name="firstName"
+                  onChange={e=>setFname(e.target.value)}
                   required
                   fullWidth
                   id="firstName"
@@ -104,6 +146,7 @@ const AddDoctor = () => {
                   fullWidth
                   id="lastName"
                   label="Last Name"
+                  onChange={e=>setLname(e.target.value)}
                   name="lastName"
                   autoComplete="family-name"
                 />
@@ -112,6 +155,7 @@ const AddDoctor = () => {
                 <TextField
                   required
                   fullWidth
+                  onChange={e=>setQualifications(e.target.value)}
                   id="qualifications"
                   label="Qualifications"
                   name="qualifications"
@@ -122,6 +166,7 @@ const AddDoctor = () => {
                 <TextField
                   required
                   fullWidth
+                  onChange={e=>setEmail(e.target.value)}
                   id="email"
                   label="E-Mail"
                   name="email"
@@ -150,14 +195,15 @@ const AddDoctor = () => {
                   <Select
                     labelId="Specialization"
                     id="Specialization"
+                    onChange={e=>setSpecialization(e.target.value)}
                     // value={age}
                     label="Specialization"
                     // onChange={handleChange}
                   >
-                    <MenuItem value={10}>Orthopedics</MenuItem>
-                    <MenuItem value={20}>General Surgery</MenuItem>
-                    <MenuItem value={20}>Pathology</MenuItem>
-                    <MenuItem value={20}>General Physician</MenuItem>
+                    <MenuItem value='orthopedics'>Orthopedics</MenuItem>
+                    <MenuItem value='general surgery'>General Surgery</MenuItem>
+                    <MenuItem value='pathology'>Pathology</MenuItem>
+                    <MenuItem value='general physician'>General Physician</MenuItem>
                     {/* <MenuItem value={20}>General Surgery</MenuItem> */}
                     {/* <MenuItem value={30}>Thirty</MenuItem> */}
                   </Select>
@@ -181,7 +227,7 @@ const AddDoctor = () => {
                   }}
                 >
                   <Typography>Upload Profile</Typography>
-                  <input type="file" id="file-input" name="ImageStyle" />
+                  <input type="file" id="file-input" name="ImageStyle" onChange={e=>setImage(e.target.files[0])}/>
                 </Box>
               </Grid>
             </Grid>
@@ -189,6 +235,7 @@ const AddDoctor = () => {
               type="submit"
               fullWidth
               variant="contained"
+              onClick={handleSubmit}
               sx={{ mt: 3, mb: 2, backgroundColor: "#0F1B4C", color: "#fff" }}
             >
               Add

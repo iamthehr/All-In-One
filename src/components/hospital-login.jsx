@@ -12,6 +12,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
+import { useState } from "react";
+
 import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
 
 function Copyright(props) {
@@ -39,14 +41,42 @@ const theme = createTheme({
 });
 
 export default function Hlogin() {
-  const handleSubmit = (event) => {
+
+  const [email,setEmail]=useState("")
+  const [password,setPassword]=useState("")
+
+  /*const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
       HospitalID: data.get("HospitalID"),
       password: data.get("password"),
     });
-  };
+  };*/
+
+  const handleSubmit=async(event)=>{
+    event.preventDefault()
+    if(!email || !password){
+      alert('enter all fields')
+      return 
+    }
+    const regex=/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
+    if(!email.match(regex)){
+      alert('enter valid email')
+      return 
+    }
+    
+    let user=await fetch('http://localhost:5000/hospital/login',{
+      method:'post',
+      body:JSON.stringify({email,password}),
+      headers:{
+        'Content-Type':'application/json'
+      }
+    })
+    user=await user.json()
+    //console.log(user)
+    localStorage.setItem('token',user.data.token)
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -78,8 +108,6 @@ export default function Hlogin() {
           </Typography>
           <Box
             component="form"
-            noValidate
-            onSubmit={handleSubmit}
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
@@ -87,6 +115,7 @@ export default function Hlogin() {
                 <TextField
                   required
                   fullWidth
+                  onChange={e=>setEmail(e.target.value)}
                   id="HospitalID"
                   label="HospitalID"
                   name="HospitalID"
@@ -98,6 +127,7 @@ export default function Hlogin() {
                   required
                   fullWidth
                   name="password"
+                  onChange={e=>setPassword(e.target.value)}
                   label="Password"
                   type="password"
                   id="password"
@@ -112,6 +142,7 @@ export default function Hlogin() {
                 type="submit"
                 fullWidth
                 variant="contained"
+                onClick={handleSubmit}
                 sx={{ mt: 3, mb: 2, backgroundColor: "#0F1B4C", color: "#fff" }}
               >
                 Login

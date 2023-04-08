@@ -13,6 +13,13 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
+import { useState } from "react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router";
+import { useRouter } from "next/router";
+
+import axios from "axios";
+
 function Copyright(props) {
   return (
     <Typography
@@ -46,9 +53,20 @@ const theme = createTheme({
 });
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
+
+  const [fname,setFname]=useState("")
+  const [lname,setLname]=useState("")
+  const [email,setEmail]=useState("")
+  const [password,setPassword]=useState("")
+  const [cnfpassword,setcnfPassword]=useState("")
+  const [image,setImage]=useState("")
+
+  const router=useRouter()
+
+
+  const handleSubmit = async(event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    /*const data = new FormData(event.currentTarget);
     console.log({
       firstname: data.get("firstname"),
       lastname: data.get("lastname"),
@@ -56,7 +74,34 @@ export default function SignUp() {
       email: data.get("email"),
       password: data.get("password"),
       Cpassword: data.get("Cpassword"),
-    });
+    });*/
+    if(!fname || !lname || !email || !password || !cnfpassword || !image){
+      alert("enter all credentials")
+      return
+    }
+    if(password!==cnfpassword){
+      alert('passwords do not match')
+      return 
+    }
+    const regex=/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
+    if(!email.match(regex)){
+      alert('enter valid email')
+      return 
+    }
+
+    const formData=new FormData()
+    formData.append('image',image)
+    formData.append('name',fname+" "+lname)
+    formData.append('email',email)
+    formData.append('password',password)
+    let ans=await axios.post('http://localhost:5000/auth/user/register',formData,{
+      headers:{
+        'Content-Type':'multipart/form-data'
+      }
+    })
+    console.log(ans)
+    router.push('/')
+    
   };
 
   return (
@@ -98,6 +143,7 @@ export default function SignUp() {
                 <TextField
                   autoComplete="given-name"
                   name="firstName"
+                  onChange={e=>setFname(e.target.value)}
                   required
                   fullWidth
                   id="firstName"
@@ -109,6 +155,7 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
+                  onChange={e=>setLname(e.target.value)}
                   id="lastName"
                   label="Last Name"
                   name="lastName"
@@ -119,6 +166,7 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
+                  onChange={e=>setEmail(e.target.value)}
                   id="email"
                   label="Email Address"
                   name="email"
@@ -129,6 +177,7 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
+                  onChange={e=>setPassword(e.target.value)}
                   name="password"
                   label="Password"
                   type="password"
@@ -140,6 +189,7 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
+                  onChange={e=>setcnfPassword(e.target.value)}
                   name="Cpassword"
                   label="Confirm Password"
                   type="password"
@@ -165,20 +215,21 @@ export default function SignUp() {
                   }}
                 >
                   <Typography>Upload Profile</Typography>
-                  <input type="file" id="file-input" name="ImageStyle" />
+                  <input type="file" id="file-input" name="ImageStyle" onChange={e=>setImage(e.target.files[0])}/>
                 </Box>
               </Grid>
             </Grid>
-            <Link href="/User-homepage" variant="body2">
+            
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2, backgroundColor: "#0F1B4C", color: "#fff" }}
+                onClick={handleSubmit}
               >
                 Sign Up
               </Button>
-            </Link>
+          
 
             <Grid container justifyContent="flex-end">
               <Grid item>
