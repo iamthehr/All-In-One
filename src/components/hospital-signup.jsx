@@ -83,13 +83,13 @@ export default function HsignUp() {
     formData.append('address',address)
     formData.append('root_mail',email)
     formData.append('root_pass',password)
-
+    console.log('data ok')
     let ans=await axios.post('http://localhost:5000/hospital/register',formData,{
       headers:{
         'Content-Type':'multipart/form-data'
       }
     })
-    console.log(ans)
+    
 
   };
 

@@ -13,7 +13,7 @@ import {
 // import { SearchIcon } from "@mui/icons-material";
 import SearchIcon from "@mui/icons-material/Search";
 import DeleteIcon from "@mui/icons-material/delete";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DoctorCard from "@/components/DoctorCard";
 import CustomButton from "@/components/CustomButton";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -49,11 +49,29 @@ const Schedule = () => {
   const [endTime, setEndTime] = useState();
   const [day, setDay] = useState();
   const [appoitArray, setAppoitArray] = useState([]);
+  const [doctors,setDoctors]=useState([])
+  const [selectedDoctor,setSelectedDoctor]=useState("")
 
-  
+  useEffect(()=>{},[doctors,appoitArray])
+
+  async function displayTimeSlots(){
+    const token=localStorage.getItem('token')
+    let slots=await fetch('http://localhost:5000/mainpage/hospital/displayTimeSlot',{
+      method:'post',
+      body:JSON.stringify({doctor_id:selectedDoctor,day:day}),
+      headers:{
+        'Content-Type':'application/json',
+        "auth":token
+      }
+    })
+    slots=await slots.json()
+    console.log(slots)
+    setAppoitArray(slots)
+  }
+
   async function searchDoctor(){
     const token=localStorage.getItem('token')
-    console.log(token)
+    //console.log(token)
     let l=await fetch('http://localhost:5000/mainpage/hospital/searchDoctor',{
       method:'post',
       body:JSON.stringify({name:searchTerm}),
@@ -63,10 +81,27 @@ const Schedule = () => {
       }
     })
     l=await l.json()
-    //console.log(l)
+    for(let i in l){
+      console.log(l[i])
+      let img=await fetch('http://localhost:5000/mainpage/hospital/doctorImages',{
+        method:'post',
+        body:JSON.stringify({doctor_id:l[i].id}),
+        headers:{
+          'Content-Type':'application/json',
+          "auth":token
+        }
+
+      })
+      img=await img.blob()
+      let newObj={...l[i],image:URL.createObjectURL(img)}
+      l[i]=newObj
+    }
+    console.log(l)
+    setDoctors(l)
   }
 
-  const handleOpen = () => {
+  const handleOpen = (item) => {
+    setSelectedDoctor(item.id)
     setOpen(true);
   };
   const handleClose = () => {
@@ -76,6 +111,23 @@ const Schedule = () => {
     if (!startTime || !endTime) {
       return;
     }
+    console.log(startTime+" "+endTime)
+    const st_time= startTime.$d
+    .toLocaleTimeString(navigator.language, {
+      hour: "2-digit",
+      minute: "2-digit",
+    })
+    .replace(/(:\d{2}| [AP]M)$/, "")
+
+    const end_time=endTime.$d
+    .toLocaleTimeString(navigator.language, {
+      hour: "2-digit",
+      minute: "2-digit",
+    })
+    .replace(/(:\d{2}| [AP]M)$/, "")
+    console.log(st_time+" "+end_time)
+
+
 
     setAppoitArray((prevVal) => [
       ...prevVal,
@@ -129,7 +181,7 @@ const Schedule = () => {
             </IconButton>
           </Paper>
           <Box width={{ base: "100%", md: "50%", lg: "40%", xs: "100%" }}>
-            <DoctorCard
+            {/*<DoctorCard
               name="Dr.Batra"
               qual="MBBS,MD"
               spec="Generel Physician"
@@ -154,8 +206,15 @@ const Schedule = () => {
             <DoctorCard
               name="Dr.Batra"
               qual="MBBS,MD"
-              spec="Generel Physician"
-            />
+          spec="Generel Physician"/>*/}
+          {doctors.map(item=>{
+            return(
+              
+              <DoctorCard key={item} name={item.name} qual={item.qualifications} spec={item.speciality} handleOpen={item=>handleOpen(item)} handleClose={handleClose}></DoctorCard>
+              
+              
+            )
+          })}
           </Box>
           <Modal
             open={open}
@@ -170,43 +229,64 @@ const Schedule = () => {
               <Box display={"flex"} gap={"1rem"} flexWrap={"wrap"}>
                 <a
                   style={{ color: "blue", textDecoration: "underline" }}
-                  onClick={() => setDay("Sunday")}
+                  onClick={() => {
+                    setDay("Sunday")
+                    displayTimeSlots()
+                  }}
                 >
                   Sun
                 </a>
 
                 <a
                   style={{ color: "blue", textDecoration: "underline" }}
-                  onClick={() => setDay("Monday")}
+                  onClick={() =>{
+                    setDay("Monday")
+                    displayTimeSlots()
+                  }}
                 >
                   Mon
                 </a>
                 <a
                   style={{ color: "blue", textDecoration: "underline" }}
-                  onClick={() => setDay("Tuesday")}
+                  onClick={() =>{
+                    setDay("Tuesday")
+                    displayTimeSlots()
+                  }}
                 >
                   Tue
                 </a>
                 <a
-                  onClick={() => setDay("Wednesday")}
+                  onClick={() =>{
+                    setDay("Wednesday")
+                    displayTimeSlots()
+                  }}
                   style={{ color: "blue", textDecoration: "underline" }}
                 >
                   Wed
                 </a>
                 <a
-                  onClick={() => setDay("Thrusday")}
+                  onClick={() =>{
+                    setDay("Thursday")
+                    displayTimeSlots()
+                  }}
                   style={{ color: "blue", textDecoration: "underline" }}
                 >
                   Thru
                 </a>
                 <a
-                  onClick={() => setDay("Friday")}
+                  onClick={() =>{
+                    setDay("Friday")
+                    displayTimeSlots()
+                  }}
                   style={{ color: "blue", textDecoration: "underline" }}
                 >
                   Fri
                 </a>
                 <a
-                  onClick={() => setDay("Saturday")}
+                  onClick={() =>{
+                    setDay("Saturday")
+                    displayTimeSlots()
+                  }}
                   style={{ color: "blue", textDecoration: "underline" }}
                 >
                   Sat

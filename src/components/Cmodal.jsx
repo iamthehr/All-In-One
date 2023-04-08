@@ -30,7 +30,7 @@ const style = {
   gap: "2rem",
 };
 
-export default function Cmodal() {
+const Cmodal=()=> {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -186,3 +186,4 @@ export default function Cmodal() {
     </div>
   );
 }
+export default Cmodal;

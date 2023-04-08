@@ -2,10 +2,16 @@ import React from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import { Box, Typography } from "@mui/material";
+import Nav3 from "@/components/Nav3";
 
 import AdminSec1 from "@/components/AdminSec1";
 import AdminSec2 from "@/components/AdminSec2";
 import AdminSec3 from "@/components/AdminSec3";
+import { useEffect } from "react";
+
+useEffect(()=>{
+  const user=await('http://localhost:5000/')
+},[])
 
 const theme = createTheme({
   palette: {
@@ -19,7 +25,7 @@ function Hospital() {
     <ThemeProvider theme={theme}>
       <Nav3 />
       <Box display={"flex"} alignItems={"center"} justifyContent={"center"}>
-        <Typography variant="h1">Welcome!</Typography>
+        <Typography variant="h1">{`Welcome ${i}`}</Typography>
       </Box>
       <AdminSec1 />
       <AdminSec2 />
