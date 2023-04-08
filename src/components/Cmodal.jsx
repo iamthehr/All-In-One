@@ -6,7 +6,7 @@ import Fade from "@mui/material/Fade";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Docnewcard from "./Docnewcard";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+// import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { MobileTimePicker } from "@mui/x-date-pickers/MobileTimePicker";
@@ -150,32 +150,32 @@ export default function Cmodal() {
 
             <Box>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DemoContainer
+                {/* <DemoContainer
                   components={[
                     "MobileTimePicker",
                     "MobileTimePicker",
                     "MobileTimePicker",
                   ]}
                   sx={{ minWidth: 210 }}
+                > */}
+                <Box
+                  sx={{
+                    display: "flex",
+                    gap: "1rem",
+                    borderRadius: "4px solid blue",
+                    color: "blue",
+                  }}
                 >
-                  <Box
-                    sx={{
-                      display: "flex",
-                      gap: "1rem",
-                      borderRadius: "4px solid blue",
-                      color: "blue",
-                    }}
-                  >
-                    <MobileTimePicker
-                      label={"Start time"}
-                      views={["hours", "minutes"]}
-                    />
-                    <MobileTimePicker
-                      label={"  End time"}
-                      views={["hours", "minutes"]}
-                    />
-                  </Box>
-                </DemoContainer>
+                  <MobileTimePicker
+                    label={"Start time"}
+                    views={["hours", "minutes"]}
+                  />
+                  <MobileTimePicker
+                    label={"  End time"}
+                    views={["hours", "minutes"]}
+                  />
+                </Box>
+                {/* </DemoContainer> */}
               </LocalizationProvider>
             </Box>
 

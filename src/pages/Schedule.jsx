@@ -41,8 +41,7 @@ const style = {
 };
 
 const Schedule = () => {
-
-  const [searchTerm,setSearchTerm]=useState("")
+  const [searchTerm, setSearchTerm] = useState("");
 
   const [open, setOpen] = useState(false);
   const [startTime, setStartTime] = useState();
@@ -50,19 +49,21 @@ const Schedule = () => {
   const [day, setDay] = useState();
   const [appoitArray, setAppoitArray] = useState([]);
 
-  
-  async function searchDoctor(){
-    const token=localStorage.getItem('token')
-    console.log(token)
-    let l=await fetch('http://localhost:5000/mainpage/hospital/searchDoctor',{
-      method:'post',
-      body:JSON.stringify({name:searchTerm}),
-      headers:{
-        'Content-Type':'application/json',
-        "auth":token
+  async function searchDoctor() {
+    const token = localStorage.getItem("token");
+    console.log(token);
+    let l = await fetch(
+      "http://localhost:5000/mainpage/hospital/searchDoctor",
+      {
+        method: "post",
+        body: JSON.stringify({ name: searchTerm }),
+        headers: {
+          "Content-Type": "application/json",
+          auth: token,
+        },
       }
-    })
-    l=await l.json()
+    );
+    l = await l.json();
     //console.log(l)
   }
 
@@ -121,10 +122,15 @@ const Schedule = () => {
             <InputBase
               sx={{ ml: 1, flex: 1 }}
               placeholder="Search Doctor"
-              onChange={e=>setSearchTerm(e.target.value)}
+              onChange={(e) => setSearchTerm(e.target.value)}
               inputProps={{ "aria-label": "search google maps" }}
             />
-            <IconButton type="button" sx={{ p: "10px" }} aria-label="search" onClick={searchDoctor}>
+            <IconButton
+              type="button"
+              sx={{ p: "10px" }}
+              aria-label="search"
+              onClick={searchDoctor}
+            >
               <SearchIcon />
             </IconButton>
           </Paper>
@@ -176,38 +182,62 @@ const Schedule = () => {
                 </a>
 
                 <a
-                  style={{ color: "blue", textDecoration: "underline" }}
+                  style={{
+                    color: "blue",
+                    textDecoration: "underline",
+                    cursor: "pointer",
+                  }}
                   onClick={() => setDay("Monday")}
                 >
                   Mon
                 </a>
                 <a
-                  style={{ color: "blue", textDecoration: "underline" }}
+                  style={{
+                    color: "blue",
+                    textDecoration: "underline",
+                    cursor: "pointer",
+                  }}
                   onClick={() => setDay("Tuesday")}
                 >
                   Tue
                 </a>
                 <a
                   onClick={() => setDay("Wednesday")}
-                  style={{ color: "blue", textDecoration: "underline" }}
+                  style={{
+                    color: "blue",
+                    textDecoration: "underline",
+                    cursor: "pointer",
+                  }}
                 >
                   Wed
                 </a>
                 <a
                   onClick={() => setDay("Thrusday")}
-                  style={{ color: "blue", textDecoration: "underline" }}
+                  style={{
+                    color: "blue",
+                    textDecoration: "underline",
+                    cursor: "pointer",
+                  }}
                 >
                   Thru
                 </a>
                 <a
                   onClick={() => setDay("Friday")}
-                  style={{ color: "blue", textDecoration: "underline" }}
+                  style={{
+                    color: "blue",
+                    textDecoration: "underline",
+                    cursor: "pointer",
+                  }}
                 >
                   Fri
                 </a>
                 <a
                   onClick={() => setDay("Saturday")}
-                  style={{ color: "blue", textDecoration: "underline" }}
+                  style={{
+                    color: "blue",
+                    textDecoration: "underline",
+                    cursor: "pointer",
+                  }}
                 >
                   Sat
                 </a>

@@ -6,6 +6,8 @@ import { Box, Typography } from "@mui/material";
 import AdminSec1 from "@/components/AdminSec1";
 import AdminSec2 from "@/components/AdminSec2";
 import AdminSec3 from "@/components/AdminSec3";
+import { Nav3 } from "@/components/Nav3";
+import AdminSec4 from "@/components/AdminSec4";
 
 const theme = createTheme({
   palette: {
@@ -23,6 +25,7 @@ function Hospital() {
       </Box>
       <AdminSec1 />
       <AdminSec2 />
+      <AdminSec4 />
       <AdminSec3 />
       {/* <Box
         display={"flex"}
