@@ -48,6 +48,12 @@ export default function Login(props) {
     });
   };
 
+  const getLocation = () => {
+    window.navigator.geolocation.getCurrentPosition((pos) => {
+      console.log(pos.coords);
+    });
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Container
@@ -110,6 +116,7 @@ export default function Login(props) {
               type="submit"
               fullWidth
               variant="contained"
+              onClick={getLocation}
               sx={{ mt: 3, mb: 2, backgroundColor: "#0F1B4C", color: "#fff" }}
             >
               Login

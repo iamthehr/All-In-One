@@ -6,6 +6,7 @@ import Nav3 from "@/components/Nav3";
 import Link from "next/link";
 import AdminSec1 from "@/components/AdminSec1";
 import AdminSec2 from "@/components/AdminSec2";
+import AdminSec3 from "@/components/AdminSec3";
 
 const theme = createTheme({
   palette: {
@@ -17,12 +18,13 @@ const theme = createTheme({
 function Hospital() {
   return (
     <ThemeProvider theme={theme}>
-      <Navbar />
+      <Nav3 />
       <Box display={"flex"} alignItems={"center"} justifyContent={"center"}>
         <Typography variant="h1">Welcome!</Typography>
       </Box>
       <AdminSec1 />
       <AdminSec2 />
+      <AdminSec3 />
       {/* <Box
         display={"flex"}
         justifyContent={"center"}
