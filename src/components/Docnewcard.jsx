@@ -1,9 +1,7 @@
-import { Avatar, Box, Modal, Typography } from "@mui/material";
+import { Avatar, Box, Typography } from "@mui/material";
 import React from "react";
 
-import Cmodal from "./Cmodal";
-
-const DocardsNew = ({
+const Docnewcard = ({
   name,
   qual,
   spec,
@@ -18,16 +16,15 @@ const DocardsNew = ({
         sx={{
           display: "flex",
           flexDirection: "column",
-          backgroundColor: "#eeeeee",
+          backgroundColor: "#0A1235",
           marginTop: "1rem",
           borderRadius: "20px",
           maxWidth: "540px",
           maxHeight: "285px",
+          color: "white",
         }}
       >
         <Box
-          //   onClick={handleFunction}
-
           display={"flex"}
           alignItems={"center"}
           color="black"
@@ -57,16 +54,23 @@ const DocardsNew = ({
               gap: "0.5rem",
             }}
           >
-            <Typography>Name:{name}</Typography>
+            <Typography sx={{ color: "white" }}>Name:{name}</Typography>
             <Box sx={{ inlineSize: "200px", overflowWrap: "break-word" }}>
-              <Typography fontSize="xs">Qualification:{qual}</Typography>
+              <Typography fontSize="xs" sx={{ color: "white" }}>
+                Qualification:{qual}
+              </Typography>
             </Box>
             <Box sx={{ inlineSize: "200px", overflowWrap: "break-word" }}>
-              <Typography fontSize="xs">Hospital:{Hospital_Name}</Typography>
+              <Typography fontSize="xs" sx={{ color: "white" }}>
+                Hospital:{Hospital_Name}
+              </Typography>
             </Box>
 
             <Box sx={{ inlineSize: "200px", overflowWrap: "break-word" }}>
-              <Typography fontSize="md" sx={{ wordBreak: "break-all" }}>
+              <Typography
+                fontSize="md"
+                sx={{ wordBreak: "break-all", color: "white" }}
+              >
                 Address:{Adress}
               </Typography>
             </Box>
@@ -80,18 +84,16 @@ const DocardsNew = ({
               gap: "0.5rem",
             }}
           >
-            <Typography fontSize="xs">
+            <Typography fontSize="xs" sx={{ color: "white" }}>
               <b>{spec}</b>
             </Typography>
 
-            <typography>Distance:{distance}</typography>
+            <Typography sx={{ color: "white" }}>Distance:{distance}</Typography>
           </Box>
         </Box>
-
-        <Cmodal />
       </Box>
     </>
   );
 };
 
-export default DocardsNew;
+export default Docnewcard;

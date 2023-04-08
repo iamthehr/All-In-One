@@ -123,7 +123,6 @@ export const Navbar = () => {
           >
             {list("left")}
           </Drawer>
-          {/* <NavbarLogo src={logoImg} alt="logo" width={100} /> */}
           <Image src={logoImg} alt="logo" width={100} />
         </Box>
 
@@ -137,8 +136,9 @@ export const Navbar = () => {
           <Link href="#About" style={{ textDecoration: "none" }}>
             <NavLink variant="body2">AboutUs</NavLink>
           </Link>
-
-          <NavLink variant="body2">Contact</NavLink>
+          <Link href="#Contact" style={{ textDecoration: "none" }}>
+            <NavLink variant="body2">Contact</NavLink>
+          </Link>
         </NavbarLinksBox>
       </Box>
 

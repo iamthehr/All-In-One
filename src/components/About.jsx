@@ -1,10 +1,6 @@
 import { styled, Typography } from "@mui/material";
 import { Box, Container } from "@mui/system";
 import React from "react";
-import lab from "../media/lab.png";
-import CustomButton from "./CustomButton";
-import Link from "next/link";
-import Image from "next/image";
 
 const About = () => {
   const CustomContainer = styled(Container)(({ theme }) => ({

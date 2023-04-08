@@ -41,11 +41,31 @@ const style = {
 };
 
 const Schedule = () => {
+
+  const [searchTerm,setSearchTerm]=useState("")
+
   const [open, setOpen] = useState(false);
   const [startTime, setStartTime] = useState();
   const [endTime, setEndTime] = useState();
   const [day, setDay] = useState();
   const [appoitArray, setAppoitArray] = useState([]);
+
+  
+  async function searchDoctor(){
+    const token=localStorage.getItem('token')
+    console.log(token)
+    let l=await fetch('http://localhost:5000/mainpage/hospital/searchDoctor',{
+      method:'post',
+      body:JSON.stringify({name:searchTerm}),
+      headers:{
+        'Content-Type':'application/json',
+        "auth":token
+      }
+    })
+    l=await l.json()
+    //console.log(l)
+  }
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -75,6 +95,7 @@ const Schedule = () => {
       },
     ]);
   };
+
   return (
     <ThemeProvider theme={theme}>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -100,9 +121,10 @@ const Schedule = () => {
             <InputBase
               sx={{ ml: 1, flex: 1 }}
               placeholder="Search Doctor"
+              onChange={e=>setSearchTerm(e.target.value)}
               inputProps={{ "aria-label": "search google maps" }}
             />
-            <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
+            <IconButton type="button" sx={{ p: "10px" }} aria-label="search" onClick={searchDoctor}>
               <SearchIcon />
             </IconButton>
           </Paper>

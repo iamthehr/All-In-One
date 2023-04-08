@@ -14,6 +14,10 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
 
+import axios from "axios";
+import { useState } from "react";
+import { useNavigate } from "react-router";
+
 function Copyright(props) {
   return (
     <Typography
@@ -39,13 +43,40 @@ const theme = createTheme({
 });
 
 export default function Login(props) {
-  const handleSubmit = (event) => {
+
+  const [email,setEmail]=useState("")
+  const [password,setPassword]=useState("") 
+  //const navigate=useNavigate()
+
+  const handleSubmit = async(event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    /*const data = new FormData(event.currentTarget);
     console.log({
       email: data.get("email"),
       password: data.get("password"),
-    });
+    });*/
+
+    if(!email || !password){
+      alert('enter all fields')
+      return 
+    }
+    const regex=/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
+    if(!email.match(regex)){
+      alert('enter valid email')
+      return 
+    }
+    
+    let user=await fetch('http://localhost:5000/auth/user/login',{
+      method:'post',
+      body:JSON.stringify({email,password}),
+      headers:{
+        'Content-Type':'application/json'
+      }
+    })
+    user=await user.json()
+    //console.log(user)
+    localStorage.setItem('token',user.data.token)
+    //navigate('./User-homepage')
   };
 
   const getLocation = () => {
@@ -94,6 +125,7 @@ export default function Login(props) {
                   required
                   fullWidth
                   id="email"
+                  onChange={e=>setEmail(e.target.value)}
                   label="Email Address"
                   name="email"
                   autoComplete="email"
@@ -104,6 +136,7 @@ export default function Login(props) {
                   required
                   fullWidth
                   name="password"
+                  onChange={e=>setPassword(e.target.value)}
                   label="Password"
                   type="password"
                   id="password"

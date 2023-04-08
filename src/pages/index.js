@@ -7,6 +7,7 @@ import Aos from "aos";
 import "Aos/dist/aos.css";
 import { useEffect } from "react";
 import About from "@/components/About";
+import Contact from "@/components/Contact";
 
 
 export default function Home() {
@@ -23,10 +24,16 @@ export default function Home() {
         <div id="About">
           <About />
         </div>
+        <div id="Contact">
+          <Contact />
+        </div>
         <div data-Aos="fade-up">
 
           <Footer />
         </div>
+
+
+
       </div>
     </>
   );
