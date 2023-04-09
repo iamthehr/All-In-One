@@ -74,9 +74,9 @@ export default function Login(props) {
       }
     })
     user=await user.json()
-    //console.log(user)
+    console.log(user)
     localStorage.setItem('token',user.data.token)
-    //navigate('./User-homepage')
+    navigate('./User-homepage')
   };
 
   const getLocation = () => {

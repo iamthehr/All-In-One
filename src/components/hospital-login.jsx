@@ -13,6 +13,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
 
@@ -44,6 +45,7 @@ export default function Hlogin() {
 
   const [email,setEmail]=useState("")
   const [password,setPassword]=useState("")
+  const router=useRouter()
 
   /*const handleSubmit = (event) => {
     event.preventDefault();
@@ -74,8 +76,9 @@ export default function Hlogin() {
       }
     })
     user=await user.json()
-    //console.log(user)
+    console.log(user)
     localStorage.setItem('token',user.data.token)
+    router.push('./Hospital')
   }
 
   return (

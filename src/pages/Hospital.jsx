@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import { Box, Typography } from "@mui/material";
@@ -7,8 +7,10 @@ import Nav3 from "@/components/Nav3";
 import AdminSec1 from "@/components/AdminSec1";
 import AdminSec2 from "@/components/AdminSec2";
 import AdminSec3 from "@/components/AdminSec3";
-import { Nav3 } from "@/components/Nav3";
+//import { Nav3 } from "@/components/Nav3";
 import AdminSec4 from "@/components/AdminSec4";
+import { useState } from "react";
+import { useRouter } from "next/router";
 
 const theme = createTheme({
   palette: {
@@ -17,12 +19,39 @@ const theme = createTheme({
   },
 });
 
+
 function Hospital() {
+
+  const [profile,setProfile]=useState("")
+  const router=useRouter()
+
+  useEffect(()=>{
+    (async()=>{
+      const token=localStorage.getItem('token')
+      //console.log(token)
+      let l=await fetch('http://localhost:5000/mainpage/hospital/displayName',{
+        method:'post',
+        headers:{
+          'Content-Type':'application/json',
+          'auth':token
+        }
+      })
+      l=await l.json()
+      console.log(l[0].name)
+      if(l[0].name==undefined){
+        alert('you are not authorized to access this page')
+        router.push('./Tabs-Hospital')
+        return
+      }
+      setProfile(l[0].name)
+    })()
+    
+  },[])
   return (
     <ThemeProvider theme={theme}>
       <Nav3 />
       <Box display={"flex"} alignItems={"center"} justifyContent={"center"}>
-        <Typography variant="h1">{`Welcome ${i}`}</Typography>
+        <Typography variant="h1">{`Welcome ${profile}`}</Typography>
       </Box>
       <AdminSec1 />
       <AdminSec2 />

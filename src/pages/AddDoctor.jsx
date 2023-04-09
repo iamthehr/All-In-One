@@ -19,6 +19,7 @@ import Navbar2 from "@/components/Navbar2";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
 function Copyright(props) {
   return (
     <Typography
@@ -53,7 +54,28 @@ const AddDoctor = () => {
   const [specialization,setSpecialization]=useState("")
   const [image,setImage]=useState("")
 
- 
+  const router=useRouter()
+
+  useEffect(()=>{
+    (async()=>{
+      const token=localStorage.getItem('token')
+      //console.log(token)
+      let l=await fetch('http://localhost:5000/mainpage/hospital/displayName',{
+        method:'post',
+        headers:{
+          'Content-Type':'application/json',
+          'auth':token
+        }
+      })
+      l=await l.json()
+      //console.log(l[0].name)
+      if(l[0]==undefined){
+        alert('you are not authorized to access this page')
+        router.push('./Tabs-Hospital')
+        return
+      }
+    })()
+  },[])
 
   const handleSubmit = async(event) => {
     const token=localStorage.getItem('token')
