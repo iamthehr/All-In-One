@@ -6,7 +6,7 @@ import Fade from "@mui/material/Fade";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Docnewcard from "./Docnewcard";
-// import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { MobileTimePicker } from "@mui/x-date-pickers/MobileTimePicker";
@@ -30,7 +30,7 @@ const style = {
   gap: "2rem",
 };
 
-const Cmodal=()=> {
+const Cmodal = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -58,6 +58,7 @@ const Cmodal=()=> {
             timeout: 500,
           },
         }}
+        sx={{ overflow: "scroll" }}
       >
         <Fade in={open}>
           <Box sx={style}>
@@ -148,22 +149,23 @@ const Cmodal=()=> {
               </Box>
             </Box>
 
-            <Box>
+            <Box
+              sx={{
+                display: "flex",
+                gap: "1rem",
+                borderRadius: "4px solid blue",
+                color: "blue",
+                width: "30%",
+              }}
+            >
               <LocalizationProvider dateAdapter={AdapterDayjs}>
-                {/* <DemoContainer
-                  components={[
-                    "MobileTimePicker",
-                    "MobileTimePicker",
-                    "MobileTimePicker",
-                  ]}
-                  sx={{ minWidth: 210 }}
-                > */}
                 <Box
                   sx={{
                     display: "flex",
-                    gap: "1rem",
+                    gap: "0.5rem",
                     borderRadius: "4px solid blue",
                     color: "blue",
+                    width: "100%",
                   }}
                 >
                   <MobileTimePicker
@@ -175,7 +177,6 @@ const Cmodal=()=> {
                     views={["hours", "minutes"]}
                   />
                 </Box>
-                {/* </DemoContainer> */}
               </LocalizationProvider>
             </Box>
 
@@ -185,5 +186,5 @@ const Cmodal=()=> {
       </Modal>
     </div>
   );
-}
+};
 export default Cmodal;

@@ -1,5 +1,7 @@
-import { Avatar, Box, Modal, Typography } from "@mui/material";
 import React from "react";
+import { styled } from "@mui/material";
+import { Container } from "@mui/material";
+import { Avatar, Box, Typography } from "@mui/material";
 
 import Cmodal from "./Cmodal";
 
@@ -12,48 +14,71 @@ const DocardsNew = ({
   Hospital_Name,
   Adress,
 }) => {
+  const CustomContainer = styled(Container)(({ theme }) => ({
+    backgroundColor: "#17275F",
+    marginTop: "29px",
+
+    borderRadius: "15px",
+
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+
+    padding: theme.spacing(0, 0, 0, 0),
+    [theme.breakpoints.down("md")]: {
+      height: "auto",
+      flexDirection: "column",
+      alignItems: "center",
+      padding: theme.spacing(1, 1, 1, 1),
+      width: "70%",
+      gap: "0.5rem",
+    },
+  }));
+  const CustomnewContainer = styled(Container)(({ theme }) => ({
+    backgroundColor: "#17275F",
+    marginTop: "29px",
+
+    borderRadius: "15px",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-around",
+    alignItems: "center",
+    width: "45%",
+    padding: theme.spacing(0, 0, 0, 0),
+    gap: "0.5rem",
+    [theme.breakpoints.down("md")]: {
+      height: "auto",
+      flexDirection: "column",
+      alignItems: "center",
+      padding: theme.spacing(0, 0, 0, 0),
+      width: "70%",
+    },
+  }));
   return (
     <>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          backgroundColor: "#eeeeee",
-          marginTop: "1rem",
-          borderRadius: "20px",
-          maxWidth: "540px",
-          maxHeight: "285px",
-        }}
-      >
-        <Box
-          //   onClick={handleFunction}
+      <CustomnewContainer>
+        <CustomContainer>
+          <Box
+            //   onClick={handleFunction}
 
-          display={"flex"}
-          alignItems={"center"}
-          color="black"
-          px={3}
-          py={2}
-          mb={6}
-          mr={2}
-          borderRadius={"0.5px"}
-          onClick={handleOpen}
-        >
-          <Avatar
-            style={{
-              marginRight: "1rem",
-            }}
-            size="md"
-            cursor={"pointer"}
-            name="Dr.Batra"
-            src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
-          />
-
+            onClick={handleOpen}
+          >
+            <Avatar
+              style={{
+                marginRight: "1rem",
+              }}
+              cursor={"pointer"}
+              name="Dr.Batra"
+              sx={{ height: "5rem", width: "5rem" }}
+              src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
+            />
+          </Box>
           <Box
             sx={{
               display: "flex",
               flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "start",
+              justifyContent: "flex-start",
+              alignItems: "flex-start",
               gap: "0.5rem",
             }}
           >
@@ -86,10 +111,11 @@ const DocardsNew = ({
 
             <typography>Distance:{distance}</typography>
           </Box>
+        </CustomContainer>
+        <Box>
+          <Cmodal />
         </Box>
-
-        <Cmodal />
-      </Box>
+      </CustomnewContainer>
     </>
   );
 };
