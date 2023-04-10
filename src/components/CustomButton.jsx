@@ -8,7 +8,6 @@ const CustomButton = ({
   heroBtn,
   guideBtn,
   getStartedBtn,
-  // handleClick,
 }) => {
   const CustomButton = styled(Button)(({ theme }) => ({
     backgroundColor: backgroundColor,
@@ -25,7 +24,6 @@ const CustomButton = ({
       backgroundColor: color,
       color: backgroundColor,
       borderColor: backgroundColor,
-      // onclick: { handleClick },
     },
     [theme.breakpoints.down("md")]: {
       margin: (heroBtn || getStartedBtn) && theme.spacing(0, "auto", 3, "auto"),

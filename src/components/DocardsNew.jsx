@@ -15,7 +15,7 @@ const DocardsNew = ({
   Adress,
 }) => {
   const CustomContainer = styled(Container)(({ theme }) => ({
-    backgroundColor: "#17275F",
+    backgroundColor: "#8092d5",
     marginTop: "29px",
 
     borderRadius: "15px",
@@ -35,7 +35,7 @@ const DocardsNew = ({
     },
   }));
   const CustomnewContainer = styled(Container)(({ theme }) => ({
-    backgroundColor: "#17275F",
+    backgroundColor: "#8092d5",
     marginTop: "29px",
 
     borderRadius: "15px",

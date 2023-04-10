@@ -40,9 +40,9 @@ const Cmodal = () => {
     <div>
       <Button
         onClick={handleOpen}
-        variant="contained"
+        variant="outlined"
         fullWidth
-        sx={{ bgcolor: "#212463" }}
+        sx={{ bgcolor: "#c5c5d3" }}
       >
         Consult
       </Button>
