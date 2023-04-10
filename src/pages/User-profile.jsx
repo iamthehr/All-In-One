@@ -19,6 +19,9 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import Image from "next/image";
 import { Avatar } from "@mui/material";
 import Link from "next/link";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 const UserProfile = () => {
   const CustomBox = styled(Box)(({ theme }) => ({
@@ -66,6 +69,56 @@ const UserProfile = () => {
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const router=useRouter()
+
+  const [name,setName]=useState("")
+  const [email,setEmail]=useState("")
+  const [image,setImage]=useState("")
+  const [appointments,setAppointments]=useState([])
+
+  useEffect(()=>{
+    (async()=>{
+      const token=localStorage.getItem('token')
+      let user=await fetch('http://localhost:5000/mainpage/user/displayName',{
+        method:'post',
+        headers:{
+          'Content-Type':'application/json',
+          'auth':token 
+        }
+      })
+      user=await user.json()
+      if(user[0].name==undefined){
+        alert('you are not authorized to view this page')
+        router.push('./Tabs-User')
+        return;
+      }
+      console.log(user[0])
+      setName(user[0].name)
+      setEmail(user[0].email)
+
+      let img=await fetch('http://localhost:5000/mainpage/user/displayProfileImage',{
+        method:'post',
+        headers:{
+          'Content-Type':'application/json',
+          'auth':token
+        }
+      })
+      img=await img.blob()
+      setImage(URL.createObjectURL(img))
+
+      let bookings=await fetch('http://localhost:5000/mainpage/user/displayBookings',{
+        method:'post',
+        headers:{
+          'Content-Type':'application/json',
+          'auth':token 
+        }
+      })
+      bookings=await bookings.json()
+      console.log(bookings)
+      setAppointments(bookings)
+    })()
+  },[])
+
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -213,21 +266,21 @@ const UserProfile = () => {
                 marginRight: "1rem",
               }}
               cursor={"pointer"}
-              name="Dr.Batra"
+              name={name}
               sx={{ height: "10rem", width: "10rem" }}
-              src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
+              src={image}
             />
           </Box>
           <Box>
             <Typography sx={{ color: "white", fontSize: "25px" }}>
-              Name:Aditya sinha
+              {`Name: ${name}`}
             </Typography>
             <Typography sx={{ color: "white", fontSize: "25px" }}>
-              Email:asjdbasjbdjasbdbsaj
+              {`Email: ${email}`}
             </Typography>
-            <Typography sx={{ color: "white", fontSize: "25px" }}>
+            {/*<Typography sx={{ color: "white", fontSize: "25px" }}>
               Address:jkbdfdsgiufgiudsfiudsui
-            </Typography>
+            </Typography>*/}
           </Box>
         </ProfileBox>
         <CustomBox>
@@ -243,7 +296,7 @@ const UserProfile = () => {
             >
               Your current appointments
             </Typography>
-            <Typography
+            {/*<Typography
               sx={{ color: "white", fontSize: { md: "10px", lg: "25px" } }}
             >
               1
@@ -277,9 +330,19 @@ const UserProfile = () => {
               sx={{ color: "white", fontSize: { md: "10px", lg: "25px" } }}
             >
               7
-            </Typography>
+          </Typography>*/}
+          <ol>
+            {appointments.map(item=>(
+              <li key={item}>
+                <Typography sx={{color:"white",fontSize:{md:"10px",lg:"25px"}}}>
+                  {`id:${item.id} doctor_name:${item.name} hospital_name:${item.hospital_name} address:${item.address} day:${item.day_of_week} start_time:${item.start_time} end_time:${item.end_time}`}
+                </Typography>
+              </li>
+            ))}
+          </ol>
+          
           </Box>
-          <Box
+          {/*<Box
             sx={{
               display: { md: "flex" },
               flexDirection: { md: "column", lg: "column" },
@@ -327,7 +390,7 @@ const UserProfile = () => {
             >
               7
             </Typography>
-          </Box>
+          </Box>*/}
         </CustomBox>
       </Box>
     </>

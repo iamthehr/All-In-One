@@ -17,6 +17,7 @@ import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { useRouter } from "next/router";
 
 function Copyright(props) {
   return (
@@ -47,6 +48,7 @@ export default function Login(props) {
   const [email,setEmail]=useState("")
   const [password,setPassword]=useState("") 
   //const navigate=useNavigate()
+  const router=useRouter()
 
   const handleSubmit = async(event) => {
     event.preventDefault();
@@ -76,7 +78,7 @@ export default function Login(props) {
     user=await user.json()
     console.log(user)
     localStorage.setItem('token',user.data.token)
-    navigate('./User-homepage')
+    router.push('./User-homepage')
   };
 
   const getLocation = () => {

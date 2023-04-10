@@ -6,6 +6,7 @@ import { Avatar, Box, Typography } from "@mui/material";
 import Cmodal from "./Cmodal";
 
 const DocardsNew = ({
+  id,
   name,
   qual,
   spec,
@@ -13,6 +14,7 @@ const DocardsNew = ({
   distance,
   Hospital_Name,
   Adress,
+  image
 }) => {
   const CustomContainer = styled(Container)(({ theme }) => ({
     backgroundColor: "#8092d5",
@@ -60,7 +62,7 @@ const DocardsNew = ({
         <CustomContainer>
           <Box
             //   onClick={handleFunction}
-
+            width='500px'
             onClick={handleOpen}
           >
             <Avatar
@@ -68,9 +70,9 @@ const DocardsNew = ({
                 marginRight: "1rem",
               }}
               cursor={"pointer"}
-              name="Dr.Batra"
+              name={name}
               sx={{ height: "5rem", width: "5rem" }}
-              src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
+              src={image}
             />
           </Box>
           <Box
@@ -109,11 +111,11 @@ const DocardsNew = ({
               <b>{spec}</b>
             </Typography>
 
-            <typography>Distance:{distance}</typography>
+            <Typography>Distance:{distance}</Typography>
           </Box>
         </CustomContainer>
         <Box>
-          <Cmodal />
+          <Cmodal id={id} name={name} qual={qual} spec={spec} Hospital_Name={Hospital_Name} Adress={Adress} distance={distance} image={image}/>
         </Box>
       </CustomnewContainer>
     </>
