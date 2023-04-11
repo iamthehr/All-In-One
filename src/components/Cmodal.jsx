@@ -61,8 +61,11 @@ const Cmodal = (props) => {
       }
     })
     confirm=await confirm.json()
-    console.log(confirm)
-    alert("your appointment has been confirmed")
+    //console.log(confirm)
+    if(confirm.status=="user exists"){
+      alert('you have already booked this timeslot')
+    }
+    else alert("your appointment has been confirmed")
     setId("")
     setToggle(!toggle)
   }
