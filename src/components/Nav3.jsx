@@ -11,6 +11,7 @@ import logoImg from "../media/logo.png";
 import { Container } from "@mui/system";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import {
+  Avatar,
   Drawer,
   IconButton,
   Link,
@@ -24,7 +25,7 @@ import {
 import { useState } from "react";
 import Image from "next/image";
 
-export const Nav3 = () => {
+export const Nav3 = (props) => {
   const [mobileMenu, setMobileMenu] = useState({
     left: false,
   });
@@ -169,16 +170,16 @@ export const Nav3 = () => {
                 },
               }}
             >
-              Aditya
+              {props.name}
             </Typography>
-            <IconButton
+            {/*<IconButton
               sx={{
                 backgroundColor: "#9EABC0",
                 color: "#0A1235",
               }}
-            >
-              <AccountCircleIcon />
-            </IconButton>
+            >*/}
+              <Avatar src={props.image} sx={{borderWidth:0}}></Avatar>
+            {/*</IconButton>}*/}
           </Box>
         </Link>
       </Box>

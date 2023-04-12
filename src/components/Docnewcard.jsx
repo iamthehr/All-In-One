@@ -11,6 +11,7 @@ const Docnewcard = ({
   distance,
   Hospital_Name,
   Adress,
+  image
 }) => {
   const CustomContainer = styled(Container)(({ theme }) => ({
     backgroundColor: "#17275F",
@@ -49,7 +50,7 @@ const Docnewcard = ({
             cursor={"pointer"}
             name="Dr.Batra"
             sx={{ width: "150px", height: "150px" }}
-            src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
+            src={image}
           />
         </Box>
         <Box
