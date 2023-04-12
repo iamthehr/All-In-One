@@ -15,7 +15,7 @@ import "Aos/dist/aos.css";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import {FormControl,InputLabel,Select} from "@mui/material"
+import { FormControl, InputLabel, Select } from "@mui/material";
 
 const theme = createTheme({
   palette: {
@@ -23,7 +23,6 @@ const theme = createTheme({
     secondary: { main: "#1da7e2" },
   },
 });
-
 
 const Specialization = [
   {
@@ -63,90 +62,101 @@ const Test = [
 ];
 
 function User_homepage() {
+  const [name, setName] = useState("");
+  const [image, setImage] = useState("");
+  const [speciality, setSpeciality] = useState([]);
+  const [search, setSearch] = useState("");
+  const [doctors, setDoctors] = useState([]);
+  const router = useRouter();
 
-  const [name,setName]=useState("")
-  const [image,setImage]=useState("")
-  const [speciality,setSpeciality]=useState([])
-  const [search,setSearch]=useState("")
-  const [doctors,setDoctors]=useState([])
-  const router=useRouter()
-
-  
-
-  async function handleSearch(){
-    const token=localStorage.getItem('token')
-    let doc=await fetch('http://localhost:5000/mainpage/user/displayDoctors',{
-      method:'post',
-      body:JSON.stringify({speciality:search}),
-      headers:{
-        'Content-Type':'application/json',
-        'auth':token
+  async function handleSearch() {
+    const token = localStorage.getItem("token");
+    let doc = await fetch(
+      "http://localhost:5000/mainpage/user/displayDoctors",
+      {
+        method: "post",
+        body: JSON.stringify({ speciality: search }),
+        headers: {
+          "Content-Type": "application/json",
+          auth: token,
+        },
       }
-    })
-    doc=await doc.json()
-    console.log(doc)
-    for(let i in doc){
-      let img=await fetch('http://localhost:5000/mainpage/user/displayDoctorImage',{
-        method:'post',
-        body:JSON.stringify({id:doc[i].doctor_id}),
-        headers:{
-          'Content-Type':'application/json',
-          'auth':token
+    );
+    doc = await doc.json();
+    console.log(doc);
+    for (let i in doc) {
+      let img = await fetch(
+        "http://localhost:5000/mainpage/user/displayDoctorImage",
+        {
+          method: "post",
+          body: JSON.stringify({ id: doc[i].doctor_id }),
+          headers: {
+            "Content-Type": "application/json",
+            auth: token,
+          },
         }
-      })
-      img=await img.blob()
-      let newObj={...doc[i],image:URL.createObjectURL(img)}
-      doc[i]=newObj
+      );
+      img = await img.blob();
+      let newObj = { ...doc[i], image: URL.createObjectURL(img) };
+      doc[i] = newObj;
     }
     //console.log(doc)
-    setDoctors(doc)
+    setDoctors(doc);
   }
-  
 
   useEffect(() => {
     Aos.init({ duration: 800 });
-    (async()=>{
-      const token=localStorage.getItem('token')
+    (async () => {
+      const token = localStorage.getItem("token");
       //const token=localStorage.getItem('token')
-      let user=await fetch('http://localhost:5000/mainpage/user/displayName',{
-        method:'post',
-        headers:{
-          'Content-Type':'application/json',
-          'auth':token
+      let user = await fetch(
+        "http://localhost:5000/mainpage/user/displayName",
+        {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json",
+            auth: token,
+          },
         }
-      })
+      );
       //console.log(user)
-      user=await user.json()
+      user = await user.json();
       //console.log(user[0].name)
-      if(user[0].name==undefined){
-        alert('you are not authorized to view this page')
-        router.push('./Tabs-User')
-        return
+      if (user[0].name == undefined) {
+        alert("you are not authorized to view this page");
+        router.push("./Tabs-User");
+        return;
       }
-      setName(user[0].name)
-      let img=await fetch('http://localhost:5000/mainpage/user/displayProfileImage',{
-        method:'post',
-        headers:{
-          'Content-Type':'application/json',
-          'auth':token
+      setName(user[0].name);
+      let img = await fetch(
+        "http://localhost:5000/mainpage/user/displayProfileImage",
+        {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json",
+            auth: token,
+          },
         }
-      })
-      img=await img.blob()
+      );
+      img = await img.blob();
       //console.log(img)
-      setImage(URL.createObjectURL(img))
+      setImage(URL.createObjectURL(img));
 
-      let specialities=await fetch('http://localhost:5000/mainpage/user/displaySpeciality',{
-        method:'post',
-        headers:{
-          'Content-Type':'application/json',
-          'auth':token
+      let specialities = await fetch(
+        "http://localhost:5000/mainpage/user/displaySpeciality",
+        {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json",
+            auth: token,
+          },
         }
-      })
-      specialities=await specialities.json()
-      specialities=specialities.map(item=>item.speciality)
+      );
+      specialities = await specialities.json();
+      specialities = specialities.map((item) => item.speciality);
       //console.log(specialities)
-      setSpeciality(specialities)
-    })()
+      setSpeciality(specialities);
+    })();
   }, []);
 
   const Title = styled(Typography)(({ theme }) => ({
@@ -156,6 +166,11 @@ function User_homepage() {
     margin: theme.spacing(4, 0, 4, 0),
     [theme.breakpoints.down("sm")]: {
       fontSize: "40px",
+      boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+      backdropFilter: "blur( 3px )",
+      webkitFbackdropFilter: " blur( 3px )",
+      borderRadius: "10px",
+      border: "1px solid rgba( 255, 255, 255, 0.18 )",
     },
   }));
   const CustomnewBox = styled(Box)(({ theme }) => ({
@@ -163,6 +178,11 @@ function User_homepage() {
     margin: theme.spacing(0, 1, 0, 0),
     [theme.breakpoints.down("md")]: {
       padding: "0",
+      boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+      backdropFilter: "blur( 3px )",
+      webkitFbackdropFilter: " blur( 3px )",
+      borderRadius: "10px",
+      border: "1px solid rgba( 255, 255, 255, 0.18 )",
     },
   }));
   const CustomContainer = styled(Container)(({ theme }) => ({
@@ -174,6 +194,11 @@ function User_homepage() {
     justifyContent: "space-around",
     alignItems: "center",
     flexDirection: "column",
+    boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+    backdropFilter: "blur( 3px )",
+    webkitFbackdropFilter: " blur( 3px )",
+    borderRadius: "10px",
+    border: "1px solid rgba( 255, 255, 255, 0.18 )",
 
     [theme.breakpoints.down("md")]: {
       height: "auto",
@@ -195,7 +220,7 @@ function User_homepage() {
           }}
         >
           <Container>
-            <Navbar name={name} image={image}/>
+            <Navbar name={name} image={image} />
 
             <Box>
               <Typography
@@ -232,6 +257,11 @@ function User_homepage() {
                     paddingLeft: "3px",
                     marginTop: "5px",
                     borderRadius: "7px",
+                    boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+                    backdropFilter: "blur( 3px )",
+                    webkitFbackdropFilter: " blur( 3px )",
+                    borderRadius: "10px",
+                    border: "1px solid rgba( 255, 255, 255, 0.18 )",
                   }}
                 >
                   <Typography
@@ -272,27 +302,25 @@ function User_homepage() {
                     ))}
                     </TextField>*/}
 
-                <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">
-                    Specialization
-                  </InputLabel>
-                  <Select
-                    labelId="Specialization"
-                    id="Specialization"
-                    onChange={e=>setSearch(e.target.value)}
-                    value={search}
-                    label="Specialization"
-                    // onChange={handleChange}
-                  >
-                    {speciality.map(item=>{
-                      return(
-                        <MenuItem value={item}>{item}</MenuItem>
-                      )
-                    })}
-                    {/* <MenuItem value={20}>General Surgery</MenuItem> */}
-                    {/* <MenuItem value={30}>Thirty</MenuItem> */}
-                  </Select>
-                </FormControl>
+                  <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label">
+                      Specialization
+                    </InputLabel>
+                    <Select
+                      labelId="Specialization"
+                      id="Specialization"
+                      onChange={(e) => setSearch(e.target.value)}
+                      value={search}
+                      label="Specialization"
+                      // onChange={handleChange}
+                    >
+                      {speciality.map((item) => {
+                        return <MenuItem value={item}>{item}</MenuItem>;
+                      })}
+                      {/* <MenuItem value={20}>General Surgery</MenuItem> */}
+                      {/* <MenuItem value={30}>Thirty</MenuItem> */}
+                    </Select>
+                  </FormControl>
 
                   <Button
                     variant="contained"
@@ -317,7 +345,7 @@ function User_homepage() {
                     <Typography
                       sx={{
                         fontSize: "30px",
-                        color: "white",
+                        color: "Black",
                         fontWeight: "700",
                       }}
                     >
@@ -340,16 +368,31 @@ function User_homepage() {
                       gap: "3px",
                       justifyContent: "center",
                       alignItems: "center",
+                      maxWidth: {
+                        lg: "100%",
+                        md: "100%",
+                        sm: "80%",
+                        xs: "80%",
+                      },
                     }}
                     marginLeft="15px"
                     mt={8}
                     mb={8}
                   >
-
-                    {doctors.map(item=>{
-                      return(
-                        <DocardsNew key={item.doctor_id} id={item.doctor_id} name={item.doctor_name} qual={item.qualifications} spec={item.speciality} distance='10km' Hospital_Name={item.hospital_name} Adress={item.address} image={item.image}></DocardsNew>
-                      )
+                    {doctors.map((item) => {
+                      return (
+                        <DocardsNew
+                          key={item.doctor_id}
+                          id={item.doctor_id}
+                          name={item.doctor_name}
+                          qual={item.qualifications}
+                          spec={item.speciality}
+                          distance="10km"
+                          Hospital_Name={item.hospital_name}
+                          Adress={item.address}
+                          image={item.image}
+                        ></DocardsNew>
+                      );
                     })}
                     {/*<DocardsNew
                       name="Aditya"
@@ -399,6 +442,14 @@ function User_homepage() {
                       Hospital_Name="TMH NAYSARAY"
                       Adress="SAHFGHASFVEFG"
                   />*/}
+                    <DocardsNew
+                      name="Aditya"
+                      qual="MBBS"
+                      spec="Physician"
+                      distance="4km"
+                      Hospital_Name="TMH NAYSARAY"
+                      Adress="SAHFGHASFVEFG"
+                    />
                   </Box>
                 </Box>
               </CustomContainer>

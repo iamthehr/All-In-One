@@ -11,12 +11,22 @@ const Contact = () => {
     display: "flex",
     justifyContent: "space-around",
     alignItems: "center",
+    boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+    backdropFilter: "blur( 3px )",
+    WebkitFbackdropFilter: " blur( 3px )",
+    borderRadius: "10px",
+    border: "1px solid rgba( 255, 255, 255, 0.18 )",
     [theme.breakpoints.down("md")]: {
       height: "auto",
       flexDirection: "column",
       alignItems: "center",
       padding: theme.spacing(1, 1, 0, 1),
       width: "100%",
+      boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+      backdropFilter: "blur( 3px )",
+      webkitFbackdropFilter: " blur( 3px )",
+      borderRadius: "10px",
+      border: "1px solid rgba( 255, 255, 255, 0.18 )",
     },
   }));
 
@@ -27,6 +37,12 @@ const Contact = () => {
       height: "auto",
       flexDirection: "column",
       alignItems: "center",
+      boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+      backdropFilter: "blur( 3px )",
+      webkitFbackdropFilter: " blur( 3px )",
+      borderRadius: "10px",
+      border: "1px solid rgba( 255, 255, 255, 0.18 )",
+
       padding: theme.spacing(1, 1, 0, 1),
       width: "100%",
     },
@@ -35,7 +51,18 @@ const Contact = () => {
   return (
     <CustomBox>
       <CustomContainer>
-        <Box>
+        <Box
+          sx={{
+            lg: {
+              boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+              backdropFilter: "blur( 3px )",
+              WebkitFbackdropFilter: " blur( 3px )",
+              borderRadius: "10px",
+              border: "1px solid rgba( 255, 255, 255, 0.18 )",
+              padding: "10px",
+            },
+          }}
+        >
           <Typography
             sx={{ fontSize: "30px", color: "white", fontWeight: "700" }}
           >

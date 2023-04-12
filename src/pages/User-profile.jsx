@@ -33,6 +33,11 @@ const UserProfile = () => {
     margin: "1.5rem",
     justifyContent: "space-around",
     alignItems: "center",
+    boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+    backdropFilter: "blur( 3px )",
+    webkitFbackdropFilter: " blur( 3px )",
+    borderRadius: "10px",
+    border: "1px solid rgba( 255, 255, 255, 0.18 )",
 
     [theme.breakpoints.down("md")]: {
       height: "80vh",
@@ -40,6 +45,11 @@ const UserProfile = () => {
       alignItems: "center",
       padding: theme.spacing(3, 3, 0, 3),
       width: "90%",
+      boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+      backdropFilter: "blur( 3px )",
+      webkitFbackdropFilter: " blur( 3px )",
+      borderRadius: "10px",
+      border: "1px solid rgba( 255, 255, 255, 0.18 )",
     },
   }));
   const ProfileBox = styled(Box)(({ theme }) => ({
@@ -54,6 +64,11 @@ const UserProfile = () => {
     padding: "0.5rem",
 
     gap: "1rem",
+    boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+    backdropFilter: "blur( 3px )",
+    webkitFbackdropFilter: " blur( 3px )",
+    borderRadius: "10px",
+    border: "1px solid rgba( 255, 255, 255, 0.18 )",
 
     [theme.breakpoints.down("md")]: {
       height: "50vh",
@@ -61,6 +76,11 @@ const UserProfile = () => {
       alignItems: "center",
       padding: theme.spacing(1, 1, 0, 1),
       width: "90%",
+      boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+      backdropFilter: "blur( 3px )",
+      webkitFbackdropFilter: " blur( 3px )",
+      borderRadius: "10px",
+      border: "1px solid rgba( 255, 255, 255, 0.18 )",
     },
   }));
 
@@ -69,56 +89,64 @@ const UserProfile = () => {
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-  const router=useRouter()
+  const router = useRouter();
 
-  const [name,setName]=useState("")
-  const [email,setEmail]=useState("")
-  const [image,setImage]=useState("")
-  const [appointments,setAppointments]=useState([])
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [image, setImage] = useState("");
+  const [appointments, setAppointments] = useState([]);
 
-  useEffect(()=>{
-    (async()=>{
-      const token=localStorage.getItem('token')
-      let user=await fetch('http://localhost:5000/mainpage/user/displayName',{
-        method:'post',
-        headers:{
-          'Content-Type':'application/json',
-          'auth':token 
+  useEffect(() => {
+    (async () => {
+      const token = localStorage.getItem("token");
+      let user = await fetch(
+        "http://localhost:5000/mainpage/user/displayName",
+        {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json",
+            auth: token,
+          },
         }
-      })
-      user=await user.json()
-      if(user[0].name==undefined){
-        alert('you are not authorized to view this page')
-        router.push('./Tabs-User')
+      );
+      user = await user.json();
+      if (user[0].name == undefined) {
+        alert("you are not authorized to view this page");
+        router.push("./Tabs-User");
         return;
       }
-      console.log(user[0])
-      setName(user[0].name)
-      setEmail(user[0].email)
+      console.log(user[0]);
+      setName(user[0].name);
+      setEmail(user[0].email);
 
-      let img=await fetch('http://localhost:5000/mainpage/user/displayProfileImage',{
-        method:'post',
-        headers:{
-          'Content-Type':'application/json',
-          'auth':token
+      let img = await fetch(
+        "http://localhost:5000/mainpage/user/displayProfileImage",
+        {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json",
+            auth: token,
+          },
         }
-      })
-      img=await img.blob()
-      setImage(URL.createObjectURL(img))
+      );
+      img = await img.blob();
+      setImage(URL.createObjectURL(img));
 
-      let bookings=await fetch('http://localhost:5000/mainpage/user/displayBookings',{
-        method:'post',
-        headers:{
-          'Content-Type':'application/json',
-          'auth':token 
+      let bookings = await fetch(
+        "http://localhost:5000/mainpage/user/displayBookings",
+        {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json",
+            auth: token,
+          },
         }
-      })
-      bookings=await bookings.json()
-      console.log(bookings)
-      setAppointments(bookings)
-    })()
-  },[])
-
+      );
+      bookings = await bookings.json();
+      console.log(bookings);
+      setAppointments(bookings);
+    })();
+  }, []);
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -171,33 +199,21 @@ const UserProfile = () => {
       }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={1} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-    </Menu>
+    ></Menu>
   );
 
   return (
     <>
-      <Box sx={{ flexGrow: 1 }}>
+      <Box
+        sx={{
+          flexGrow: 1,
+          boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+          backdropFilter: "blur( 3px )",
+          webkitFbackdropFilter: " blur( 3px )",
+          borderRadius: "10px",
+          border: "1px solid rgba( 255, 255, 255, 0.18 )",
+        }}
+      >
         <AppBar position="sticky">
           <Toolbar
             sx={{
@@ -220,38 +236,20 @@ const UserProfile = () => {
             <Box sx={{ flexGrow: 1 }} />
             <Image src={logoImg} style={{ height: "70px", width: "80px" }} />
             <Box sx={{ flexGrow: 1 }} />
-            <Box sx={{ display: { xs: "none", md: "flex" } }}>
-              <IconButton
-                size="large"
-                aria-label="show 4 new mails"
-                color="inherit"
-              >
-                <Badge badgeContent={4} color="error">
-                  <MailIcon />
-                </Badge>
-              </IconButton>
-              <IconButton
-                size="large"
-                aria-label="show 17 new notifications"
-                color="inherit"
-              >
-                <Badge badgeContent={17} color="error">
-                  <NotificationsIcon />
-                </Badge>
-              </IconButton>
-            </Box>
-            <Box sx={{ display: { xs: "flex", md: "none" } }}>
-              <IconButton
-                size="large"
-                aria-label="show more"
-                aria-controls={mobileMenuId}
-                aria-haspopup="true"
-                onClick={handleMobileMenuOpen}
-                color="inherit"
-              >
-                <MoreIcon />
-              </IconButton>
-            </Box>
+
+            <Box
+              sx={{
+                display: {
+                  xs: "flex",
+                  md: "none",
+                  boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+                  backdropFilter: "blur( 3px )",
+                  webkitFbackdropFilter: " blur( 3px )",
+                  borderRadius: "10px",
+                  border: "1px solid rgba( 255, 255, 255, 0.18 )",
+                },
+              }}
+            ></Box>
           </Toolbar>
         </AppBar>
         {renderMobileMenu}
@@ -331,16 +329,20 @@ const UserProfile = () => {
             >
               7
           </Typography>*/}
-          <ol>
-            {appointments.map(item=>(
-              <li key={item}>
-                <Typography sx={{color:"white",fontSize:{md:"10px",lg:"25px"}}}>
-                  {`id:${item.id} doctor_name:${item.name} hospital_name:${item.hospital_name} address:${item.address} day:${item.day_of_week} start_time:${item.start_time} end_time:${item.end_time}`}
-                </Typography>
-              </li>
-            ))}
-          </ol>
-          
+            <ol>
+              {appointments.map((item) => (
+                <li key={item}>
+                  <Typography
+                    sx={{
+                      color: "white",
+                      fontSize: { md: "10px", lg: "25px" },
+                    }}
+                  >
+                    {`id:${item.id} doctor_name:${item.name} hospital_name:${item.hospital_name} address:${item.address} day:${item.day_of_week} start_time:${item.start_time} end_time:${item.end_time}`}
+                  </Typography>
+                </li>
+              ))}
+            </ol>
           </Box>
           {/*<Box
             sx={{

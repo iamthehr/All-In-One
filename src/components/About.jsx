@@ -11,18 +11,33 @@ const About = () => {
     display: "flex",
     justifyContent: "space-around",
     alignItems: "center",
+
+    backdropFilter: "blur( 3px )",
+    webkitFbackdropFilter: " blur( 3px )",
+    borderRadius: "10px",
+    border: "1px solid rgba( 255, 255, 255, 0.18 )",
     [theme.breakpoints.down("md")]: {
       height: "auto",
       flexDirection: "column",
       alignItems: "center",
       padding: theme.spacing(1, 1, 0, 1),
       width: "100%",
+
+      backdropFilter: "blur( 3px )",
+      webkitFbackdropFilter: " blur( 3px )",
+      borderRadius: "10px",
+      border: "1px solid rgba( 255, 255, 255, 0.18 )",
     },
   }));
 
   const CustomBox = styled(Box)(({ theme }) => ({
     padding: theme.spacing(1, 0, 1, 0),
     margin: theme.spacing(0, 1, 0, 1),
+
+    backdropFilter: "blur( 3px )",
+    webkitFbackdropFilter: " blur( 3px )",
+    borderRadius: "10px",
+    border: "1px solid rgba( 255, 255, 255, 0.18 )",
     [theme.breakpoints.down("md")]: {
       height: "auto",
       flexDirection: "column",

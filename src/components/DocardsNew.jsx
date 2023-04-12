@@ -14,7 +14,7 @@ const DocardsNew = ({
   distance,
   Hospital_Name,
   Adress,
-  image
+  image,
 }) => {
   const CustomContainer = styled(Container)(({ theme }) => ({
     backgroundColor: "#8092d5",
@@ -31,10 +31,16 @@ const DocardsNew = ({
       height: "auto",
       flexDirection: "column",
       alignItems: "center",
+      justifyContent: "center",
       padding: theme.spacing(1, 1, 1, 1),
       width: "70%",
       gap: "0.5rem",
       fontSize: "2rem",
+      boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+      backdropFilter: "blur( 3px )",
+      WebkitFbackdropFilter: " blur( 3px )",
+      borderRadius: "10px",
+      border: "1px solid rgba( 255, 255, 255, 0.18 )",
     },
   }));
   const CustomnewContainer = styled(Container)(({ theme }) => ({
@@ -49,12 +55,23 @@ const DocardsNew = ({
     width: "45%",
     padding: theme.spacing(0, 0, 0, 0),
     gap: "0.5rem",
+    boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+    backdropFilter: "blur( 3px )",
+    WebkitFbackdropFilter: " blur( 3px )",
+    borderRadius: "10px",
+    border: "1px solid rgba( 255, 255, 255, 0.18 )",
     [theme.breakpoints.down("md")]: {
       height: "auto",
       flexDirection: "column",
       alignItems: "center",
       padding: theme.spacing(0, 0, 0, 0),
       width: "70%",
+      justifyContent: "center",
+      boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+      backdropFilter: "blur( 3px )",
+      WebkitFbackdropFilter: " blur( 3px )",
+      borderRadius: "10px",
+      border: "1px solid rgba( 255, 255, 255, 0.18 )",
     },
   }));
   return (
@@ -63,8 +80,13 @@ const DocardsNew = ({
         <CustomContainer>
           <Box
             //   onClick={handleFunction}
-            width='500px'
+            width="500px"
             onClick={handleOpen}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
           >
             <Avatar
               style={{
@@ -83,6 +105,11 @@ const DocardsNew = ({
               justifyContent: "flex-start",
               alignItems: "flex-start",
               gap: "0.5rem",
+              md: {
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "start",
+              },
             }}
           >
             <Typography>Name:{name}</Typography>
@@ -116,7 +143,16 @@ const DocardsNew = ({
           </Box>
         </CustomContainer>
         <Box>
-          <Cmodal id={id} name={name} qual={qual} spec={spec} Hospital_Name={Hospital_Name} Adress={Adress} distance={distance} image={image}/>
+          <Cmodal
+            id={id}
+            name={name}
+            qual={qual}
+            spec={spec}
+            Hospital_Name={Hospital_Name}
+            Adress={Adress}
+            distance={distance}
+            image={image}
+          />
         </Box>
       </CustomnewContainer>
     </>

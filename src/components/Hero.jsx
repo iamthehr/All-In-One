@@ -16,10 +16,21 @@ const Hero = () => {
     justifyContent: "center",
     gap: theme.spacing(5),
     marginTop: theme.spacing(3),
+
+    backdropFilter: "blur( 3px )",
+    webkitFbackdropFilter: " blur( 3px )",
+    borderRadius: "10px",
+    border: "1px solid rgba( 255, 255, 255, 0.18 )",
+    padding: "5px",
     [theme.breakpoints.down("md")]: {
       flexDirection: "column",
       alignItems: "center",
       textAlign: "center",
+
+      backdropFilter: "blur( 3px )",
+      webkitFbackdropFilter: " blur( 3px )",
+      borderRadius: "10px",
+      border: "1px solid rgba( 255, 255, 255, 0.18 )",
     },
   }));
 
@@ -78,7 +89,17 @@ const Hero = () => {
             </Box>
           </Box>
 
-          <Box sx={{ flex: "1.25" }} data-aos="fade-left">
+          <Box
+            sx={{
+              flex: "1.25",
+
+              backdropFilter: "blur( 3px )",
+              webkitFbackdropFilter: " blur( 3px )",
+              borderRadius: "10px",
+              border: "1px solid rgba( 255, 255, 255, 0.18 )",
+            }}
+            data-aos="fade-left"
+          >
             <Image
               src={heroImg2}
               alt="heroImg"

@@ -11,7 +11,7 @@ const Docnewcard = ({
   distance,
   Hospital_Name,
   Adress,
-  image
+  image,
 }) => {
   const CustomContainer = styled(Container)(({ theme }) => ({
     backgroundColor: "#17275F",
@@ -22,12 +22,22 @@ const Docnewcard = ({
     justifyContent: "space-around",
     alignItems: "center",
     padding: theme.spacing(1, 1, 1, 1),
+    boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+    backdropFilter: "blur( 3px )",
+    webkitFbackdropFilter: " blur( 3px )",
+    borderRadius: "10px",
+    border: "1px solid rgba( 255, 255, 255, 0.18 )",
     [theme.breakpoints.down("md")]: {
       height: "auto",
       flexDirection: "column",
       alignItems: "center",
       padding: theme.spacing(1, 1, 1, 1),
       width: "35%",
+      boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+      backdropFilter: "blur( 3px )",
+      webkitFbackdropFilter: " blur( 3px )",
+      borderRadius: "10px",
+      border: "1px solid rgba( 255, 255, 255, 0.18 )",
     },
   }));
 
