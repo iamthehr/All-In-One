@@ -32,6 +32,7 @@ const DocardsNew = ({
       padding: theme.spacing(1, 1, 1, 1),
       width: "70%",
       gap: "0.5rem",
+      fontSize: "2rem",
     },
   }));
   const CustomnewContainer = styled(Container)(({ theme }) => ({
