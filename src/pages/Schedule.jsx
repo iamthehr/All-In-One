@@ -74,7 +74,30 @@ const Schedule = () => {
 
     })()
   },[doctors,appoitArray])
+  const router=useRouter()
 
+  useEffect(()=>{
+    (async()=>{
+      const token=localStorage.getItem('token')
+      let l=await fetch('http://localhost:5000/mainpage/hospital/displayName',{
+        method:'post',
+        headers:{
+          'Content-Type':'application/json',
+          'auth':token
+        }
+      })
+      l=await l.json()
+      //console.log(l)
+      if(l[0].name==undefined){
+        alert('you are not authorized to access this page')
+        router.push('./Tabs-Hospital')
+        return
+      }
+
+    })()
+  },[doctors,appoitArray])
+
+  /*async function displayTimeSlots(){
   /*async function displayTimeSlots(){
     const token=localStorage.getItem('token')
     let slots=await fetch('http://localhost:5000/mainpage/hospital/displayTimeSlot',{
@@ -133,6 +156,7 @@ const Schedule = () => {
       return;
     }
     console.log(startTime+" "+endTime)
+    /*const st_time= startTime.$d
     /*const st_time= startTime.$d
     .toLocaleTimeString(navigator.language, {
       hour: "2-digit",
@@ -232,6 +256,7 @@ const Schedule = () => {
             <DoctorCard
               name="Dr.Batra"
               qual="MBBS,MD"
+          spec="Generel Physician"/>}
           spec="Generel Physician"/>}
           {doctors.map(item=>{
             return(
