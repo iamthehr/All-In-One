@@ -3,15 +3,13 @@ import React from "react";
 import { styled } from "@mui/material";
 import { Container } from "@mui/material";
 
-const Docnewcard = ({
+const Docusercard = ({
   name,
   qual,
   spec,
-  handleOpen,
-  distance,
+
   Hospital_Name,
   Adress,
-  image
 }) => {
   const CustomContainer = styled(Container)(({ theme }) => ({
     backgroundColor: "#17275F",
@@ -34,25 +32,6 @@ const Docnewcard = ({
   return (
     <>
       <CustomContainer>
-        <Box
-          onClick={handleOpen}
-          sx={{
-            justifyContent: "center",
-            alignItems: "center",
-            padding: "1rem",
-          }}
-        >
-          <Avatar
-            style={{
-              marginRight: "1rem",
-            }}
-            size="md"
-            cursor={"pointer"}
-            name="Dr.Batra"
-            sx={{ width: "150px", height: "150px" }}
-            src={image}
-          />
-        </Box>
         <Box
           sx={{
             display: "flex",
@@ -80,7 +59,11 @@ const Docnewcard = ({
           <Box sx={{ inlineSize: "300px", overflowWrap: "break-word" }}>
             <Typography
               fontSize="md"
-              sx={{ wordBreak: "break-all", color: "white", fontSize: "20px" }}
+              sx={{
+                wordBreak: "break-all",
+                color: "white",
+                fontSize: "20px",
+              }}
             >
               Address:{Adress}
             </Typography>
@@ -99,14 +82,10 @@ const Docnewcard = ({
           <Typography fontSize="xs" sx={{ color: "white", fontSize: "30px" }}>
             <b>{spec}</b>
           </Typography>
-
-          <Typography sx={{ color: "white", fontSize: "30px" }}>
-            Distance:{distance}
-          </Typography>
         </Box>
       </CustomContainer>
     </>
   );
 };
 
-export default Docnewcard;
+export default Docusercard;

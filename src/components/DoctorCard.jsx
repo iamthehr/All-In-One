@@ -1,7 +1,8 @@
 import { Avatar, Box, Typography } from "@mui/material";
 import React from "react";
 
-const DoctorCard = ({ name, qual, spec, handleOpen }) => {
+const DoctorCard = ({ name, qual, spec, handleOpen,image }) => {
+  //console.log(image);
   return (
     <Box
       //   onClick={handleFunction}
@@ -32,7 +33,7 @@ const DoctorCard = ({ name, qual, spec, handleOpen }) => {
         size="sm"
         cursor={"pointer"}
         name="Dr.Batra"
-        src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
+        src={image}
       />
       <Box>
         <Typography>{name}</Typography>

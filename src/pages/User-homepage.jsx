@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "@/components/Nav3";
-import { Box, Button, styled, Typography } from "@mui/material";
+import { Box, Button, MenuItem, styled, Typography } from "@mui/material";
 import { Container } from "@mui/system";
 import TextField from "@mui/material/TextField";
 
@@ -13,6 +13,9 @@ import Contact from "@/components/Contact";
 import Aos from "aos";
 import "Aos/dist/aos.css";
 import { useEffect } from "react";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import { FormControl, InputLabel, Select } from "@mui/material";
 
 const theme = createTheme({
   palette: {
@@ -59,8 +62,101 @@ const Test = [
 ];
 
 function User_homepage() {
+  const [name, setName] = useState("");
+  const [image, setImage] = useState("");
+  const [speciality, setSpeciality] = useState([]);
+  const [search, setSearch] = useState("");
+  const [doctors, setDoctors] = useState([]);
+  const router = useRouter();
+
+  async function handleSearch() {
+    const token = localStorage.getItem("token");
+    let doc = await fetch(
+      "http://localhost:5000/mainpage/user/displayDoctors",
+      {
+        method: "post",
+        body: JSON.stringify({ speciality: search }),
+        headers: {
+          "Content-Type": "application/json",
+          auth: token,
+        },
+      }
+    );
+    doc = await doc.json();
+    console.log(doc);
+    for (let i in doc) {
+      let img = await fetch(
+        "http://localhost:5000/mainpage/user/displayDoctorImage",
+        {
+          method: "post",
+          body: JSON.stringify({ id: doc[i].doctor_id }),
+          headers: {
+            "Content-Type": "application/json",
+            auth: token,
+          },
+        }
+      );
+      img = await img.blob();
+      let newObj = { ...doc[i], image: URL.createObjectURL(img) };
+      doc[i] = newObj;
+    }
+    //console.log(doc)
+    setDoctors(doc);
+  }
+
   useEffect(() => {
     Aos.init({ duration: 800 });
+    (async () => {
+      const token = localStorage.getItem("token");
+      //const token=localStorage.getItem('token')
+      let user = await fetch(
+        "http://localhost:5000/mainpage/user/displayName",
+        {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json",
+            auth: token,
+          },
+        }
+      );
+      //console.log(user)
+      user = await user.json();
+      //console.log(user[0].name)
+      if (user[0].name == undefined) {
+        alert("you are not authorized to view this page");
+        router.push("./Tabs-User");
+        return;
+      }
+      setName(user[0].name);
+      let img = await fetch(
+        "http://localhost:5000/mainpage/user/displayProfileImage",
+        {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json",
+            auth: token,
+          },
+        }
+      );
+      img = await img.blob();
+      //console.log(img)
+      setImage(URL.createObjectURL(img));
+
+      let specialities = await fetch(
+        "http://localhost:5000/mainpage/user/displaySpeciality",
+        {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json",
+            auth: token,
+          },
+        }
+      );
+      specialities = await specialities.json();
+      specialities = specialities.map((item) => item.speciality);
+      //console.log(specialities)
+      setSpeciality(specialities);
+    })();
   }, []);
 
   const Title = styled(Typography)(({ theme }) => ({
@@ -109,7 +205,7 @@ function User_homepage() {
           }}
         >
           <Container>
-            <Navbar />
+            <Navbar name={name} image={image} />
 
             <Box>
               <Typography
@@ -122,7 +218,7 @@ function User_homepage() {
                   mb: 4,
                 }}
               >
-                Welcome User,
+                {`Welcome ${name}`}
               </Typography>
               <Title variant="h1">
                 Always caring about your health, we are here to help you!
@@ -168,28 +264,49 @@ function User_homepage() {
                     }}
                   ></div>
 
-                  <TextField
+                  {/*<TextField
                     select
                     fullWidth
                     label="select specialization"
-                    defaultValue="Specialization"
+                    value={search}
                     SelectProps={{
                       native: true,
                     }}
                     helperText="  select the speciation of the doctor  "
                     variant="standard"
                   >
-                    {Specialization.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
+                    {speciality.map((option) => (
+                      <option key={option} value={option} onClick={()=>setSearch(option)}>
+                        {option}
                       </option>
                     ))}
-                  </TextField>
+                    </TextField>*/}
+
+                  <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label">
+                      Specialization
+                    </InputLabel>
+                    <Select
+                      labelId="Specialization"
+                      id="Specialization"
+                      onChange={(e) => setSearch(e.target.value)}
+                      value={search}
+                      label="Specialization"
+                      // onChange={handleChange}
+                    >
+                      {speciality.map((item) => {
+                        return <MenuItem value={item}>{item}</MenuItem>;
+                      })}
+                      {/* <MenuItem value={20}>General Surgery</MenuItem> */}
+                      {/* <MenuItem value={30}>Thirty</MenuItem> */}
+                    </Select>
+                  </FormControl>
 
                   <Button
                     variant="contained"
                     fullWidth
                     endIcon={<SearchIcon />}
+                    onClick={handleSearch}
                   >
                     Search
                   </Button>
@@ -236,7 +353,22 @@ function User_homepage() {
                     mt={8}
                     mb={8}
                   >
-                    <DocardsNew
+                    {doctors.map((item) => {
+                      return (
+                        <DocardsNew
+                          key={item.doctor_id}
+                          id={item.doctor_id}
+                          name={item.doctor_name}
+                          qual={item.qualifications}
+                          spec={item.speciality}
+                          distance="10km"
+                          Hospital_Name={item.hospital_name}
+                          Adress={item.address}
+                          image={item.image}
+                        ></DocardsNew>
+                      );
+                    })}
+                    {/*<DocardsNew
                       name="Aditya"
                       qual="MBBS"
                       spec="Physician"
@@ -283,7 +415,7 @@ function User_homepage() {
                       distance="4km"
                       Hospital_Name="TMH NAYSARAY"
                       Adress="SAHFGHASFVEFG"
-                    />
+                  />*/}
                   </Box>
                 </Box>
               </CustomContainer>

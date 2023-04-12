@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -6,11 +6,13 @@ import Fade from "@mui/material/Fade";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Docnewcard from "./Docnewcard";
-// import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { MobileTimePicker } from "@mui/x-date-pickers/MobileTimePicker";
 import { useState } from "react";
+import { useEffect } from "react";
+import { ButtonGroup } from "@mui/material";
 
 const style = {
   position: "absolute",
@@ -30,19 +32,70 @@ const style = {
   gap: "2rem",
 };
 
-const Cmodal=()=> {
+const Cmodal = (props) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [day, setDay] = useState();
+  const [timeslots,setTimeslots]=useState([])
+  const [id,setId]=useState("")
+  const [toggle,setToggle]=useState(true)
+
+  async function addAppointment(){
+    const token=localStorage.getItem('token')
+    console.log(id)
+    if(!id){
+      alert('please select a timeslot')
+      return
+    }
+    if(id.no_of_bookings===id.total_bookings){
+      alert('the slot is filled')
+      return
+    }
+    let confirm=await fetch('http://localhost:5000/mainpage/user/selectTimeSlot',{
+      method:'post',
+      body:JSON.stringify({timeslot_id:id.id}),
+      headers:{
+        'Content-Type':'application/json',
+        'auth':token
+      }
+    })
+    confirm=await confirm.json()
+    //console.log(confirm)
+    if(confirm.status=="user exists"){
+      alert('you have already booked this timeslot')
+    }
+    else alert("your appointment has been confirmed")
+    setId("")
+    setToggle(!toggle)
+  }
+  
+
+  useEffect(()=>{
+    (async()=>{
+      console.log(day)
+      const token=localStorage.getItem('token')
+      let available=await fetch('http://localhost:5000/mainpage/user/displayDoctorTimeslots',{
+        method:'post',
+        body:JSON.stringify({id:props.id,day}),
+        headers:{
+          'Content-Type':'application/json',
+          'auth':token 
+        }
+      })
+      available=await available.json()
+      console.log(available)
+      setTimeslots(available)
+    })()
+  },[day,toggle])
 
   return (
     <div>
       <Button
         onClick={handleOpen}
-        variant="contained"
+        variant="outlined"
         fullWidth
-        sx={{ bgcolor: "#212463" }}
+        sx={{ bgcolor: "#c5c5d3" }}
       >
         Consult
       </Button>
@@ -58,16 +111,18 @@ const Cmodal=()=> {
             timeout: 500,
           },
         }}
+        sx={{ overflow: "scroll" }}
       >
         <Fade in={open}>
           <Box sx={style}>
             <Docnewcard
-              name="Aditya"
-              qual="MBBS"
-              spec="Physician"
-              distance="4km"
-              Hospital_Name="TMH NAYSARAY"
-              Adress="SAHFGHASFVJHdsdfsd"
+              name={props.name}
+              qual={props.qual}
+              spec={props.spec}
+              distance={props.distance}
+              Hospital_Name={props.Hospital_Name}
+              Adress={props.Adress}
+              image={props.image}
             />
             <Typography id="transition-modal-title" variant="h6" component="h2">
               This doctor is available
@@ -77,9 +132,10 @@ const Cmodal=()=> {
               <Typography>
                 <b>Weekdays</b>
               </Typography>
+              
               <Box display={"flex"} gap={"1rem"} flexWrap={"wrap"}>
                 <a
-                  style={{ color: "blue", textDecoration: "underline" }}
+                  style={{ color: "blue", textDecoration: "underline" ,cursor:'pointer'}}
                   onClick={() => setDay("Sunday")}
                 >
                   Sun
@@ -146,24 +202,31 @@ const Cmodal=()=> {
                   Sat
                 </a>
               </Box>
+
+              <ButtonGroup>
+                {timeslots.map(item=>(
+                  <Button key={item.id} value={item.id} onClick={()=>setId(item)}>{`${item.start_time} to ${item.end_time} available=${item.total_bookings-item.no_of_bookings}`}</Button>
+                ))}
+              </ButtonGroup>
             </Box>
 
-            <Box>
+            <Box
+              sx={{
+                display: "flex",
+                gap: "1rem",
+                borderRadius: "4px solid blue",
+                color: "blue",
+                width: "30%",
+              }}
+            >
               <LocalizationProvider dateAdapter={AdapterDayjs}>
-                {/* <DemoContainer
-                  components={[
-                    "MobileTimePicker",
-                    "MobileTimePicker",
-                    "MobileTimePicker",
-                  ]}
-                  sx={{ minWidth: 210 }}
-                > */}
                 <Box
                   sx={{
                     display: "flex",
-                    gap: "1rem",
+                    gap: "0.5rem",
                     borderRadius: "4px solid blue",
                     color: "blue",
+                    width: "100%",
                   }}
                 >
                   <MobileTimePicker
@@ -175,15 +238,14 @@ const Cmodal=()=> {
                     views={["hours", "minutes"]}
                   />
                 </Box>
-                {/* </DemoContainer> */}
               </LocalizationProvider>
             </Box>
 
-            <Button variant="contained">Book Appointment</Button>
+            <Button variant="contained" onClick={addAppointment}>Book Appointment</Button>
           </Box>
         </Fade>
       </Modal>
     </div>
   );
-}
+};
 export default Cmodal;

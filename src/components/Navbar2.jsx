@@ -8,11 +8,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import EventNoteIcon from "@mui/icons-material/EventNote";
-import AddIcon from "@mui/icons-material/Add";
+
 import AddBoxIcon from "@mui/icons-material/AddBox";
-import Switch from "@mui/material/Switch";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormGroup from "@mui/material/FormGroup";
+
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import { Button, Drawer } from "@mui/material";
@@ -37,18 +35,6 @@ export default function Navbar2() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      {/* <FormGroup> */}
-      {/* <FormControlLabel
-          control={
-            <Switch
-              checked={auth}
-              onChange={handleChange}
-              aria-label="login switch"
-            />
-          }
-          label={auth ? "Logout" : "Login"}
-        />
-      </FormGroup> */}
       <AppBar position="static">
         <Toolbar>
           <IconButton

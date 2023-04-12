@@ -9,9 +9,11 @@ import HomeIcon from "@mui/icons-material/Home";
 import ContactsIcon from "@mui/icons-material/Contacts";
 import logoImg from "../media/logo.png";
 import { Container } from "@mui/system";
-
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import {
+  Avatar,
   Drawer,
+  IconButton,
   Link,
   List,
   ListItem,
@@ -23,7 +25,7 @@ import {
 import { useState } from "react";
 import Image from "next/image";
 
-export const Nav3 = () => {
+export const Nav3 = (props) => {
   const [mobileMenu, setMobileMenu] = useState({
     left: false,
   });
@@ -97,10 +99,10 @@ export const Nav3 = () => {
   const NavbarContainer = styled(Container)(({ theme }) => ({
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "center",
     padding: theme.spacing(5),
     [theme.breakpoints.down("md")]: {
-      padding: theme.spacing(2),
+      padding: theme.spacing(1),
     },
   }));
 
@@ -111,7 +113,7 @@ export const Nav3 = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          gap: "15rem",
+          gap: "6rem",
         }}
       >
         <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -141,6 +143,45 @@ export const Nav3 = () => {
             <NavLink variant="body2">Contact</NavLink>
           </Link>
         </NavbarLinksBox>
+
+        <Link href="/User-profile" sx={{ textDecoration: "none" }}>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              border: "1px solid #a6b8d4",
+              padding: "0.2rem",
+              borderRadius: "5px",
+              "&:hover": {
+                backgroundColor: "#0A1235",
+                color: "#FFFFFF",
+              },
+            }}
+          >
+            <Typography
+              sx={{
+                fontSize: "14px",
+                color: "#4F5361",
+                fontWeight: "bold",
+                cursor: "pointer",
+                "&:hover": {
+                  color: "#fff",
+                },
+              }}
+            >
+              {props.name}
+            </Typography>
+            {/*<IconButton
+              sx={{
+                backgroundColor: "#9EABC0",
+                color: "#0A1235",
+              }}
+            >*/}
+              <Avatar src={props.image} sx={{borderWidth:0}}></Avatar>
+            {/*</IconButton>}*/}
+          </Box>
+        </Link>
       </Box>
     </NavbarContainer>
   );
