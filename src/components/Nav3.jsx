@@ -130,17 +130,17 @@ export const Nav3 = (props) => {
         </Box>
 
         <NavbarLinksBox>
-          <Link href="#consultdoc" sx={{ textDecoration: "none" }}>
+          <Link href="/Hospital" sx={{ textDecoration: "none" }}>
             <NavLink variant="body2">Home</NavLink>
           </Link>
-          <Link href="#consultdoc" sx={{ textDecoration: "none" }}>
-            <NavLink variant="body2">Consult</NavLink>
+          <Link href="/Schedule" sx={{ textDecoration: "none" }}>
+            <NavLink variant="body2">Schedule</NavLink>
           </Link>
-          <Link href="#Booklabtest" sx={{ textDecoration: "none" }}>
-            <NavLink variant="body2">Lab-test</NavLink>
+          <Link href="/AddDoctor" sx={{ textDecoration: "none" }}>
+            <NavLink variant="body2">Add Doctor</NavLink>
           </Link>
-          <Link href="#contact" sx={{ textDecoration: "none" }}>
-            <NavLink variant="body2">Contact</NavLink>
+          <Link href="/ShowAppointment" sx={{ textDecoration: "none" }}>
+            <NavLink variant="body2">Show Appointment</NavLink>
           </Link>
         </NavbarLinksBox>
 
@@ -178,7 +178,7 @@ export const Nav3 = (props) => {
                 color: "#0A1235",
               }}
             >*/}
-              <Avatar src={props.image} sx={{borderWidth:0}}></Avatar>
+            <Avatar src={props.image} sx={{ borderWidth: 0 }}></Avatar>
             {/*</IconButton>}*/}
           </Box>
         </Link>

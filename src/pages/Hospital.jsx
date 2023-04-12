@@ -19,34 +19,34 @@ const theme = createTheme({
   },
 });
 
-
 function Hospital() {
+  const [profile, setProfile] = useState("");
+  const router = useRouter();
 
-  const [profile,setProfile]=useState("")
-  const router=useRouter()
-
-  useEffect(()=>{
-    (async()=>{
-      const token=localStorage.getItem('token')
+  useEffect(() => {
+    (async () => {
+      const token = localStorage.getItem("token");
       //console.log(token)
-      let l=await fetch('http://localhost:5000/mainpage/hospital/displayName',{
-        method:'post',
-        headers:{
-          'Content-Type':'application/json',
-          'auth':token
+      let l = await fetch(
+        "http://localhost:5000/mainpage/hospital/displayName",
+        {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json",
+            auth: token,
+          },
         }
-      })
-      l=await l.json()
-      console.log(l[0].name)
-      if(l[0].name==undefined){
-        alert('you are not authorized to access this page')
-        router.push('./Tabs-Hospital')
-        return
+      );
+      l = await l.json();
+      console.log(l[0].name);
+      if (l[0].name == undefined) {
+        alert("you are not authorized to access this page");
+        router.push("./Tabs-Hospital");
+        return;
       }
-      setProfile(l[0].name)
-    })()
-    
-  },[])
+      setProfile(l[0].name);
+    })();
+  }, []);
   return (
     <ThemeProvider theme={theme}>
       <Nav3 />
@@ -55,7 +55,7 @@ function Hospital() {
       </Box>
       <AdminSec1 />
       <AdminSec2 />
-      <AdminSec4 />
+      {/* <AdminSec4 /> */}
       <AdminSec3 />
       {/* <Box
         display={"flex"}

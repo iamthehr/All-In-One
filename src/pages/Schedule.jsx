@@ -454,6 +454,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import Navbar2 from "@/components/Navbar2";
 import { type } from "@testing-library/user-event/dist/type";
+import Nav3 from "@/components/Nav3";
 
 const theme = createTheme({
   palette: {
@@ -667,7 +668,7 @@ const Schedule = () => {
   return (
     <ThemeProvider theme={theme}>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <Navbar2 />
+        <Nav3 />
         <Box
           display={"flex"}
           justifyContent={"center"}
@@ -702,32 +703,6 @@ const Schedule = () => {
             </IconButton>
           </Paper>
           <Box width={{ base: "100%", md: "50%", lg: "40%", xs: "100%" }}>
-            {/* <DoctorCard
-              name="Dr.Batra"
-              qual="MBBS,MD"
-              spec="Generel Physician"
-              handleOpen={handleOpen}
-              handleClose={handleClose}
-            /> */}
-            {/* <DoctorCard
-              name="Dr.Batra"
-              qual="MBBS,MD"
-              spec="Generel Physician"
-            />
-            <DoctorCard
-              name="Dr.Batra"
-              qual="MBBS,MD"
-              spec="Generel Physician"
-            />
-            <DoctorCard
-              name="Dr.Batra"
-              qual="MBBS,MD"
-              spec="Generel Physician"
-            />
-            <DoctorCard
-              name="Dr.Batra"
-              qual="MBBS,MD"
-          spec="Generel Physician"/> */}
             {doctors.map((item) => {
               return (
                 <div>
