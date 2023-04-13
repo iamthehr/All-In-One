@@ -166,7 +166,7 @@ function User_homepage() {
     margin: theme.spacing(4, 0, 4, 0),
     [theme.breakpoints.down("sm")]: {
       fontSize: "40px",
-      boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+
       backdropFilter: "blur( 3px )",
       webkitFbackdropFilter: " blur( 3px )",
       borderRadius: "10px",
@@ -242,9 +242,13 @@ function User_homepage() {
                 variant="body2"
                 sx={{ fontSize: "18px", color: "#5A6473", my: 4 }}
               >
-                many web sites still in their infancy. Various versions have
-                evolved over the years, sometimes by accident, sometimes on
-                purpose (injected humour and the like).
+                Find the Best Doctors in Your Area with Allisone. Looking for a
+                reliable and experienced doctor near you? Look no further than
+                Allisone. Our platform makes it easy to find nearby doctors in
+                all hospitals, so you can get the care you need, when you need
+                it. Whether you're looking for a specialist or a primary care
+                physician, our comprehensive directory has you covered. Start
+                your search today and discover the best doctors in your area
               </Typography>
             </Box>
 

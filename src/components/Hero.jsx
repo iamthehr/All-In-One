@@ -74,9 +74,9 @@ const Hero = () => {
               variant="body2"
               sx={{ fontSize: "18px", color: "#5A6473", my: 4 }}
             >
-              many web sites still in their infancy. Various versions have
-              evolved over the years, sometimes by accident, sometimes on
-              purpose (injected humour and the like).
+              Find Nearby Doctors with Allisone. Easily locate reliable and
+              experienced doctors in your area with our user-friendly platform.
+              Discover quality healthcare today.
             </Typography>
             <Box data-aos="fade-right">
               <Link href="/User-homepage" style={{ textDecoration: "none" }}>

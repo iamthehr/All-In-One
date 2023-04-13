@@ -71,7 +71,7 @@ const House = () => {
             </Box>
 
             <Box>
-              <Image src={doc} />
+              <Image src={doc} style={{ height: "300px", width: "300px" }} />
             </Box>
           </CustomContainer>
         </CustomBox>
