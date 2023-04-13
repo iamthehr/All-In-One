@@ -186,7 +186,7 @@ function User_homepage() {
     },
   }));
   const CustomContainer = styled(Container)(({ theme }) => ({
-    backgroundColor: "#CBD7FF",
+    // backgroundColor: "#CBD7FF",
     marginTop: "29px",
     height: "auto",
     borderRadius: "15px",
@@ -194,11 +194,11 @@ function User_homepage() {
     justifyContent: "space-around",
     alignItems: "center",
     flexDirection: "column",
-    boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
-    backdropFilter: "blur( 3px )",
-    webkitFbackdropFilter: " blur( 3px )",
-    borderRadius: "10px",
-    border: "1px solid rgba( 255, 255, 255, 0.18 )",
+    // boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+    // backdropFilter: "blur( 3px )",
+    // webkitFbackdropFilter: " blur( 3px )",
+    // borderRadius: "10px",
+    // border: "1px solid rgba( 255, 255, 255, 0.18 )",
 
     [theme.breakpoints.down("md")]: {
       height: "auto",
@@ -257,8 +257,8 @@ function User_homepage() {
                     paddingLeft: "3px",
                     marginTop: "5px",
                     borderRadius: "7px",
-                    boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
-                    backdropFilter: "blur( 3px )",
+                    // boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+                    // backdropFilter: "blur( 3px )",
                     webkitFbackdropFilter: " blur( 3px )",
                     borderRadius: "10px",
                     border: "1px solid rgba( 255, 255, 255, 0.18 )",
@@ -270,11 +270,12 @@ function User_homepage() {
                       color: "black",
                       fontWeight: "700",
                       textAlign: "center",
+                      mb: "1rem",
                     }}
                   >
                     CONSULT WITH A DOCTOR
                   </Typography>
-                  <div
+                  {/* <div
                     style={{
                       width: "100%",
                       height: "5px",
@@ -282,7 +283,7 @@ function User_homepage() {
                       margin: "0 auto",
                       marginBottom: "43px",
                     }}
-                  ></div>
+                  ></div> */}
 
                   {/*<TextField
                     select
@@ -351,7 +352,7 @@ function User_homepage() {
                     >
                       DOCTORS NEAR YOU
                     </Typography>
-                    <div
+                    {/* <div
                       style={{
                         width: "100%",
                         height: "5px",
@@ -359,7 +360,7 @@ function User_homepage() {
                         margin: "0 auto",
                         marginBottom: "43px",
                       }}
-                    ></div>
+                    ></div> */}
                   </Box>
                   <Box
                     sx={{
@@ -394,14 +395,6 @@ function User_homepage() {
                         ></DocardsNew>
                       );
                     })}
-                    {/*<DocardsNew
-                      name="Aditya"
-                      qual="MBBS"
-                      spec="Physician"
-                      distance="4km"
-                      Hospital_Name="TMH NAYSARAY"
-                      Adress="SAHFGHASFVJH"
-                    />
                     <DocardsNew
                       name="Aditya"
                       qual="MBBS"
@@ -428,6 +421,14 @@ function User_homepage() {
                     />
                     <DocardsNew
                       name="Aditya"
+                      qual="MBBS"
+                      spec="Physician"
+                      distance="4km"
+                      Hospital_Name="TMH NAYSARAY"
+                      Adress="SAHFGHASFVJH"
+                    />
+                    <DocardsNew
+                      name="Aditya Prasad Sinha Doctor"
                       qual="MBBS"
                       spec="Physician"
                       distance="4km"
@@ -441,7 +442,7 @@ function User_homepage() {
                       distance="4km"
                       Hospital_Name="TMH NAYSARAY"
                       Adress="SAHFGHASFVEFG"
-                  />*/}
+                    />
                     <DocardsNew
                       name="Aditya"
                       qual="MBBS"
@@ -517,9 +518,6 @@ function User_homepage() {
                         </div> */}
           </Container>
         </Box>
-        <div id="contact">
-          <Contact />
-        </div>
         <Footer />
       </ThemeProvider>
     </>

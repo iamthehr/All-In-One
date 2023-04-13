@@ -12,7 +12,8 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { MobileTimePicker } from "@mui/x-date-pickers/MobileTimePicker";
 import { useState } from "react";
 import { useEffect } from "react";
-import { ButtonGroup } from "@mui/material";
+import { ButtonGroup, IconButton } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 const style = {
   position: "absolute",
@@ -98,6 +99,16 @@ const Cmodal = (props) => {
     })();
   }, [day, toggle]);
 
+  const days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
   return (
     <div>
       <Button
@@ -139,6 +150,17 @@ const Cmodal = (props) => {
       >
         <Fade in={open}>
           <Box sx={style}>
+            <div
+              style={{
+                position: "absolute",
+                right: "10px",
+                top: "10px",
+              }}
+            >
+              <IconButton onClick={handleClose}>
+                <CloseIcon />
+              </IconButton>
+            </div>
             <Docnewcard
               name={props.name}
               qual={props.qual}
@@ -151,14 +173,28 @@ const Cmodal = (props) => {
             <Typography id="transition-modal-title" variant="h6" component="h2">
               This doctor is available
             </Typography>
-
             <Box>
               <Typography>
                 <b>Weekdays</b>
               </Typography>
 
               <Box display={"flex"} gap={"1rem"} flexWrap={"wrap"}>
-                <a
+                {days.map((d) => (
+                  <IconButton
+                    sx={{
+                      width: "2.5rem",
+                      height: "2.5rem",
+                      border: d === day ? "2px solid black" : "",
+                      fontWeight: "bold",
+                      fontSize: "1.1em",
+                    }}
+                    key={d}
+                    onClick={() => setDay(d)}
+                  >
+                    {d.slice(0, 1)}
+                  </IconButton>
+                ))}
+                {/* <a
                   style={{
                     color: "blue",
                     textDecoration: "underline",
@@ -228,7 +264,7 @@ const Cmodal = (props) => {
                   }}
                 >
                   Sat
-                </a>
+                </a> */}
               </Box>
 
               <ButtonGroup>
@@ -243,7 +279,6 @@ const Cmodal = (props) => {
                 ))}
               </ButtonGroup>
             </Box>
-
             <Box
               sx={{
                 display: "flex",
@@ -274,7 +309,6 @@ const Cmodal = (props) => {
                 </Box>
               </LocalizationProvider>
             </Box>
-
             <Button variant="contained" onClick={addAppointment}>
               Book Appointment
             </Button>

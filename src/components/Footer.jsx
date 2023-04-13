@@ -42,7 +42,7 @@ const Footer = () => {
       sx={{
         py: 10,
         backgroundColor: "#E6F0FF",
-        boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+        // boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
         backdropFilter: "blur( 3px )",
         webkitFbackdropFilter: " blur( 3px )",
         borderRadius: "10px",
