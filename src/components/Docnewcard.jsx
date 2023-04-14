@@ -14,7 +14,8 @@ const Docnewcard = ({
   image,
 }) => {
   const CustomContainer = styled(Container)(({ theme }) => ({
-    backgroundColor: "#17275F",
+    // backgroundColor: "#17275F",
+    backgroundColor: "red",
     marginTop: "29px",
     height: "416px",
     borderRadius: "15px",

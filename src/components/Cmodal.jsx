@@ -15,13 +15,13 @@ import { useEffect } from "react";
 import { ButtonGroup, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import DomainAddIcon from "@mui/icons-material/DomainAdd";
+import { PropaneSharp } from "@mui/icons-material";
+
 const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
   width: 1000,
-  height: "auto",
+  height: "calc(100% - 100px)",
   backgroundColor: "background.paper",
   border: "5px solid #EEEEEE",
   boxShadow: 24,
@@ -32,10 +32,10 @@ const style = {
   flexDirection: "column",
   gap: "2rem",
   boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
-  backdropFilter: "blur( 3px )",
-  webkitFbackdropFilter: " blur( 3px )",
+  backdropFilter: "blur(3px)",
   borderRadius: "10px",
   border: "1px solid rgba( 255, 255, 255, 0.18 )",
+  overflow: "auto",
 };
 
 const Cmodal = (props) => {
@@ -140,61 +140,100 @@ const Cmodal = (props) => {
           },
         }}
         sx={{
-          overflow: "scroll",
-          boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+          position: "fixed",
+          inset: 0,
+          overflowY: "hidden",
           backdropFilter: "blur( 3px )",
-          webkitFbackdropFilter: " blur( 3px )",
-          borderRadius: "10px",
-          border: "1px solid rgba( 255, 255, 255, 0.18 )",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
         }}
       >
-        <Fade in={open}>
-          <Box sx={style}>
-            <div
-              style={{
-                position: "absolute",
-                right: "10px",
-                top: "10px",
+        {/* <Fade in={open}> */}
+        <Box sx={style}>
+          <div
+            style={{
+              position: "absolute",
+              right: "10px",
+              top: "10px",
+            }}
+          >
+            <IconButton onClick={handleClose}>
+              <CloseIcon />
+            </IconButton>
+          </div>
+          <Box
+            sx={{
+              backgroundColor: "blue",
+              width: "100%",
+              display: "flex",
+              gap: "10px",
+              padding: "1.5rem",
+              borderRadius: "10px",
+            }}
+          >
+            <Box
+              sx={{
+                width: "8rem",
+                height: "8rem",
+                borderRadius: "2394872px",
+                // backgroundColor: "white",
+                border: "2px solid red",
+                backgroundImage: `url(${props.image})`,
+                backgroundSize: "cover",
               }}
-            >
-              <IconButton onClick={handleClose}>
-                <CloseIcon />
-              </IconButton>
-            </div>
-            <Docnewcard
-              name={props.name}
-              qual={props.qual}
-              spec={props.spec}
-              distance={props.distance}
-              Hospital_Name={props.Hospital_Name}
-              Adress={props.Adress}
-              image={props.image}
             />
-            <Typography id="transition-modal-title" variant="h6" component="h2">
-              This doctor is available
-            </Typography>
-            <Box>
-              <Typography>
-                <b>Weekdays</b>
-              </Typography>
 
-              <Box display={"flex"} gap={"1rem"} flexWrap={"wrap"}>
-                {days.map((d) => (
-                  <IconButton
-                    sx={{
-                      width: "2.5rem",
-                      height: "2.5rem",
-                      border: d === day ? "2px solid black" : "",
-                      fontWeight: "bold",
-                      fontSize: "1.1em",
-                    }}
-                    key={d}
-                    onClick={() => setDay(d)}
-                  >
-                    {d.slice(0, 1)}
-                  </IconButton>
-                ))}
-                {/* <a
+            <Box sx={{ backgroundColor: "red", flex: 1 }}>
+              <Typography variant="h5" component="h2">
+                {props.name}
+              </Typography>
+              <Typography
+                fontSize="xs"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "5px",
+                }}
+              >
+                <DomainAddIcon /> {props.Hospital_Name}
+              </Typography>
+            </Box>
+          </Box>
+          {/* <Docnewcard
+            name={props.name}
+            qual={props.qual}
+            spec={props.spec}
+            distance={props.distance}
+            Hospital_Name={props.Hospital_Name}
+            Adress={props.Adress}
+            image={props.image}
+          /> */}
+          <Typography id="transition-modal-title" variant="h6" component="h2">
+            This doctor is available
+          </Typography>
+          <Box>
+            <Typography>
+              <b>Weekdays</b>
+            </Typography>
+
+            <Box display={"flex"} gap={"1rem"} flexWrap={"wrap"}>
+              {days.map((d) => (
+                <IconButton
+                  sx={{
+                    width: "2.5rem",
+                    height: "2.5rem",
+                    border: d === day ? "2px solid black" : "",
+                    fontWeight: "bold",
+                    fontSize: "1.1em",
+                  }}
+                  key={d}
+                  onClick={() => setDay(d)}
+                >
+                  {d.slice(0, 1)}
+                </IconButton>
+              ))}
+              {/* <a
                   style={{
                     color: "blue",
                     textDecoration: "underline",
@@ -265,55 +304,55 @@ const Cmodal = (props) => {
                 >
                   Sat
                 </a> */}
-              </Box>
+            </Box>
 
-              <ButtonGroup>
-                {timeslots.map((item) => (
-                  <Button
-                    key={item.id}
-                    value={item.id}
-                    onClick={() => setId(item)}
-                  >{`${item.start_time} to ${item.end_time} available=${
-                    item.total_bookings - item.no_of_bookings
-                  }`}</Button>
-                ))}
-              </ButtonGroup>
-            </Box>
-            <Box
-              sx={{
-                display: "flex",
-                gap: "1rem",
-                borderRadius: "4px solid blue",
-                color: "blue",
-                width: "30%",
-              }}
-            >
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    gap: "0.5rem",
-                    borderRadius: "4px solid blue",
-                    color: "blue",
-                    width: "100%",
-                  }}
-                >
-                  <MobileTimePicker
-                    label={"Start time"}
-                    views={["hours", "minutes"]}
-                  />
-                  <MobileTimePicker
-                    label={"  End time"}
-                    views={["hours", "minutes"]}
-                  />
-                </Box>
-              </LocalizationProvider>
-            </Box>
-            <Button variant="contained" onClick={addAppointment}>
-              Book Appointment
-            </Button>
+            <ButtonGroup>
+              {timeslots.map((item) => (
+                <Button
+                  key={item.id}
+                  value={item.id}
+                  onClick={() => setId(item)}
+                >{`${item.start_time} to ${item.end_time} available=${
+                  item.total_bookings - item.no_of_bookings
+                }`}</Button>
+              ))}
+            </ButtonGroup>
           </Box>
-        </Fade>
+          <Box
+            sx={{
+              display: "flex",
+              gap: "1rem",
+              borderRadius: "4px solid blue",
+              color: "blue",
+              width: "calc(100%-50px)",
+            }}
+          >
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <Box
+                sx={{
+                  display: "flex",
+                  gap: "0.5rem",
+                  borderRadius: "4px solid blue",
+                  color: "blue",
+                  width: "100%",
+                }}
+              >
+                <MobileTimePicker
+                  label={"Start time"}
+                  views={["hours", "minutes"]}
+                />
+                <MobileTimePicker
+                  label={"  End time"}
+                  views={["hours", "minutes"]}
+                />
+              </Box>
+            </LocalizationProvider>
+          </Box>
+          <Button variant="contained" onClick={addAppointment}>
+            Book Appointment
+          </Button>
+        </Box>
+        {/* </Fade> */}
       </Modal>
     </div>
   );
