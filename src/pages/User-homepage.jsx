@@ -24,43 +24,6 @@ const theme = createTheme({
   },
 });
 
-const Specialization = [
-  {
-    value: "USD",
-    label: "Physician",
-  },
-  {
-    value: "EUR",
-    label: "gand ka doctor",
-  },
-  {
-    value: "BTC",
-    label: "gand ka doctor number 2",
-  },
-  {
-    value: "JPY",
-    label: " gand ka doctor number 3",
-  },
-];
-const Test = [
-  {
-    value: "1",
-    label: "bloodtest",
-  },
-  {
-    value: "2",
-    label: "sugar",
-  },
-  {
-    value: "3",
-    label: "lamp",
-  },
-  {
-    value: "4",
-    label: "new blood test",
-  },
-];
-
 function User_homepage() {
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
@@ -71,37 +34,45 @@ function User_homepage() {
 
   async function handleSearch() {
     const token = localStorage.getItem("token");
-    let doc = await fetch(
-      "http://localhost:5000/mainpage/user/displayDoctors",
-      {
-        method: "post",
-        body: JSON.stringify({ speciality: search }),
-        headers: {
-          "Content-Type": "application/json",
-          auth: token,
-        },
-      }
-    );
-    doc = await doc.json();
-    console.log(doc);
-    for (let i in doc) {
-      let img = await fetch(
-        "http://localhost:5000/mainpage/user/displayDoctorImage",
-        {
-          method: "post",
-          body: JSON.stringify({ id: doc[i].doctor_id }),
-          headers: {
-            "Content-Type": "application/json",
-            auth: token,
-          },
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(async (pos) => {
+        const lat = pos.coords.latitude;
+        const lng = pos.coords.longitude;
+
+        let doc = await fetch(
+          "http://localhost:5000/mainpage/user/displayDoctors",
+          {
+            method: "post",
+            body: JSON.stringify({ speciality: search, lat, lng }),
+            headers: {
+              "Content-Type": "application/json",
+              auth: token,
+            },
+          }
+        );
+        doc = await doc.json();
+        console.log(doc);
+        for (let i in doc) {
+          let img = await fetch(
+            "http://localhost:5000/mainpage/user/displayDoctorImage",
+            {
+              method: "post",
+              body: JSON.stringify({ id: doc[i].doctor_id }),
+              headers: {
+                "Content-Type": "application/json",
+                auth: token,
+              },
+            }
+          );
+          img = await img.blob();
+          let newObj = { ...doc[i], image: URL.createObjectURL(img) };
+          doc[i] = newObj;
         }
-      );
-      img = await img.blob();
-      let newObj = { ...doc[i], image: URL.createObjectURL(img) };
-      doc[i] = newObj;
+        //console.log(doc)
+        setDoctors(doc);
+      });
     }
-    //console.log(doc)
-    setDoctors(doc);
   }
 
   useEffect(() => {
@@ -392,7 +363,7 @@ function User_homepage() {
                           name={item.doctor_name}
                           qual={item.qualifications}
                           spec={item.speciality}
-                          distance="10km"
+                          distance={parseFloat(item.distance) / 1000.0}
                           Hospital_Name={item.hospital_name}
                           Adress={item.address}
                           image={item.image}
@@ -403,57 +374,9 @@ function User_homepage() {
                       name="Aditya"
                       qual="MBBS"
                       spec="Physician"
-                      distance="4km"
+                      distance={4.33}
                       Hospital_Name="TMH NAYSARAY"
                       Adress="SAHFGHASFVJH"
-                    />
-                    <DocardsNew
-                      name="Aditya"
-                      qual="MBBS"
-                      spec="Physician"
-                      distance="4km"
-                      Hospital_Name="TMH NAYSARAY"
-                      Adress="SAHFGHASFVJH"
-                    />
-                    <DocardsNew
-                      name="Aditya"
-                      qual="MBBS"
-                      spec="Physician"
-                      distance="4km"
-                      Hospital_Name="TMH NAYSARAY"
-                      Adress="SAHFGHASFVJH"
-                    />
-                    <DocardsNew
-                      name="Aditya"
-                      qual="MBBS"
-                      spec="Physician"
-                      distance="4km"
-                      Hospital_Name="TMH NAYSARAY"
-                      Adress="SAHFGHASFVJH"
-                    />
-                    <DocardsNew
-                      name="Aditya Prasad Sinha Doctor"
-                      qual="MBBS"
-                      spec="Physician"
-                      distance="4km"
-                      Hospital_Name="TMH NAYSARAY"
-                      Adress="SAHFGHASFVJH"
-                    />
-                    <DocardsNew
-                      name="Aditya"
-                      qual="MBBS"
-                      spec="Physician"
-                      distance="4km"
-                      Hospital_Name="TMH NAYSARAY"
-                      Adress="SAHFGHASFVEFG"
-                    />
-                    <DocardsNew
-                      name="Aditya"
-                      qual="MBBS"
-                      spec="Physician"
-                      distance="4km"
-                      Hospital_Name="TMH NAYSARAY"
-                      Adress="SAHFGHASFVEFG"
                     />
                   </Box>
                 </Box>
