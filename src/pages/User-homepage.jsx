@@ -11,7 +11,7 @@ import Footer from "@/components/Footer";
 import Contact from "@/components/Contact";
 
 import Aos from "aos";
-import "Aos/dist/aos.css";
+import "aos/dist/aos.css";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useState } from "react";

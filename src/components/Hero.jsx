@@ -8,7 +8,7 @@ import CustomButton from "./CustomButton";
 import heroImg2 from "../media/heroImg.png";
 import Image from "next/image";
 import Aos from "aos";
-import "Aos/dist/aos.css";
+import "aos/dist/aos.css";
 import { useEffect } from "react";
 
 const Hero = () => {
