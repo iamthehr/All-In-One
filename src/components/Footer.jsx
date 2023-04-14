@@ -38,7 +38,17 @@ const Footer = () => {
   }));
 
   return (
-    <Box sx={{ py: 10, backgroundColor: "#E6F0FF" }}>
+    <Box
+      sx={{
+        py: 10,
+        backgroundColor: "#E6F0FF",
+        // boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+        backdropFilter: "blur( 3px )",
+        webkitFbackdropFilter: " blur( 3px )",
+        borderRadius: "10px",
+        border: "1px solid rgba( 255, 255, 255, 0.18 )",
+      }}
+    >
       <div
         style={{
           width: "6%",
@@ -46,6 +56,11 @@ const Footer = () => {
           backgroundColor: "#000339",
           margin: "0 auto",
           marginBottom: "43px",
+          boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+          backdropFilter: "blur( 3px )",
+          webkitFbackdropFilter: " blur( 3px )",
+          borderRadius: "10px",
+          border: "1px solid rgba( 255, 255, 255, 0.18 )",
         }}
       ></div>
       <CustomContainer>

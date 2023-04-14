@@ -1,4 +1,5 @@
-import { Box, Button, Link, styled, Typography } from "@mui/material";
+import { Box, Button, styled, Typography } from "@mui/material";
+import Link from "next/link";
 import { Container } from "@mui/system";
 import React from "react";
 import Navbar from "./Navbar";
@@ -16,10 +17,21 @@ const Hero = () => {
     justifyContent: "center",
     gap: theme.spacing(5),
     marginTop: theme.spacing(3),
+
+    backdropFilter: "blur( 3px )",
+    webkitFbackdropFilter: " blur( 3px )",
+    borderRadius: "10px",
+    border: "1px solid rgba( 255, 255, 255, 0.18 )",
+    padding: "5px",
     [theme.breakpoints.down("md")]: {
       flexDirection: "column",
       alignItems: "center",
       textAlign: "center",
+
+      backdropFilter: "blur( 3px )",
+      webkitFbackdropFilter: " blur( 3px )",
+      borderRadius: "10px",
+      border: "1px solid rgba( 255, 255, 255, 0.18 )",
     },
   }));
 
@@ -62,12 +74,12 @@ const Hero = () => {
               variant="body2"
               sx={{ fontSize: "18px", color: "#5A6473", my: 4 }}
             >
-              many web sites still in their infancy. Various versions have
-              evolved over the years, sometimes by accident, sometimes on
-              purpose (injected humour and the like).
+              Find Nearby Doctors with Allisone. Easily locate reliable and
+              experienced doctors in your area with our user-friendly platform.
+              Discover quality healthcare today.
             </Typography>
             <Box data-aos="fade-right">
-              <Link href="User-homepage" style={{ textDecoration: "none" }}>
+              <Link href="/User-homepage" style={{ textDecoration: "none" }}>
                 <CustomButton
                   backgroundColor="#0F1B4C"
                   color="#fff"
@@ -78,7 +90,19 @@ const Hero = () => {
             </Box>
           </Box>
 
-          <Box sx={{ flex: "1.25" }} data-aos="fade-left">
+          <Box
+            sx={{
+              flex: "1.25",
+
+              backdropFilter: "blur( 3px )",
+              webkitFbackdropFilter: " blur( 3px )",
+              borderRadius: "10px",
+              border: "1px solid rgba( 255, 255, 255, 0.18 )",
+              order: { xs: -1, md: 0 },
+              maxWidth: "600px",
+            }}
+            data-aos="fade-left"
+          >
             <Image
               src={heroImg2}
               alt="heroImg"

@@ -166,6 +166,11 @@ function User_homepage() {
     margin: theme.spacing(4, 0, 4, 0),
     [theme.breakpoints.down("sm")]: {
       fontSize: "40px",
+
+      backdropFilter: "blur( 3px )",
+      webkitFbackdropFilter: " blur( 3px )",
+      borderRadius: "10px",
+      border: "1px solid rgba( 255, 255, 255, 0.18 )",
     },
   }));
   const CustomnewBox = styled(Box)(({ theme }) => ({
@@ -173,10 +178,15 @@ function User_homepage() {
     margin: theme.spacing(0, 1, 0, 0),
     [theme.breakpoints.down("md")]: {
       padding: "0",
+      boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+      backdropFilter: "blur( 3px )",
+      webkitFbackdropFilter: " blur( 3px )",
+      borderRadius: "10px",
+      border: "1px solid rgba( 255, 255, 255, 0.18 )",
     },
   }));
   const CustomContainer = styled(Container)(({ theme }) => ({
-    backgroundColor: "#CBD7FF",
+    // backgroundColor: "#CBD7FF",
     marginTop: "29px",
     height: "auto",
     borderRadius: "15px",
@@ -184,6 +194,11 @@ function User_homepage() {
     justifyContent: "space-around",
     alignItems: "center",
     flexDirection: "column",
+    // boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+    // backdropFilter: "blur( 3px )",
+    // webkitFbackdropFilter: " blur( 3px )",
+    // borderRadius: "10px",
+    // border: "1px solid rgba( 255, 255, 255, 0.18 )",
 
     [theme.breakpoints.down("md")]: {
       height: "auto",
@@ -227,9 +242,13 @@ function User_homepage() {
                 variant="body2"
                 sx={{ fontSize: "18px", color: "#5A6473", my: 4 }}
               >
-                many web sites still in their infancy. Various versions have
-                evolved over the years, sometimes by accident, sometimes on
-                purpose (injected humour and the like).
+                Find the Best Doctors in Your Area with Allisone. Looking for a
+                reliable and experienced doctor near you? Look no further than
+                Allisone. Our platform makes it easy to find nearby doctors in
+                all hospitals, so you can get the care you need, when you need
+                it. Whether you're looking for a specialist or a primary care
+                physician, our comprehensive directory has you covered. Start
+                your search today and discover the best doctors in your area
               </Typography>
             </Box>
 
@@ -242,6 +261,11 @@ function User_homepage() {
                     paddingLeft: "3px",
                     marginTop: "5px",
                     borderRadius: "7px",
+                    // boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+                    // backdropFilter: "blur( 3px )",
+                    webkitFbackdropFilter: " blur( 3px )",
+                    borderRadius: "10px",
+                    border: "1px solid rgba( 255, 255, 255, 0.18 )",
                   }}
                 >
                   <Typography
@@ -250,11 +274,12 @@ function User_homepage() {
                       color: "black",
                       fontWeight: "700",
                       textAlign: "center",
+                      mb: "1rem",
                     }}
                   >
                     CONSULT WITH A DOCTOR
                   </Typography>
-                  <div
+                  {/* <div
                     style={{
                       width: "100%",
                       height: "5px",
@@ -262,7 +287,7 @@ function User_homepage() {
                       margin: "0 auto",
                       marginBottom: "43px",
                     }}
-                  ></div>
+                  ></div> */}
 
                   {/*<TextField
                     select
@@ -325,13 +350,13 @@ function User_homepage() {
                     <Typography
                       sx={{
                         fontSize: "30px",
-                        color: "white",
+                        color: "Black",
                         fontWeight: "700",
                       }}
                     >
                       DOCTORS NEAR YOU
                     </Typography>
-                    <div
+                    {/* <div
                       style={{
                         width: "100%",
                         height: "5px",
@@ -339,7 +364,7 @@ function User_homepage() {
                         margin: "0 auto",
                         marginBottom: "43px",
                       }}
-                    ></div>
+                    ></div> */}
                   </Box>
                   <Box
                     sx={{
@@ -348,6 +373,12 @@ function User_homepage() {
                       gap: "3px",
                       justifyContent: "center",
                       alignItems: "center",
+                      maxWidth: {
+                        lg: "100%",
+                        md: "100%",
+                        sm: "80%",
+                        xs: "80%",
+                      },
                     }}
                     marginLeft="15px"
                     mt={8}
@@ -368,14 +399,6 @@ function User_homepage() {
                         ></DocardsNew>
                       );
                     })}
-                    {/*<DocardsNew
-                      name="Aditya"
-                      qual="MBBS"
-                      spec="Physician"
-                      distance="4km"
-                      Hospital_Name="TMH NAYSARAY"
-                      Adress="SAHFGHASFVJH"
-                    />
                     <DocardsNew
                       name="Aditya"
                       qual="MBBS"
@@ -402,6 +425,14 @@ function User_homepage() {
                     />
                     <DocardsNew
                       name="Aditya"
+                      qual="MBBS"
+                      spec="Physician"
+                      distance="4km"
+                      Hospital_Name="TMH NAYSARAY"
+                      Adress="SAHFGHASFVJH"
+                    />
+                    <DocardsNew
+                      name="Aditya Prasad Sinha Doctor"
                       qual="MBBS"
                       spec="Physician"
                       distance="4km"
@@ -415,7 +446,15 @@ function User_homepage() {
                       distance="4km"
                       Hospital_Name="TMH NAYSARAY"
                       Adress="SAHFGHASFVEFG"
-                  />*/}
+                    />
+                    <DocardsNew
+                      name="Aditya"
+                      qual="MBBS"
+                      spec="Physician"
+                      distance="4km"
+                      Hospital_Name="TMH NAYSARAY"
+                      Adress="SAHFGHASFVEFG"
+                    />
                   </Box>
                 </Box>
               </CustomContainer>
@@ -483,9 +522,6 @@ function User_homepage() {
                         </div> */}
           </Container>
         </Box>
-        <div id="contact">
-          <Contact />
-        </div>
         <Footer />
       </ThemeProvider>
     </>

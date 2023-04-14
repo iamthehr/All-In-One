@@ -49,7 +49,7 @@ export const Nav3 = (props) => {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {["Home", "Consult", "Lab-test", "Contact"].map((text, index) => (
+        {["Home", "Consult", "Contact"].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <ListItemIcon>
@@ -150,12 +150,16 @@ export const Nav3 = (props) => {
               display: "flex",
               alignItems: "center",
               gap: "0.5rem",
-              border: "1px solid #a6b8d4",
+
               padding: "0.2rem",
               borderRadius: "5px",
-              "&:hover": {
-                backgroundColor: "#0A1235",
-                color: "#FFFFFF",
+
+              transition: "0.1s all",
+
+              ":hover": {
+                backgroundColor: "rgba(14, 18, 41, 0.402)",
+
+                border: "1px solid #a6b8d4",
               },
             }}
           >
@@ -165,9 +169,6 @@ export const Nav3 = (props) => {
                 color: "#4F5361",
                 fontWeight: "bold",
                 cursor: "pointer",
-                "&:hover": {
-                  color: "#fff",
-                },
               }}
             >
               {props.name}

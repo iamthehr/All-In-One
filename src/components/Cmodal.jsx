@@ -12,7 +12,8 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { MobileTimePicker } from "@mui/x-date-pickers/MobileTimePicker";
 import { useState } from "react";
 import { useEffect } from "react";
-import { ButtonGroup } from "@mui/material";
+import { ButtonGroup, IconButton } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 const style = {
   position: "absolute",
@@ -30,6 +31,11 @@ const style = {
   justifyContent: "center",
   flexDirection: "column",
   gap: "2rem",
+  boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+  backdropFilter: "blur( 3px )",
+  webkitFbackdropFilter: " blur( 3px )",
+  borderRadius: "10px",
+  border: "1px solid rgba( 255, 255, 255, 0.18 )",
 };
 
 const Cmodal = (props) => {
@@ -37,57 +43,71 @@ const Cmodal = (props) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [day, setDay] = useState();
-  const [timeslots,setTimeslots]=useState([])
-  const [id,setId]=useState("")
-  const [toggle,setToggle]=useState(true)
+  const [timeslots, setTimeslots] = useState([]);
+  const [id, setId] = useState("");
+  const [toggle, setToggle] = useState(true);
 
-  async function addAppointment(){
-    const token=localStorage.getItem('token')
-    console.log(id)
-    if(!id){
-      alert('please select a timeslot')
-      return
+  async function addAppointment() {
+    const token = localStorage.getItem("token");
+    console.log(id);
+    if (!id) {
+      alert("please select a timeslot");
+      return;
     }
-    if(id.no_of_bookings===id.total_bookings){
-      alert('the slot is filled')
-      return
+    if (id.no_of_bookings === id.total_bookings) {
+      alert("the slot is filled");
+      return;
     }
-    let confirm=await fetch('http://localhost:5000/mainpage/user/selectTimeSlot',{
-      method:'post',
-      body:JSON.stringify({timeslot_id:id.id}),
-      headers:{
-        'Content-Type':'application/json',
-        'auth':token
+    let confirm = await fetch(
+      "http://localhost:5000/mainpage/user/selectTimeSlot",
+      {
+        method: "post",
+        body: JSON.stringify({ timeslot_id: id.id }),
+        headers: {
+          "Content-Type": "application/json",
+          auth: token,
+        },
       }
-    })
-    confirm=await confirm.json()
+    );
+    confirm = await confirm.json();
     //console.log(confirm)
-    if(confirm.status=="user exists"){
-      alert('you have already booked this timeslot')
-    }
-    else alert("your appointment has been confirmed")
-    setId("")
-    setToggle(!toggle)
+    if (confirm.status == "user exists") {
+      alert("you have already booked this timeslot");
+    } else alert("your appointment has been confirmed");
+    setId("");
+    setToggle(!toggle);
   }
-  
 
-  useEffect(()=>{
-    (async()=>{
-      console.log(day)
-      const token=localStorage.getItem('token')
-      let available=await fetch('http://localhost:5000/mainpage/user/displayDoctorTimeslots',{
-        method:'post',
-        body:JSON.stringify({id:props.id,day}),
-        headers:{
-          'Content-Type':'application/json',
-          'auth':token 
+  useEffect(() => {
+    (async () => {
+      console.log(day);
+      const token = localStorage.getItem("token");
+      let available = await fetch(
+        "http://localhost:5000/mainpage/user/displayDoctorTimeslots",
+        {
+          method: "post",
+          body: JSON.stringify({ id: props.id, day }),
+          headers: {
+            "Content-Type": "application/json",
+            auth: token,
+          },
         }
-      })
-      available=await available.json()
-      console.log(available)
-      setTimeslots(available)
-    })()
-  },[day,toggle])
+      );
+      available = await available.json();
+      console.log(available);
+      setTimeslots(available);
+    })();
+  }, [day, toggle]);
+
+  const days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
 
   return (
     <div>
@@ -95,7 +115,15 @@ const Cmodal = (props) => {
         onClick={handleOpen}
         variant="outlined"
         fullWidth
-        sx={{ bgcolor: "#c5c5d3" }}
+        sx={{
+          bgcolor: "#c5c5d3",
+          boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+          backdropFilter: "blur( 3px )",
+          webkitFbackdropFilter: " blur( 3px )",
+          borderRadius: "10px",
+          border: "1px solid rgba( 255, 255, 255, 0.18 )",
+          marginBottom: "2px",
+        }}
       >
         Consult
       </Button>
@@ -111,10 +139,28 @@ const Cmodal = (props) => {
             timeout: 500,
           },
         }}
-        sx={{ overflow: "scroll" }}
+        sx={{
+          overflow: "scroll",
+          boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+          backdropFilter: "blur( 3px )",
+          webkitFbackdropFilter: " blur( 3px )",
+          borderRadius: "10px",
+          border: "1px solid rgba( 255, 255, 255, 0.18 )",
+        }}
       >
         <Fade in={open}>
           <Box sx={style}>
+            <div
+              style={{
+                position: "absolute",
+                right: "10px",
+                top: "10px",
+              }}
+            >
+              <IconButton onClick={handleClose}>
+                <CloseIcon />
+              </IconButton>
+            </div>
             <Docnewcard
               name={props.name}
               qual={props.qual}
@@ -127,15 +173,33 @@ const Cmodal = (props) => {
             <Typography id="transition-modal-title" variant="h6" component="h2">
               This doctor is available
             </Typography>
-
             <Box>
               <Typography>
                 <b>Weekdays</b>
               </Typography>
-              
+
               <Box display={"flex"} gap={"1rem"} flexWrap={"wrap"}>
-                <a
-                  style={{ color: "blue", textDecoration: "underline" ,cursor:'pointer'}}
+                {days.map((d) => (
+                  <IconButton
+                    sx={{
+                      width: "2.5rem",
+                      height: "2.5rem",
+                      border: d === day ? "2px solid black" : "",
+                      fontWeight: "bold",
+                      fontSize: "1.1em",
+                    }}
+                    key={d}
+                    onClick={() => setDay(d)}
+                  >
+                    {d.slice(0, 1)}
+                  </IconButton>
+                ))}
+                {/* <a
+                  style={{
+                    color: "blue",
+                    textDecoration: "underline",
+                    cursor: "pointer",
+                  }}
                   onClick={() => setDay("Sunday")}
                 >
                   Sun
@@ -200,16 +264,21 @@ const Cmodal = (props) => {
                   }}
                 >
                   Sat
-                </a>
+                </a> */}
               </Box>
 
               <ButtonGroup>
-                {timeslots.map(item=>(
-                  <Button key={item.id} value={item.id} onClick={()=>setId(item)}>{`${item.start_time} to ${item.end_time} available=${item.total_bookings-item.no_of_bookings}`}</Button>
+                {timeslots.map((item) => (
+                  <Button
+                    key={item.id}
+                    value={item.id}
+                    onClick={() => setId(item)}
+                  >{`${item.start_time} to ${item.end_time} available=${
+                    item.total_bookings - item.no_of_bookings
+                  }`}</Button>
                 ))}
               </ButtonGroup>
             </Box>
-
             <Box
               sx={{
                 display: "flex",
@@ -240,8 +309,9 @@ const Cmodal = (props) => {
                 </Box>
               </LocalizationProvider>
             </Box>
-
-            <Button variant="contained" onClick={addAppointment}>Book Appointment</Button>
+            <Button variant="contained" onClick={addAppointment}>
+              Book Appointment
+            </Button>
           </Box>
         </Fade>
       </Modal>

@@ -3,6 +3,10 @@ import { styled } from "@mui/material";
 import { Container } from "@mui/material";
 import { Avatar, Box, Typography } from "@mui/material";
 
+import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import DomainAddIcon from "@mui/icons-material/DomainAdd";
+
 import Cmodal from "./Cmodal";
 
 const DocardsNew = ({
@@ -14,10 +18,9 @@ const DocardsNew = ({
   distance,
   Hospital_Name,
   Adress,
-  image
+  image,
 }) => {
   const CustomContainer = styled(Container)(({ theme }) => ({
-    backgroundColor: "#8092d5",
     marginTop: "29px",
 
     borderRadius: "15px",
@@ -31,13 +34,22 @@ const DocardsNew = ({
       height: "auto",
       flexDirection: "column",
       alignItems: "center",
+      justifyContent: "center",
       padding: theme.spacing(1, 1, 1, 1),
       width: "70%",
       gap: "0.5rem",
+      fontSize: "2rem",
+      // boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+      // backdropFilter: "blur( 3px )",
+      // WebkitFbackdropFilter: " blur( 3px )",
+      // borderRadius: "10px",
+      // border: "1px solid rgba( 255, 255, 255, 0.18 )",
     },
   }));
   const CustomnewContainer = styled(Container)(({ theme }) => ({
-    backgroundColor: "#8092d5",
+    // 42, 50, 88
+    backgroundColor: "rgba(0, 0, 0, 0.9)",
+    color: "white",
     marginTop: "29px",
 
     borderRadius: "15px",
@@ -48,12 +60,31 @@ const DocardsNew = ({
     width: "45%",
     padding: theme.spacing(0, 0, 0, 0),
     gap: "0.5rem",
+    boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+    backdropFilter: "blur( 3px )",
+    WebkitFbackdropFilter: " blur( 3px )",
+    borderRadius: "10px",
+    border: "1px solid rgba( 255, 255, 255, 0.18 )",
+
+    transition: "0.2s all",
+
+    ":hover": {
+      backgroundColor: "rgb(42, 50, 88)",
+      transform: "scale(1.05) rotateZ(-1deg)",
+    },
+
     [theme.breakpoints.down("md")]: {
       height: "auto",
       flexDirection: "column",
       alignItems: "center",
       padding: theme.spacing(0, 0, 0, 0),
       width: "70%",
+      justifyContent: "center",
+      boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+      backdropFilter: "blur( 3px )",
+      WebkitFbackdropFilter: " blur( 3px )",
+      borderRadius: "10px",
+      border: "1px solid rgba( 255, 255, 255, 0.18 )",
     },
   }));
   return (
@@ -62,12 +93,17 @@ const DocardsNew = ({
         <CustomContainer>
           <Box
             //   onClick={handleFunction}
-            width='500px'
+            // width="500px"
             onClick={handleOpen}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
           >
             <Avatar
               style={{
-                marginRight: "1rem",
+                marginRight: "1.5rem",
               }}
               cursor={"pointer"}
               name={name}
@@ -82,19 +118,42 @@ const DocardsNew = ({
               justifyContent: "flex-start",
               alignItems: "flex-start",
               gap: "0.5rem",
+              md: {
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "start",
+              },
+              position: "reative",
             }}
           >
-            <Typography>Name:{name}</Typography>
+            <Typography variant="h5">{name}</Typography>
             <Box sx={{ inlineSize: "200px", overflowWrap: "break-word" }}>
-              <Typography fontSize="xs">Qualification:{qual}</Typography>
+              <Typography fontSize="0.8em">{qual}</Typography>
             </Box>
             <Box sx={{ inlineSize: "200px", overflowWrap: "break-word" }}>
-              <Typography fontSize="xs">Hospital:{Hospital_Name}</Typography>
+              <Typography
+                fontSize="xs"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "5px",
+                }}
+              >
+                <DomainAddIcon /> {Hospital_Name}
+              </Typography>
             </Box>
 
             <Box sx={{ inlineSize: "200px", overflowWrap: "break-word" }}>
-              <Typography fontSize="md" sx={{ wordBreak: "break-all" }}>
-                Address:{Adress}
+              <Typography
+                fontSize="md"
+                sx={{ wordBreak: "break-all" }}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "5px",
+                }}
+              >
+                <LocationOnIcon /> {Adress}
               </Typography>
             </Box>
           </Box>
@@ -107,15 +166,50 @@ const DocardsNew = ({
               gap: "0.5rem",
             }}
           >
-            <Typography fontSize="xs">
-              <b>{spec}</b>
+            <Typography
+              fontSize="xs"
+              style={{
+                position: "absolute",
+                top: "10px",
+                right: "20px",
+                display: "flex",
+                gap: "0.5rem",
+              }}
+            >
+              <span
+                style={{
+                  backgroundColor: "#0b9a79",
+                  borderRadius: "492834px",
+                  padding: "0 .6rem",
+                  fontSize: "0.8em",
+                }}
+              >
+                {spec}
+              </span>
+              <span
+                style={{
+                  backgroundColor: "#0b9a79",
+                  borderRadius: "492834px",
+                  padding: "0 .6rem",
+                  fontSize: "0.8em",
+                }}
+              >
+                {distance}
+              </span>
             </Typography>
-
-            <Typography>Distance:{distance}</Typography>
           </Box>
         </CustomContainer>
         <Box>
-          <Cmodal id={id} name={name} qual={qual} spec={spec} Hospital_Name={Hospital_Name} Adress={Adress} distance={distance} image={image}/>
+          <Cmodal
+            id={id}
+            name={name}
+            qual={qual}
+            spec={spec}
+            Hospital_Name={Hospital_Name}
+            Adress={Adress}
+            distance={distance}
+            image={image}
+          />
         </Box>
       </CustomnewContainer>
     </>
