@@ -487,6 +487,15 @@ const Schedule = () => {
   const [selectedDoctor, setSelectedDoctor] = useState("");
   const [numOfAppo, setNumOfAppo] = useState(0);
   const [reRender, setReRender] = useState(false);
+  const days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
 
   useEffect(() => {
     (async () => {
@@ -733,71 +742,92 @@ const Schedule = () => {
                 <b>Weekdays</b>
               </Typography>
               <Box display={"flex"} gap={"1rem"} flexWrap={"wrap"}>
-                <a
-                  style={{ color: "blue", textDecoration: "underline" }}
-                  onClick={() => {
-                    setDay("Sunday");
-                    console.log(day);
-                    displayTimeSlots();
+                {days.map((d) => (
+                  <IconButton
+                    sx={{
+                      width: "2.5rem",
+                      height: "2.5rem",
+                      border: d === day ? "2px solid black" : "",
+                      fontWeight: "bold",
+                      fontSize: "1.1em",
+                    }}
+                    key={d}
+                    onClick={() => setDay(d)}
+                  >
+                    {d.slice(0, 1)}
+                  </IconButton>
+                ))}
+                {/* <a
+                  style={{
+                    color: "blue",
+                    textDecoration: "underline",
+                    cursor: "pointer",
                   }}
+                  onClick={() => setDay("Sunday")}
                 >
                   Sun
                 </a>
 
                 <a
-                  style={{ color: "blue", textDecoration: "underline" }}
-                  onClick={() => {
-                    setDay("Monday");
-                    displayTimeSlots();
+                  style={{
+                    color: "blue",
+                    textDecoration: "underline",
+                    cursor: "pointer",
                   }}
+                  onClick={() => setDay("Monday")}
                 >
                   Mon
                 </a>
                 <a
-                  style={{ color: "blue", textDecoration: "underline" }}
-                  onClick={() => {
-                    setDay("Tuesday");
-                    displayTimeSlots();
+                  style={{
+                    color: "blue",
+                    textDecoration: "underline",
+                    cursor: "pointer",
                   }}
+                  onClick={() => setDay("Tuesday")}
                 >
                   Tue
                 </a>
                 <a
-                  onClick={() => {
-                    setDay("Wednesday");
-                    displayTimeSlots();
+                  onClick={() => setDay("Wednesday")}
+                  style={{
+                    color: "blue",
+                    textDecoration: "underline",
+                    cursor: "pointer",
                   }}
-                  style={{ color: "blue", textDecoration: "underline" }}
                 >
                   Wed
                 </a>
                 <a
-                  onClick={() => {
-                    setDay("Thursday");
-                    displayTimeSlots();
+                  onClick={() => setDay("Thrusday")}
+                  style={{
+                    color: "blue",
+                    textDecoration: "underline",
+                    cursor: "pointer",
                   }}
-                  style={{ color: "blue", textDecoration: "underline" }}
                 >
                   Thru
                 </a>
                 <a
-                  onClick={() => {
-                    setDay("Friday");
-                    displayTimeSlots();
+                  onClick={() => setDay("Friday")}
+                  style={{
+                    color: "blue",
+                    textDecoration: "underline",
+                    cursor: "pointer",
                   }}
-                  style={{ color: "blue", textDecoration: "underline" }}
                 >
                   Fri
                 </a>
                 <a
-                  onClick={() => {
-                    setDay("Saturday");
-                    displayTimeSlots();
+                  onClick={() => setDay("Saturday")}
+                  style={{
+                    color: "blue",
+                    textDecoration: "underline",
+                    cursor: "pointer",
                   }}
-                  style={{ color: "blue", textDecoration: "underline" }}
                 >
                   Sat
-                </a>
+                </a> */}
               </Box>
               <Box display={"flex"} flexDirection={"column"} gap={"1rem"}>
                 <ul>
