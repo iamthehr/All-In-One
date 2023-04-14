@@ -8,7 +8,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import "Aos/dist/aos.css";
+import "aos/dist/aos.css";
 import { useEffect } from "react";
 import Aos from "aos";
 

@@ -4,11 +4,10 @@ import Footer from "@/components/Footer";
 import House from "@/components/Sec1";
 
 import Aos from "aos";
-import "Aos/dist/aos.css";
+import "aos/dist/aos.css";
 import { useEffect } from "react";
 import About from "@/components/About";
 import Contact from "@/components/Contact";
-
 
 export default function Home() {
   useEffect(() => {
@@ -28,12 +27,8 @@ export default function Home() {
           <Contact />
         </div>
         <div data-Aos="fade-up">
-
           <Footer />
         </div>
-
-
-
       </div>
     </>
   );

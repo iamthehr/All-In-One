@@ -61,16 +61,19 @@ const DocardsNew = ({
     padding: theme.spacing(0, 0, 0, 0),
     gap: "0.5rem",
     boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
-    backdropFilter: "blur( 3px )",
-    WebkitFbackdropFilter: " blur( 3px )",
+    backdropFilter: "blur( 0px )",
     borderRadius: "10px",
     border: "1px solid rgba( 255, 255, 255, 0.18 )",
 
     transition: "0.2s all",
 
+    overflow: "hidden",
+    width: "min-content",
+
     ":hover": {
       backgroundColor: "rgb(42, 50, 88)",
       transform: "scale(1.05) rotateZ(-1deg)",
+      zIndex: 333,
     },
 
     [theme.breakpoints.down("md")]: {
@@ -78,7 +81,7 @@ const DocardsNew = ({
       flexDirection: "column",
       alignItems: "center",
       padding: theme.spacing(0, 0, 0, 0),
-      width: "70%",
+      width: "min-content",
       justifyContent: "center",
       boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
       backdropFilter: "blur( 3px )",
@@ -194,7 +197,7 @@ const DocardsNew = ({
                   fontSize: "0.8em",
                 }}
               >
-                {distance}
+                {distance.toFixed(1)} KM
               </span>
             </Typography>
           </Box>
