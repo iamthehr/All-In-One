@@ -12,9 +12,20 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+
 import Link from "next/link";
+import dynamic from "next/dynamic";
+
 import { useState } from "react";
 import axios from "axios";
+
+const LocationPicker = dynamic(
+  () => import("./LocationPicker"), // replace '@components/map' with your component's location
+  {
+    loading: () => <p>Huh??</p>,
+    ssr: false,
+  }
+);
 
 function Copyright(props) {
   return (
@@ -45,52 +56,66 @@ const theme = createTheme({
 });
 
 export default function HsignUp() {
+  const [hospital, setHospital] = useState("");
+  const [address, setAddress] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [cnfpassword, setcnfPassword] = useState("");
+  const [image, setImage] = useState("");
 
-  const [hospital,setHospital]=useState("")
-  const [address,setAddress]=useState("")
-  const [email,setEmail]=useState("")
-  const [password,setPassword]=useState("")
-  const [cnfpassword,setcnfPassword]=useState("")
-  const [image,setImage]=useState("")
+  const [coords, setCoords] = useState(null);
 
-  const handleSubmit = async() => {
-    /*event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-      Name: data.get("name"),
-      ImageStyle: data.get("imageStyle"),
-      Cpassword: data.get("Cpassword"),
-    });*/
-    if(!hospital || !address || !email || !password || !cnfpassword || !image){
-      alert("enter all credentials")
-      return
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // /* const data = new FormData(event.currentTarget);
+    // console.log({
+    //   email: data.get("email"),
+    //   password: data.get("password"),
+    //   Name: data.get("name"),
+    //   ImageStyle: data.get("imageStyle"),
+    //   Cpassword: data.get("Cpassword"),
+    // });* /
+    if (
+      !hospital ||
+      !address ||
+      !email ||
+      !password ||
+      !cnfpassword ||
+      !image ||
+      !coords
+    ) {
+      alert("enter all credentials");
+      return;
     }
-    if(password!==cnfpassword){
-      alert('passwords do not match')
-      return 
+    if (password !== cnfpassword) {
+      alert("passwords do not match");
+      return;
     }
-    const regex=/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
-    if(!email.match(regex)){
-      alert('enter valid email')
-      return 
+    const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+    if (!email.match(regex)) {
+      alert("enter valid email");
+      return;
     }
 
-    const formData=new FormData()
-    formData.append('image',image)
-    formData.append('name',hospital)
-    formData.append('address',address)
-    formData.append('root_mail',email)
-    formData.append('root_pass',password)
-    console.log('data ok')
-    let ans=await axios.post('http://localhost:5000/hospital/register',formData,{
-      headers:{
-        'Content-Type':'multipart/form-data'
+    const formData = new FormData();
+    formData.append("image", image);
+    formData.append("name", hospital);
+    formData.append("address", address);
+    formData.append("root_mail", email);
+    formData.append("root_pass", password);
+    formData.append("lat", coords.lat);
+    formData.append("lng", coords.lng);
+
+    console.log("data ok");
+    let ans = await axios.post(
+      "http://localhost:5000/hospital/register",
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       }
-    })
-    
-
+    );
   };
 
   return (
@@ -132,7 +157,7 @@ export default function HsignUp() {
                 <TextField
                   autoComplete="given-name"
                   name="Name"
-                  onChange={e=>setHospital(e.target.value)}
+                  onChange={(e) => setHospital(e.target.value)}
                   required
                   fullWidth
                   id="Name"
@@ -146,7 +171,7 @@ export default function HsignUp() {
                   required
                   fullWidth
                   name="Address"
-                  onChange={e=>setAddress(e.target.value)}
+                  onChange={(e) => setAddress(e.target.value)}
                   label="Hospital Address"
                   type="Address"
                   id="password"
@@ -158,7 +183,7 @@ export default function HsignUp() {
                   required
                   fullWidth
                   id="email"
-                  onChange={e=>setEmail(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value)}
                   label="Email Address"
                   name="email"
                   autoComplete="email"
@@ -169,7 +194,7 @@ export default function HsignUp() {
                   required
                   fullWidth
                   name="password"
-                  onChange={e=>setPassword(e.target.value)}
+                  onChange={(e) => setPassword(e.target.value)}
                   label="Password"
                   type="password"
                   id="password"
@@ -181,16 +206,22 @@ export default function HsignUp() {
                   required
                   fullWidth
                   name="Cpassword"
-                  onChange={e=>setcnfPassword(e.target.value)}
+                  onChange={(e) => setcnfPassword(e.target.value)}
                   label="Confirm Password"
                   type="password"
                   autoComplete="new-password"
                 />
               </Grid>
+              <LocationPicker onLocationChange={(val) => setCoords(val)} />
               <Grid item xs={12}>
                 <Box sx={{ display: "flex", gap: "1em" }}>
                   <Typography> Upload profile</Typography>
-                  <input type="file" id="file-input" name="ImageStyle" onChange={e=>setImage(e.target.files[0])}/>
+                  <input
+                    type="file"
+                    id="file-input"
+                    name="ImageStyle"
+                    onChange={(e) => setImage(e.target.files[0])}
+                  />
                 </Box>
               </Grid>
               <Grid item xs={12}>
@@ -202,17 +233,16 @@ export default function HsignUp() {
                 />
               </Grid>
             </Grid>
-            
-              <Button
-                type="submit"
-                fullWidth
-                onClick={handleSubmit}
-                variant="contained"
-                sx={{ mt: 3, mb: 2, backgroundColor: "#0F1B4C", color: "#fff" }}
-              >
-                Sign Up
-              </Button>
-            
+
+            <Button
+              type="submit"
+              fullWidth
+              onClick={handleSubmit}
+              variant="contained"
+              sx={{ mt: 3, mb: 2, backgroundColor: "#0F1B4C", color: "#fff" }}
+            >
+              Sign Up
+            </Button>
 
             <Grid container justifyContent="flex-end">
               <Grid item>
