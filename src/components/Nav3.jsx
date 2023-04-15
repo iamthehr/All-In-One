@@ -12,6 +12,7 @@ import { Container } from "@mui/system";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import {
   Avatar,
+  Button,
   Drawer,
   IconButton,
   Link,
@@ -25,10 +26,19 @@ import {
 import { useState } from "react";
 import Image from "next/image";
 
+import { useRouter } from "next/router";
+
 export const Nav3 = (props) => {
   const [mobileMenu, setMobileMenu] = useState({
     left: false,
   });
+
+  const router = useRouter();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    router.push("/");
+  };
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -142,6 +152,14 @@ export const Nav3 = (props) => {
           <Link href="/ShowAppointment" sx={{ textDecoration: "none" }}>
             <NavLink variant="body2">Show Appointment</NavLink>
           </Link>
+
+          <Button
+            variant="contained"
+            sx={{ borderRadius: "20px", fontWeight: "bold" }}
+            onClick={handleLogout}
+          >
+            LOGOUT
+          </Button>
         </NavbarLinksBox>
       </Box>
     </NavbarContainer>

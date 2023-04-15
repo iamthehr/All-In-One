@@ -1,5 +1,8 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
 import FeaturedPlayListIcon from "@mui/icons-material/FeaturedPlayList";
@@ -13,7 +16,6 @@ import { Container } from "@mui/system";
 import {
   Avatar,
   Drawer,
-  Link,
   List,
   ListItem,
   ListItemButton,
@@ -22,7 +24,98 @@ import {
   styled,
 } from "@mui/material";
 import { useState } from "react";
+
+import { useRouter } from "next/router";
+
 import Image from "next/image";
+import Link from "next/link";
+
+function PositionedMenu(props) {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+
+  const router = useRouter();
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    handleClose();
+
+    localStorage.removeItem("token");
+    router.push("/");
+  };
+
+  return (
+    <div>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          gap: "0.5rem",
+
+          padding: "0.2rem",
+          borderRadius: "5px",
+
+          transition: "0.1s all",
+
+          ":hover": {
+            backgroundColor: "rgba(14, 18, 41, 0.402)",
+
+            border: "1px solid #a6b8d4",
+          },
+        }}
+        id="demo-positioned-button"
+        aria-controls={open ? "demo-positioned-menu" : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? "true" : undefined}
+        onClick={handleClick}
+      >
+        <Typography
+          sx={{
+            fontSize: "14px",
+            color: "#4F5361",
+            fontWeight: "bold",
+            cursor: "pointer",
+          }}
+        >
+          {props.name}
+        </Typography>
+        <Avatar src={props.image} sx={{ borderWidth: 0 }}></Avatar>
+      </Box>
+      <Menu
+        id="demo-positioned-menu"
+        aria-labelledby="demo-positioned-button"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "left",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "left",
+        }}
+      >
+        <Link
+          href="/User-profile"
+          style={{
+            textDecoration: "none",
+          }}
+        >
+          <MenuItem onClick={handleClose}>Profile</MenuItem>
+        </Link>
+        <MenuItem onClick={handleLogout}>Logout</MenuItem>
+      </Menu>
+    </div>
+  );
+}
 
 export const Nav4 = (props) => {
   const [mobileMenu, setMobileMenu] = useState({
@@ -128,18 +221,20 @@ export const Nav4 = (props) => {
         </Box>
 
         <NavbarLinksBox>
-          <Link href="#" sx={{ textDecoration: "none" }}>
+          <Link href="#" style={{ textDecoration: "none" }}>
             <NavLink variant="body2">Home</NavLink>
           </Link>
-          <Link href="#" sx={{ textDecoration: "none" }}>
+          <Link href="#" style={{ textDecoration: "none" }}>
             <NavLink variant="body2">Find doctors</NavLink>
           </Link>
-          <Link href="#" sx={{ textDecoration: "none" }}>
+          <Link href="#" style={{ textDecoration: "none" }}>
             <NavLink variant="body2">lab-test</NavLink>
           </Link>
         </NavbarLinksBox>
 
-        <Link href="/User-profile" sx={{ textDecoration: "none" }}>
+        <PositionedMenu {...props} />
+
+        {/* <Link href="/User-profile" sx={{ textDecoration: "none" }}>
           <Box
             sx={{
               display: "flex",
@@ -174,10 +269,10 @@ export const Nav4 = (props) => {
                 color: "#0A1235",
               }}
             >*/}
-            <Avatar src={props.image} sx={{ borderWidth: 0 }}></Avatar>
-            {/*</IconButton>}*/}
-          </Box>
-        </Link>
+        {/* <Avatar src={props.image} sx={{ borderWidth: 0 }}></Avatar> */}
+        {/*</IconButton>}*/}
+        {/* </Box> */}
+        {/* </Link>  */}
       </Box>
     </NavbarContainer>
   );

@@ -6,7 +6,8 @@ import { Grid } from "@mui/material";
 
 const Contact = () => {
   const CustomContainer = styled(Container)(({ theme }) => ({
-    marginTop: "30px",
+    marginTop: "100px",
+    marginBottom: "100px",
     height: "30vh",
     borderRadius: "15px",
     display: "flex",
@@ -23,7 +24,7 @@ const Contact = () => {
       alignItems: "center",
       padding: theme.spacing(1, 1, 0, 1),
       width: "100%",
-      boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
+      // boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
       backdropFilter: "blur( 3px )",
       webkitFbackdropFilter: " blur( 3px )",
       borderRadius: "10px",
@@ -132,6 +133,7 @@ const Contact = () => {
                   rows={2}
                   maxRows={4}
                   required
+                  placeholder="Your Query?"
                   onChange={(e) => (queryRef.current = e.target.value)}
                 />
               </Grid>
