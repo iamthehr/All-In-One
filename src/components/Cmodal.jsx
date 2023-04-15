@@ -26,7 +26,7 @@ const style = {
   border: "5px solid #EEEEEE",
   boxShadow: 24,
   p: 4,
-  display: "flex",
+  // display: "flex",
   alignItems: "center",
   justifyContent: "center",
   flexDirection: "column",
@@ -281,31 +281,39 @@ const Cmodal = (props) => {
             Adress={props.Adress}
             image={props.image}
           /> */}
-          <Typography id="transition-modal-title" variant="h6" component="h2">
-            This doctor is available
-          </Typography>
-          <Box>
-            <Typography>
-              <b>Weekdays</b>
+          <Box
+            sx={{
+              display: "flex",
+              gap: "1rem",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Typography id="transition-modal-title" variant="h6" component="h2">
+              This doctor is available
             </Typography>
+            <Box>
+              <Typography>
+                <b>Weekdays</b>
+              </Typography>
 
-            <Box display={"flex"} gap={"1rem"} flexWrap={"wrap"}>
-              {days.map((d) => (
-                <IconButton
-                  sx={{
-                    width: "2.5rem",
-                    height: "2.5rem",
-                    border: d === day ? "2px solid black" : "",
-                    fontWeight: "bold",
-                    fontSize: "1.1em",
-                  }}
-                  key={d}
-                  onClick={() => setDay(d)}
-                >
-                  {d.slice(0, 1)}
-                </IconButton>
-              ))}
-              {/* <a
+              <Box display={"flex"} gap={"1rem"} flexWrap={"wrap"}>
+                {days.map((d) => (
+                  <IconButton
+                    sx={{
+                      width: "2.5rem",
+                      height: "2.5rem",
+                      border: d === day ? "2px solid black" : "",
+                      fontWeight: "bold",
+                      fontSize: "1.1em",
+                    }}
+                    key={d}
+                    onClick={() => setDay(d)}
+                  >
+                    {d.slice(0, 1)}
+                  </IconButton>
+                ))}
+                {/* <a
                   style={{
                     color: "blue",
                     textDecoration: "underline",
@@ -376,53 +384,54 @@ const Cmodal = (props) => {
                 >
                   Sat
                 </a> */}
-            </Box>
-
-            <ButtonGroup>
-              {timeslots.map((item) => (
-                <Button
-                  key={item.id}
-                  value={item.id}
-                  onClick={() => setId(item)}
-                >{`${item.start_time} to ${item.end_time} available=${
-                  item.total_bookings - item.no_of_bookings
-                }`}</Button>
-              ))}
-            </ButtonGroup>
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              gap: "1rem",
-              borderRadius: "4px solid blue",
-              color: "blue",
-              width: "calc(100%-50px)",
-            }}
-          >
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <Box
-                sx={{
-                  display: "flex",
-                  gap: "0.5rem",
-                  borderRadius: "4px solid blue",
-                  color: "blue",
-                  width: "100%",
-                }}
-              >
-                <MobileTimePicker
-                  label={"Start time"}
-                  views={["hours", "minutes"]}
-                />
-                <MobileTimePicker
-                  label={"  End time"}
-                  views={["hours", "minutes"]}
-                />
               </Box>
-            </LocalizationProvider>
+
+              <ButtonGroup>
+                {timeslots.map((item) => (
+                  <Button
+                    key={item.id}
+                    value={item.id}
+                    onClick={() => setId(item)}
+                  >{`${item.start_time} to ${item.end_time} available=${
+                    item.total_bookings - item.no_of_bookings
+                  }`}</Button>
+                ))}
+              </ButtonGroup>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                gap: "1rem",
+                borderRadius: "4px solid blue",
+                color: "blue",
+                width: "calc(100%-50px)",
+              }}
+            >
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    gap: "0.5rem",
+                    borderRadius: "4px solid blue",
+                    color: "blue",
+                    width: "100%",
+                  }}
+                >
+                  <MobileTimePicker
+                    label={"Start time"}
+                    views={["hours", "minutes"]}
+                  />
+                  <MobileTimePicker
+                    label={"  End time"}
+                    views={["hours", "minutes"]}
+                  />
+                </Box>
+              </LocalizationProvider>
+            </Box>
+            <Button variant="contained" onClick={addAppointment}>
+              Book Appointment
+            </Button>
           </Box>
-          <Button variant="contained" onClick={addAppointment}>
-            Book Appointment
-          </Button>
         </Box>
         {/* </Fade> */}
       </Modal>

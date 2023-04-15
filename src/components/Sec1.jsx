@@ -98,11 +98,11 @@ const House = () => {
               >
                 Checkout for nearby labs.
               </Typography>
-              <Link href="/#" style={{ textDecoration: "none" }}>
+              <Link href="/coming-soon" style={{ textDecoration: "none" }}>
                 <CustomButton
                   backgroundColor="#fff"
                   color="#17275F"
-                  buttonText="Checkout"
+                  buttonText="Coming soon"
                   getStartedBtn={true}
                 />
               </Link>
