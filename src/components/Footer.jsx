@@ -7,6 +7,7 @@ import twitterIcon from "../media/twittericon.png";
 import linkedinIcon from "../media/linkedinicon.png";
 import Image from "next/image";
 
+import Link from "next/link";
 const Footer = () => {
   const CustomContainer = styled(Container)(({ theme }) => ({
     display: "flex",
@@ -76,19 +77,47 @@ const Footer = () => {
             >
               Book lab tests at home
             </Typography>
-            <FooterLink>RT PCR Test At Home</FooterLink>
+            <Link
+              href="/coming-soon"
+              style={{ textDecoration: "none", color: "grey" }}
+            >
+              <FooterLink>RT PCR Test At Home</FooterLink>
+            </Link>
+
+            <Link
+              href="/coming-soon"
+              style={{ textDecoration: "none", color: "grey" }}
+            >
+              <FooterLink></FooterLink>
+            </Link>
             <br />
-            <FooterLink>Renal Profile (KFT, RFT Test)</FooterLink>
+            <Link
+              href="/coming-soon"
+              style={{ textDecoration: "none", color: "grey" }}
+            >
+              <FooterLink>Renal Profile (KFT, RFT Test)</FooterLink>
+            </Link>
             <br />
-            <FooterLink>Hemogram Test</FooterLink>
+            <Link
+              href="/coming-soon"
+              style={{ textDecoration: "none", color: "grey" }}
+            >
+              <FooterLink>Hemogram Test</FooterLink>
+            </Link>
             <br />
-            <FooterLink>Lipid Profile Test</FooterLink>
+            <Link
+              href="/coming-soon"
+              style={{ textDecoration: "none", color: "grey" }}
+            >
+              <FooterLink>Lipid Profile Test</FooterLink>
+            </Link>
             <br />
-            <FooterLink>Thyroid Profile Test </FooterLink>
-            <br />
-            <FooterLink>D Dimer Test</FooterLink>
-            <br />
-            <FooterLink>Urine Culture Test</FooterLink>
+            <Link
+              href="/coming-soon"
+              style={{ textDecoration: "none", color: "grey" }}
+            >
+              <FooterLink>Urine Culture Test</FooterLink>
+            </Link>
           </Box>
 
           <Box>
@@ -103,19 +132,60 @@ const Footer = () => {
               Services
             </Typography>
 
-            <FooterLink>Consult Diabetologists</FooterLink>
+            <Link
+              href="/coming-soon"
+              style={{ textDecoration: "none", color: "grey" }}
+            >
+              <FooterLink>Consult Diabetologists</FooterLink>
+            </Link>
             <br />
-            <FooterLink>Consult Geriatricians</FooterLink>
+
+            <Link
+              href="/coming-soon"
+              style={{ textDecoration: "none", color: "grey" }}
+            >
+              <FooterLink>Consult Geriatricians</FooterLink>
+            </Link>
             <br />
-            <FooterLink>Consult ENT Specialists</FooterLink>
+            <Link
+              href="/coming-soon"
+              style={{ textDecoration: "none", color: "grey" }}
+            >
+              <FooterLink>Consult ENT Specialists</FooterLink>
+            </Link>
+
             <br />
-            <FooterLink>Consult Dietitians</FooterLink>
+            <Link
+              href="/coming-soon"
+              style={{ textDecoration: "none", color: "grey" }}
+            >
+              <FooterLink>Consult Dietitians</FooterLink>
+            </Link>
+
             <br />
-            <FooterLink>Consult Cardiologists</FooterLink>
+            <Link
+              href="/coming-soon"
+              style={{ textDecoration: "none", color: "grey" }}
+            >
+              <FooterLink>Consult Cardiologists</FooterLink>
+            </Link>
+
             <br />
-            <FooterLink>Consult Gastroenterologists</FooterLink>
+            <Link
+              href="/coming-soon"
+              style={{ textDecoration: "none", color: "grey" }}
+            >
+              <FooterLink>Consult Gastroenterologists</FooterLink>
+            </Link>
+
             <br />
-            <FooterLink>Consult Dermatologists</FooterLink>
+
+            <Link
+              href="/coming-soon"
+              style={{ textDecoration: "none", color: "grey" }}
+            >
+              <FooterLink>Consult Dermatologists</FooterLink>
+            </Link>
           </Box>
 
           <Box>
