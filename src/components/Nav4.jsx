@@ -227,7 +227,7 @@ export const Nav4 = (props) => {
           <Link href="#" style={{ textDecoration: "none" }}>
             <NavLink variant="body2">Find doctors</NavLink>
           </Link>
-          <Link href="#" style={{ textDecoration: "none" }}>
+          <Link href="coming-soon" style={{ textDecoration: "none" }}>
             <NavLink variant="body2">lab-test</NavLink>
           </Link>
         </NavbarLinksBox>
