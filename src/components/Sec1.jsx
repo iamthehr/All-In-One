@@ -102,7 +102,7 @@ const House = () => {
                 <CustomButton
                   backgroundColor="#fff"
                   color="#17275F"
-                  buttonText="Checkout"
+                  buttonText="Coming soon"
                   getStartedBtn={true}
                 />
               </Link>
