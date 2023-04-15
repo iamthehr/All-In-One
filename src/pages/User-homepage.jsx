@@ -41,7 +41,7 @@ function User_homepage() {
         const lng = pos.coords.longitude;
 
         let doc = await fetch(
-          `${process.env.NEXT_APP_BACKEND_URL}/mainpage/user/displayDoctors`,
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/mainpage/user/displayDoctors`,
           {
             method: "post",
             body: JSON.stringify({ speciality: search, lat, lng }),
@@ -55,7 +55,7 @@ function User_homepage() {
         console.log(doc);
         for (let i in doc) {
           let img = await fetch(
-            `${process.env.NEXT_APP_BACKEND_URL}/mainpage/user/displayDoctorImage`,
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/mainpage/user/displayDoctorImage`,
             {
               method: "post",
               body: JSON.stringify({ id: doc[i].doctor_id }),
@@ -81,7 +81,7 @@ function User_homepage() {
       const token = localStorage.getItem("token");
       //const token=localStorage.getItem('token')
       let user = await fetch(
-        `${process.env.NEXT_APP_BACKEND_URL}/mainpage/user/displayName`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/mainpage/user/displayName`,
         {
           method: "post",
           headers: {
@@ -100,7 +100,7 @@ function User_homepage() {
       }
       setName(user[0].name);
       let img = await fetch(
-        `${process.env.NEXT_APP_BACKEND_URL}/mainpage/user/displayProfileImage`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/mainpage/user/displayProfileImage`,
         {
           method: "post",
           headers: {
@@ -114,7 +114,7 @@ function User_homepage() {
       setImage(URL.createObjectURL(img));
 
       let specialities = await fetch(
-        `${process.env.NEXT_APP_BACKEND_URL}/mainpage/user/displaySpeciality`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/mainpage/user/displaySpeciality`,
         {
           method: "post",
           headers: {

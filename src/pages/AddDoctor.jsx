@@ -61,7 +61,7 @@ const AddDoctor = () => {
       const token = localStorage.getItem("token");
       //console.log(token)
       let l = await fetch(
-        `${process.env.NEXT_APP_BACKEND_URL}/mainpage/hospital/displayName`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/mainpage/hospital/displayName`,
         {
           method: "post",
           headers: {
@@ -116,7 +116,7 @@ const AddDoctor = () => {
     formData.append("speciality", specialization);
 
     let ans = await axios.post(
-      `${process.env.NEXT_APP_BACKEND_URL}/mainpage/hospital/addDoctor/register`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/mainpage/hospital/addDoctor/register`,
       formData,
       {
         headers: {

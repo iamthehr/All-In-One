@@ -83,7 +83,7 @@ const Cmodal = (props) => {
       console.log(day);
       const token = localStorage.getItem("token");
       let available = await fetch(
-        `${process.env.NEXT_APP_BACKEND_URL}/mainpage/user/displayDoctorTimeslots`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/mainpage/user/displayDoctorTimeslots`,
         {
           method: "post",
           body: JSON.stringify({ id: props.id, day }),

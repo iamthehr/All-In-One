@@ -61,7 +61,7 @@ const ShowAppointment = () => {
     (async () => {
       const token = localStorage.getItem("token");
       let l = await fetch(
-        `${process.env.NEXT_APP_BACKEND_URL}/mainpage/hospital/displayName`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/mainpage/hospital/displayName`,
         {
           method: "post",
           headers: {
@@ -79,7 +79,7 @@ const ShowAppointment = () => {
       }
       console.log(selectedDoctor + "is s" + day);
       let slots = await fetch(
-        `${process.env.NEXT_APP_BACKEND_URL}/mainpage/hospital/displayTimeSlot`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/mainpage/hospital/displayTimeSlot`,
         {
           method: "post",
           body: JSON.stringify({ doctor_id: selectedDoctor, day: day }),
@@ -131,7 +131,7 @@ const ShowAppointment = () => {
     const token = localStorage.getItem("token");
     console.log(selectedDoctor + "is s" + day);
     let slots = await fetch(
-      `${process.env.NEXT_APP_BACKEND_URL}/mainpage/hospital/displayTimeSlot`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/mainpage/hospital/displayTimeSlot`,
       {
         method: "post",
         body: JSON.stringify({ doctor_id: selectedDoctor, day: day }),
@@ -150,7 +150,7 @@ const ShowAppointment = () => {
     const token = localStorage.getItem("token");
     //console.log(token)
     let l = await fetch(
-      `${process.env.NEXT_APP_BACKEND_URL}/mainpage/hospital/searchDoctor`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/mainpage/hospital/searchDoctor`,
       {
         method: "post",
         body: JSON.stringify({ name: searchTerm }),
@@ -164,7 +164,7 @@ const ShowAppointment = () => {
     for (let i in l) {
       console.log(l[i]);
       let img = await fetch(
-        `${process.env.NEXT_APP_BACKEND_URL}/mainpage/hospital/doctorImages`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/mainpage/hospital/doctorImages`,
         {
           method: "post",
           body: JSON.stringify({ doctor_id: l[i].id }),
