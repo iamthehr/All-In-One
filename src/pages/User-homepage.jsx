@@ -370,14 +370,14 @@ function User_homepage() {
                         ></DocardsNew>
                       );
                     })}
-                    <DocardsNew
+                    {/* <DocardsNew
                       name="Aditya"
                       qual="MBBS"
                       spec="Physician"
                       distance={4.33}
                       Hospital_Name="TMH NAYSARAY"
                       Adress="SAHFGHASFVJH"
-                    />
+                    /> */}
                   </Box>
                 </Box>
               </CustomContainer>
