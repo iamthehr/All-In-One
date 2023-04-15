@@ -164,40 +164,112 @@ const Cmodal = (props) => {
           </div>
           <Box
             sx={{
-              backgroundColor: "blue",
+              backgroundColor: "#2A3258",
               width: "100%",
               display: "flex",
-              gap: "10px",
+              gap: "20px",
               padding: "1.5rem",
               borderRadius: "10px",
+              maxWidth: { md: "50%", lg: "80%", sm: "100%", xs: "100%" },
+              position: "relative",
+              flexDirection: {
+                md: "column",
+                sm: "column",
+                xs: "column",
+                lg: "row",
+              },
             }}
           >
             <Box
               sx={{
                 width: "8rem",
                 height: "8rem",
+
                 borderRadius: "2394872px",
                 // backgroundColor: "white",
-                border: "2px solid red",
+                border: "2px solid white",
                 backgroundImage: `url(${props.image})`,
                 backgroundSize: "cover",
               }}
             />
 
-            <Box sx={{ backgroundColor: "red", flex: 1 }}>
-              <Typography variant="h5" component="h2">
+            <Box sx={{ backgroundColor: "#2A3258", flex: 1 }}>
+              <Typography
+                variant="h4"
+                component="h2"
+                style={{ color: "white" }}
+              >
                 {props.name}
               </Typography>
               <Typography
+                variant="h6"
                 fontSize="xs"
                 style={{
                   display: "flex",
                   alignItems: "center",
                   gap: "5px",
+                  color: "white",
                 }}
               >
                 <DomainAddIcon /> {props.Hospital_Name}
               </Typography>
+              <Box sx={{ inlineSize: "90%", overflowWrap: "break-word" }}>
+                <Typography
+                  variant="h6"
+                  fontSize="md"
+                  sx={{ wordBreak: "break-all" }}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "5px",
+                    color: "white",
+                  }}
+                >
+                  <LocationOnIcon /> {props.Adress}
+                </Typography>
+              </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  flex: "1",
+                  flexDirection: "column",
+                  alignItems: "start",
+                  gap: "0.5rem",
+                }}
+              >
+                <Typography
+                  fontSize="xs"
+                  style={{
+                    position: "absolute",
+
+                    top: "0.2rem",
+                    right: "1rem",
+                    display: "flex",
+                    gap: "0.5rem",
+                  }}
+                >
+                  <span
+                    style={{
+                      backgroundColor: "#0b9a79",
+                      borderRadius: "492834px",
+                      padding: "0 .6rem",
+                      fontSize: "0.8em",
+                    }}
+                  >
+                    {props.spec}
+                  </span>
+                  <span
+                    style={{
+                      backgroundColor: "#0b9a79",
+                      borderRadius: "492834px",
+                      padding: "0 .6rem",
+                      fontSize: "0.8em",
+                    }}
+                  >
+                    {props.distance.toFixed(1)} KM
+                  </span>
+                </Typography>
+              </Box>
             </Box>
           </Box>
           {/* <Docnewcard

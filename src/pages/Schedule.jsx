@@ -74,7 +74,30 @@ const Schedule = () => {
 
     })()
   },[doctors,appoitArray])
+  const router=useRouter()
 
+  useEffect(()=>{
+    (async()=>{
+      const token=localStorage.getItem('token')
+      let l=await fetch('http://localhost:5000/mainpage/hospital/displayName',{
+        method:'post',
+        headers:{
+          'Content-Type':'application/json',
+          'auth':token
+        }
+      })
+      l=await l.json()
+      //console.log(l)
+      if(l[0].name==undefined){
+        alert('you are not authorized to access this page')
+        router.push('./Tabs-Hospital')
+        return
+      }
+
+    })()
+  },[doctors,appoitArray])
+
+  /*async function displayTimeSlots(){
   /*async function displayTimeSlots(){
     const token=localStorage.getItem('token')
     let slots=await fetch('http://localhost:5000/mainpage/hospital/displayTimeSlot',{
@@ -133,6 +156,7 @@ const Schedule = () => {
       return;
     }
     console.log(startTime+" "+endTime)
+    /*const st_time= startTime.$d
     /*const st_time= startTime.$d
     .toLocaleTimeString(navigator.language, {
       hour: "2-digit",
@@ -232,6 +256,7 @@ const Schedule = () => {
             <DoctorCard
               name="Dr.Batra"
               qual="MBBS,MD"
+          spec="Generel Physician"/>}
           spec="Generel Physician"/>}
           {doctors.map(item=>{
             return(
@@ -405,7 +430,6 @@ const Schedule = () => {
 
 export default Schedule;*/
 
-
 import {
   Box,
   Button,
@@ -430,6 +454,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import Navbar2 from "@/components/Navbar2";
 import { type } from "@testing-library/user-event/dist/type";
+import Nav3 from "@/components/Nav3";
 
 const theme = createTheme({
   palette: {
@@ -460,68 +485,80 @@ const Schedule = () => {
   const [appoitArray, setAppoitArray] = useState([]);
   const [doctors, setDoctors] = useState([]);
   const [selectedDoctor, setSelectedDoctor] = useState("");
-  const [numOfAppo, setNumOfAppo] = useState(0)
-  const [reRender, setReRender] = useState(false)
+  const [numOfAppo, setNumOfAppo] = useState(0);
+  const [reRender, setReRender] = useState(false);
+  const days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
 
   useEffect(() => {
-    (
-    async()=>{const token = localStorage.getItem("token");
-    let l=await fetch('http://localhost:5000/mainpage/hospital/displayName',{
-        method:'post',
-        headers:{
-          'Content-Type':'application/json',
-          'auth':token
+    (async () => {
+      const token = localStorage.getItem("token");
+      let l = await fetch(
+        "http://localhost:5000/mainpage/hospital/displayName",
+        {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json",
+            auth: token,
+          },
         }
-      })
-      l=await l.json()
+      );
+      l = await l.json();
       //console.log(l[0].name)
-      if(l[0]==undefined){
-        alert('you are not authorized to access this page')
-        router.push('./Tabs-Hospital')
-        return
+      if (l[0] == undefined) {
+        alert("you are not authorized to access this page");
+        router.push("./Tabs-Hospital");
+        return;
       }
-    console.log(selectedDoctor+"is s"+day)
-    let slots = await fetch(
-      "http://localhost:5000/mainpage/hospital/displayTimeSlot",
-      {
-        method: "post",
-        body: JSON.stringify({ doctor_id: selectedDoctor, day: day }),
-        headers: {
-          "Content-Type": "application/json",
-          "auth": token,
-        },
-      }
-    );
-    slots = await slots.json();
-    console.log(slots);
-    setAppoitArray(slots);
-    })()}
-
-  , [day,doctors,reRender])
-  
+      console.log(selectedDoctor + "is s" + day);
+      let slots = await fetch(
+        "http://localhost:5000/mainpage/hospital/displayTimeSlot",
+        {
+          method: "post",
+          body: JSON.stringify({ doctor_id: selectedDoctor, day: day }),
+          headers: {
+            "Content-Type": "application/json",
+            auth: token,
+          },
+        }
+      );
+      slots = await slots.json();
+      console.log(slots);
+      setAppoitArray(slots);
+    })();
+  }, [day, doctors, reRender]);
 
   //useEffect(() => {}, [doctors, appoitArray]);
 
-  async function deleteTs(item){
-    const token=localStorage.getItem('token')
-    const id=item.id
-    console.log(id)
-    let l=await fetch('http://localhost:5000/mainpage/hospital/deleteTimeSlot',{
-      method:"post",
-      body:JSON.stringify({id}),
-      headers: {
-        "Content-Type": "application/json",
-        "auth": token,
-      },
-    })
-    l=await l.json()
-    setReRender(!reRender)
+  async function deleteTs(item) {
+    const token = localStorage.getItem("token");
+    const id = item.id;
+    console.log(id);
+    let l = await fetch(
+      "http://localhost:5000/mainpage/hospital/deleteTimeSlot",
+      {
+        method: "post",
+        body: JSON.stringify({ id }),
+        headers: {
+          "Content-Type": "application/json",
+          auth: token,
+        },
+      }
+    );
+    l = await l.json();
+    setReRender(!reRender);
   }
 
   async function displayTimeSlots() {
-    
     const token = localStorage.getItem("token");
-    console.log(selectedDoctor+"is s"+day)
+    console.log(selectedDoctor + "is s" + day);
     let slots = await fetch(
       "http://localhost:5000/mainpage/hospital/displayTimeSlot",
       {
@@ -529,7 +566,7 @@ const Schedule = () => {
         body: JSON.stringify({ doctor_id: selectedDoctor, day: day }),
         headers: {
           "Content-Type": "application/json",
-          "auth": token,
+          auth: token,
         },
       }
     );
@@ -588,37 +625,35 @@ const Schedule = () => {
       return;
     }
     //console.log(startTime + " " + endTime);
-    const st_time = startTime.$d
-      .toLocaleTimeString(navigator.language, {
-        hour: "2-digit",
-        minute: "2-digit",
-      })
-      
+    const st_time = startTime.$d.toLocaleTimeString(navigator.language, {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
 
-    const end_time = endTime.$d
-      .toLocaleTimeString(navigator.language, {
-        hour: "2-digit",
-        minute: "2-digit",
-      })
-      
+    const end_time = endTime.$d.toLocaleTimeString(navigator.language, {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
     //console.log(selectedDoctor)
     //console.log(st_time + " " + end_time);
-    const token=localStorage.getItem("token");
-    let l = await fetch(
-      "http://localhost:5000/mainpage/hospital/addTimeSlot",
-      {
-        method: "post",
-        body: JSON.stringify({doctor_id: selectedDoctor, day:day,start_time:st_time,end_time:end_time,total_bookings:numOfAppo }),
-        headers: {
-          "Content-Type": "application/json",
-          "auth": token,
-        },
-      }
-    );
+    const token = localStorage.getItem("token");
+    let l = await fetch("http://localhost:5000/mainpage/hospital/addTimeSlot", {
+      method: "post",
+      body: JSON.stringify({
+        doctor_id: selectedDoctor,
+        day: day,
+        start_time: st_time,
+        end_time: end_time,
+        total_bookings: numOfAppo,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        auth: token,
+      },
+    });
     console.log(l);
     setReRender(!reRender);
-
-
 
     /*setAppoitArray((prevVal) => [
       ...prevVal,
@@ -642,7 +677,7 @@ const Schedule = () => {
   return (
     <ThemeProvider theme={theme}>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <Navbar2 />
+        <Nav3 />
         <Box
           display={"flex"}
           justifyContent={"center"}
@@ -677,48 +712,22 @@ const Schedule = () => {
             </IconButton>
           </Paper>
           <Box width={{ base: "100%", md: "50%", lg: "40%", xs: "100%" }}>
-            {/* <DoctorCard
-              name="Dr.Batra"
-              qual="MBBS,MD"
-              spec="Generel Physician"
-              handleOpen={handleOpen}
-              handleClose={handleClose}
-            /> */}
-            {/* <DoctorCard
-              name="Dr.Batra"
-              qual="MBBS,MD"
-              spec="Generel Physician"
-            />
-            <DoctorCard
-              name="Dr.Batra"
-              qual="MBBS,MD"
-              spec="Generel Physician"
-            />
-            <DoctorCard
-              name="Dr.Batra"
-              qual="MBBS,MD"
-              spec="Generel Physician"
-            />
-            <DoctorCard
-              name="Dr.Batra"
-              qual="MBBS,MD"
-          spec="Generel Physician"/> */}
             {doctors.map((item) => {
               return (
                 <div>
                   <DoctorCard
-                  key={item.id}
-                  name={item.name}
-                  qual={item.qualifications}
-                  spec={item.speciality}
-                  // handleDoctor={()=> setSelectedDoctor(item.id)}
-                  handleOpen={() => handleOpen(doctors.find(i=>i==item))}
-                  handleClose={handleClose}
-                  image={item.image}
-                ></DoctorCard>
-                
+                    key={item.id}
+                    name={item.name}
+                    qual={item.qualifications}
+                    spec={item.speciality}
+                    // handleDoctor={()=> setSelectedDoctor(item.id)}
+                    handleOpen={() =>
+                      handleOpen(doctors.find((i) => i == item))
+                    }
+                    handleClose={handleClose}
+                    image={item.image}
+                  ></DoctorCard>
                 </div>
-                
               );
             })}
           </Box>
@@ -733,71 +742,92 @@ const Schedule = () => {
                 <b>Weekdays</b>
               </Typography>
               <Box display={"flex"} gap={"1rem"} flexWrap={"wrap"}>
-                <a
-                  style={{ color: "blue", textDecoration: "underline" }}
-                  onClick={() => {
-                    setDay("Sunday");
-                    console.log(day)
-                    displayTimeSlots();
+                {days.map((d) => (
+                  <IconButton
+                    sx={{
+                      width: "2.5rem",
+                      height: "2.5rem",
+                      border: d === day ? "2px solid black" : "",
+                      fontWeight: "bold",
+                      fontSize: "1.1em",
+                    }}
+                    key={d}
+                    onClick={() => setDay(d)}
+                  >
+                    {d.slice(0, 1)}
+                  </IconButton>
+                ))}
+                {/* <a
+                  style={{
+                    color: "blue",
+                    textDecoration: "underline",
+                    cursor: "pointer",
                   }}
+                  onClick={() => setDay("Sunday")}
                 >
                   Sun
                 </a>
 
                 <a
-                  style={{ color: "blue", textDecoration: "underline" }}
-                  onClick={() => {
-                    setDay("Monday");
-                    displayTimeSlots();
+                  style={{
+                    color: "blue",
+                    textDecoration: "underline",
+                    cursor: "pointer",
                   }}
+                  onClick={() => setDay("Monday")}
                 >
                   Mon
                 </a>
                 <a
-                  style={{ color: "blue", textDecoration: "underline" }}
-                  onClick={() => {
-                    setDay("Tuesday");
-                    displayTimeSlots();
+                  style={{
+                    color: "blue",
+                    textDecoration: "underline",
+                    cursor: "pointer",
                   }}
+                  onClick={() => setDay("Tuesday")}
                 >
                   Tue
                 </a>
                 <a
-                  onClick={() => {
-                    setDay("Wednesday");
-                    displayTimeSlots();
+                  onClick={() => setDay("Wednesday")}
+                  style={{
+                    color: "blue",
+                    textDecoration: "underline",
+                    cursor: "pointer",
                   }}
-                  style={{ color: "blue", textDecoration: "underline" }}
                 >
                   Wed
                 </a>
                 <a
-                  onClick={() => {
-                    setDay("Thursday");
-                    displayTimeSlots();
+                  onClick={() => setDay("Thrusday")}
+                  style={{
+                    color: "blue",
+                    textDecoration: "underline",
+                    cursor: "pointer",
                   }}
-                  style={{ color: "blue", textDecoration: "underline" }}
                 >
                   Thru
                 </a>
                 <a
-                  onClick={() => {
-                    setDay("Friday");
-                    displayTimeSlots();
+                  onClick={() => setDay("Friday")}
+                  style={{
+                    color: "blue",
+                    textDecoration: "underline",
+                    cursor: "pointer",
                   }}
-                  style={{ color: "blue", textDecoration: "underline" }}
                 >
                   Fri
                 </a>
                 <a
-                  onClick={() => {
-                    setDay("Saturday");
-                    displayTimeSlots();
+                  onClick={() => setDay("Saturday")}
+                  style={{
+                    color: "blue",
+                    textDecoration: "underline",
+                    cursor: "pointer",
                   }}
-                  style={{ color: "blue", textDecoration: "underline" }}
                 >
                   Sat
-                </a>
+                </a> */}
               </Box>
               <Box display={"flex"} flexDirection={"column"} gap={"1rem"}>
                 <ul>
@@ -840,7 +870,13 @@ const Schedule = () => {
                             <b>To</b>
                           </Typography>
                           <Typography>{item.end_time}</Typography>
-                          <IconButton aria-label="delete" xs onClick={()=>deleteTs(appoitArray.find(i=>i==item))}>
+                          <IconButton
+                            aria-label="delete"
+                            xs
+                            onClick={() =>
+                              deleteTs(appoitArray.find((i) => i == item))
+                            }
+                          >
                             <DeleteIcon />
                           </IconButton>
                         </Box>
@@ -862,15 +898,17 @@ const Schedule = () => {
                     onChange={(newValue) => setEndTime(newValue)}
                     xs
                   />
-                          <TextField
-          id="outlined-number"
-          label="Number Of Appointments"
-          type="number"
-          InputProps={{
-            inputProps: { min: 0 },
-          }}
-          onChange={(event)=>setNumOfAppo(Number(event.target.value))}
-        />
+                  <TextField
+                    id="outlined-number"
+                    label="Number Of Appointments"
+                    type="number"
+                    InputProps={{
+                      inputProps: { min: 0 },
+                    }}
+                    onChange={(event) =>
+                      setNumOfAppo(Number(event.target.value))
+                    }
+                  />
                 </Box>
               </Box>
               <Box
