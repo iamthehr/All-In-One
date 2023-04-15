@@ -54,9 +54,22 @@ const Contact = () => {
   const phoneRef = useRef("");
   const queryRef = useRef("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log(emailRef.current, phoneRef.current, queryRef.current);
+    //console.log(emailRef.current, phoneRef.current, queryRef.current);
+    let query=await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/contact`,{
+      method:'post',
+      body:JSON.stringify({email:emailRef.current,
+        phone:phoneRef.current,
+        query:queryRef.current}),
+      headers:{
+        'Content-Type':'application/json'
+      }
+    })
+    query=await query.json()
+    if(query.status=="success") alert('your query has been sent successfully, you would have received a mail regarding the same')
+    
+    else alert('unable to send query')
   };
 
   return (
