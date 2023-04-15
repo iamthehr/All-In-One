@@ -215,13 +215,18 @@ export default function HsignUp() {
               <LocationPicker onLocationChange={(val) => setCoords(val)} />
               <Grid item xs={12}>
                 <Box sx={{ display: "flex", gap: "1em" }}>
-                  <Typography> Upload profile</Typography>
-                  <input
-                    type="file"
-                    id="file-input"
-                    name="ImageStyle"
-                    onChange={(e) => setImage(e.target.files[0])}
-                  />
+                  {/* <Typography> Upload profile</Typography> */}
+
+                  <Button variant="contained" component="label">
+                    Upload Image
+                    <input
+                      type="file"
+                      id="file-input"
+                      name="ImageStyle"
+                      hidden
+                      onChange={(e) => setImage(e.target.files[0])}
+                    />
+                  </Button>
                 </Box>
               </Grid>
               <Grid item xs={12}>
