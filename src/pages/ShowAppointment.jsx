@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 // import { SearchIcon } from "@mui/icons-material";
 import SearchIcon from "@mui/icons-material/Search";
-import DeleteIcon from "@mui/icons-material/delete";
+import DeleteIcon from "@mui/icons-material/Delete";
 import React, { useEffect, useState } from "react";
 import DoctorCard from "@/components/DoctorCard";
 import CustomButton from "@/components/CustomButton";
