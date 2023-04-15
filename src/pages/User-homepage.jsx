@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "@/components/Nav3";
+import Nav4 from "@/components/Nav4";
 import { Box, Button, MenuItem, styled, Typography } from "@mui/material";
 import { Container } from "@mui/system";
 import TextField from "@mui/material/TextField";
@@ -191,7 +191,7 @@ function User_homepage() {
           }}
         >
           <Container>
-            <Navbar name={name} image={image} />
+            <Nav4 name={name} image={image} />
 
             <Box>
               <Typography

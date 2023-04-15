@@ -9,11 +9,10 @@ import HomeIcon from "@mui/icons-material/Home";
 import ContactsIcon from "@mui/icons-material/Contacts";
 import logoImg from "../media/logo.png";
 import { Container } from "@mui/system";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+
 import {
   Avatar,
   Drawer,
-  IconButton,
   Link,
   List,
   ListItem,
@@ -25,7 +24,7 @@ import {
 import { useState } from "react";
 import Image from "next/image";
 
-export const Nav3 = (props) => {
+export const Nav4 = (props) => {
   const [mobileMenu, setMobileMenu] = useState({
     left: false,
   });
@@ -57,7 +56,6 @@ export const Nav3 = (props) => {
                 {index === 1 && <FeaturedPlayListIcon />}
                 {index === 2 && <MiscellaneousServicesIcon />}
                 {index === 3 && <ListAltIcon />}
-                {index === 4 && <ContactsIcon />}
               </ListItemIcon>
               <ListItemText primary={text} />
             </ListItemButton>
@@ -130,22 +128,59 @@ export const Nav3 = (props) => {
         </Box>
 
         <NavbarLinksBox>
-          <Link href="/Hospital" sx={{ textDecoration: "none" }}>
+          <Link href="#" sx={{ textDecoration: "none" }}>
             <NavLink variant="body2">Home</NavLink>
           </Link>
-          <Link href="/Schedule" sx={{ textDecoration: "none" }}>
-            <NavLink variant="body2">Schedule</NavLink>
+          <Link href="#" sx={{ textDecoration: "none" }}>
+            <NavLink variant="body2">Find doctors</NavLink>
           </Link>
-          <Link href="/AddDoctor" sx={{ textDecoration: "none" }}>
-            <NavLink variant="body2">Add Doctor</NavLink>
-          </Link>
-          <Link href="/ShowAppointment" sx={{ textDecoration: "none" }}>
-            <NavLink variant="body2">Show Appointment</NavLink>
+          <Link href="#" sx={{ textDecoration: "none" }}>
+            <NavLink variant="body2">lab-test</NavLink>
           </Link>
         </NavbarLinksBox>
+
+        <Link href="/User-profile" sx={{ textDecoration: "none" }}>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: "0.5rem",
+
+              padding: "0.2rem",
+              borderRadius: "5px",
+
+              transition: "0.1s all",
+
+              ":hover": {
+                backgroundColor: "rgba(14, 18, 41, 0.402)",
+
+                border: "1px solid #a6b8d4",
+              },
+            }}
+          >
+            <Typography
+              sx={{
+                fontSize: "14px",
+                color: "#4F5361",
+                fontWeight: "bold",
+                cursor: "pointer",
+              }}
+            >
+              {props.name}
+            </Typography>
+            {/*<IconButton
+              sx={{
+                backgroundColor: "#9EABC0",
+                color: "#0A1235",
+              }}
+            >*/}
+            <Avatar src={props.image} sx={{ borderWidth: 0 }}></Avatar>
+            {/*</IconButton>}*/}
+          </Box>
+        </Link>
       </Box>
     </NavbarContainer>
   );
 };
 
-export default Nav3;
+export default Nav4;
