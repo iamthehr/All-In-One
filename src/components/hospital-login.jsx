@@ -42,10 +42,9 @@ const theme = createTheme({
 });
 
 export default function Hlogin() {
-
-  const [email,setEmail]=useState("")
-  const [password,setPassword]=useState("")
-  const router=useRouter()
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const router = useRouter();
 
   /*const handleSubmit = (event) => {
     event.preventDefault();
@@ -56,30 +55,33 @@ export default function Hlogin() {
     });
   };*/
 
-  const handleSubmit=async(event)=>{
-    event.preventDefault()
-    if(!email || !password){
-      alert('enter all fields')
-      return 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (!email || !password) {
+      alert("enter all fields");
+      return;
     }
-    const regex=/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
-    if(!email.match(regex)){
-      alert('enter valid email')
-      return 
+    const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+    if (!email.match(regex)) {
+      alert("enter valid email");
+      return;
     }
-    
-    let user=await fetch('http://localhost:5000/hospital/login',{
-      method:'post',
-      body:JSON.stringify({email,password}),
-      headers:{
-        'Content-Type':'application/json'
+
+    let user = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/hospital/login`,
+      {
+        method: "post",
+        body: JSON.stringify({ email, password }),
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-    })
-    user=await user.json()
-    console.log(user)
-    localStorage.setItem('token',user.data.token)
-    router.push('./Hospital')
-  }
+    );
+    user = await user.json();
+    console.log(user);
+    localStorage.setItem("token", user.data.token);
+    router.push("./Hospital");
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -109,16 +111,13 @@ export default function Hlogin() {
           <Typography component="h1" variant="h5">
             Admin Login
           </Typography>
-          <Box
-            component="form"
-            sx={{ mt: 3 }}
-          >
+          <Box component="form" sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
-                  onChange={e=>setEmail(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value)}
                   id="HospitalID"
                   label="HospitalID"
                   name="HospitalID"
@@ -130,7 +129,7 @@ export default function Hlogin() {
                   required
                   fullWidth
                   name="password"
-                  onChange={e=>setPassword(e.target.value)}
+                  onChange={(e) => setPassword(e.target.value)}
                   label="Password"
                   type="password"
                   id="password"

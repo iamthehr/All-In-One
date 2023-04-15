@@ -94,7 +94,7 @@ export default function SignUp() {
     formData.append("email", email);
     formData.append("password", password);
     let ans = await axios.post(
-      "http://localhost:5000/auth/user/register",
+      `${process.env.NEXT_APP_BACKEND_URL}/auth/user/register`,
       formData,
       {
         headers: {

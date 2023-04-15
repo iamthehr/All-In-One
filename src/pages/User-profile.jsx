@@ -100,7 +100,7 @@ const UserProfile = () => {
     (async () => {
       const token = localStorage.getItem("token");
       let user = await fetch(
-        "http://localhost:5000/mainpage/user/displayName",
+        `${process.env.NEXT_APP_BACKEND_URL}/mainpage/user/displayName`,
         {
           method: "post",
           headers: {
@@ -120,7 +120,7 @@ const UserProfile = () => {
       setEmail(user[0].email);
 
       let img = await fetch(
-        "http://localhost:5000/mainpage/user/displayProfileImage",
+        `${process.env.NEXT_APP_BACKEND_URL}/mainpage/user/displayProfileImage`,
         {
           method: "post",
           headers: {
@@ -133,7 +133,7 @@ const UserProfile = () => {
       setImage(URL.createObjectURL(img));
 
       let bookings = await fetch(
-        "http://localhost:5000/mainpage/user/displayBookings",
+        `${process.env.NEXT_APP_BACKEND_URL}/mainpage/user/displayBookings`,
         {
           method: "post",
           headers: {

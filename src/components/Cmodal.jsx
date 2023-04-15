@@ -59,7 +59,7 @@ const Cmodal = (props) => {
       return;
     }
     let confirm = await fetch(
-      "http://localhost:5000/mainpage/user/selectTimeSlot",
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/mainpage/user/selectTimeSlot`,
       {
         method: "post",
         body: JSON.stringify({ timeslot_id: id.id }),
@@ -83,7 +83,7 @@ const Cmodal = (props) => {
       console.log(day);
       const token = localStorage.getItem("token");
       let available = await fetch(
-        "http://localhost:5000/mainpage/user/displayDoctorTimeslots",
+        `${process.env.NEXT_APP_BACKEND_URL}/mainpage/user/displayDoctorTimeslots`,
         {
           method: "post",
           body: JSON.stringify({ id: props.id, day }),
@@ -170,7 +170,7 @@ const Cmodal = (props) => {
               gap: "20px",
               padding: "1.5rem",
               borderRadius: "10px",
-              maxWidth: { md: "50%", lg: "80%", sm: "100%", xs: "100%" },
+              // maxWidth: { md: "50%", lg: "80%", sm: "100%", xs: "100%" },
               position: "relative",
               flexDirection: {
                 md: "column",

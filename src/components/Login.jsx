@@ -44,13 +44,12 @@ const theme = createTheme({
 });
 
 export default function Login(props) {
-
-  const [email,setEmail]=useState("")
-  const [password,setPassword]=useState("") 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   //const navigate=useNavigate()
-  const router=useRouter()
+  const router = useRouter();
 
-  const handleSubmit = async(event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     /*const data = new FormData(event.currentTarget);
     console.log({
@@ -58,27 +57,30 @@ export default function Login(props) {
       password: data.get("password"),
     });*/
 
-    if(!email || !password){
-      alert('enter all fields')
-      return 
+    if (!email || !password) {
+      alert("enter all fields");
+      return;
     }
-    const regex=/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
-    if(!email.match(regex)){
-      alert('enter valid email')
-      return 
+    const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+    if (!email.match(regex)) {
+      alert("enter valid email");
+      return;
     }
-    
-    let user=await fetch('http://localhost:5000/auth/user/login',{
-      method:'post',
-      body:JSON.stringify({email,password}),
-      headers:{
-        'Content-Type':'application/json'
+
+    let user = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/user/login`,
+      {
+        method: "post",
+        body: JSON.stringify({ email, password }),
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-    })
-    user=await user.json()
-    console.log(user)
-    localStorage.setItem('token',user.data.token)
-    router.push('./User-homepage')
+    );
+    user = await user.json();
+    console.log(user);
+    localStorage.setItem("token", user.data.token);
+    router.push("./User-homepage");
   };
 
   const getLocation = () => {
@@ -127,7 +129,7 @@ export default function Login(props) {
                   required
                   fullWidth
                   id="email"
-                  onChange={e=>setEmail(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value)}
                   label="Email Address"
                   name="email"
                   autoComplete="email"
@@ -138,7 +140,7 @@ export default function Login(props) {
                   required
                   fullWidth
                   name="password"
-                  onChange={e=>setPassword(e.target.value)}
+                  onChange={(e) => setPassword(e.target.value)}
                   label="Password"
                   type="password"
                   id="password"

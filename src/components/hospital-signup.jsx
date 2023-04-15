@@ -108,7 +108,7 @@ export default function HsignUp() {
 
     console.log("data ok");
     let ans = await axios.post(
-      "http://localhost:5000/hospital/register",
+      `${process.env.NEXT_APP_BACKEND_URL}/hospital/register`,
       formData,
       {
         headers: {
