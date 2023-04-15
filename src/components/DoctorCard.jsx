@@ -1,11 +1,19 @@
 import { Avatar, Box, Typography } from "@mui/material";
 import React from "react";
 
-const DoctorCard = ({ name, qual, spec, handleOpen,image }) => {
+const DoctorCard = ({ name, qual, spec, handleOpen, image }) => {
+  const days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
   //console.log(image);
   return (
     <Box
-      //   onClick={handleFunction}
       cursor="pointer"
       _hover={{
         background: "#38B2AC",
