@@ -199,20 +199,13 @@ export default function SignUp() {
                   autoComplete="new-password"
                 />
               </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox value="allowExtraEmails" color="primary" />
-                  }
-                  label="I want to receive updates via email."
-                />
-              </Grid>
-              <Grid item xs={12}>
+
+              {/* <Grid item xs={12}>
                 <Box
                   sx={{
                     display: "flex",
                     flexDirection: "row",
-                    flexWrap: "nowrap",
+                    flexWrap: "wrap",
                     gap: "0.3em",
                   }}
                 >
@@ -223,6 +216,20 @@ export default function SignUp() {
                     name="ImageStyle"
                     onChange={(e) => setImage(e.target.files[0])}
                   />
+                </Box>
+              </Grid> */}
+              <Grid item xs={12}>
+                <Box sx={{ display: "flex", gap: "1em" }}>
+                  <Button variant="contained" component="label">
+                    Upload Image
+                    <input
+                      type="file"
+                      id="file-input"
+                      name="ImageStyle"
+                      hidden
+                      onChange={(e) => setImage(e.target.files[0])}
+                    />
+                  </Button>
                 </Box>
               </Grid>
             </Grid>
