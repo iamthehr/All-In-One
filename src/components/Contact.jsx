@@ -1,6 +1,6 @@
 import { styled, Typography, TextField, Button } from "@mui/material";
 import { Box, Container } from "@mui/system";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 import { Grid } from "@mui/material";
 
@@ -54,10 +54,16 @@ const Contact = () => {
   const phoneRef = useRef("");
   const queryRef = useRef("");
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const handleSubmit = async(e) => {
     e.preventDefault();
+
+    // console.log("submitting")
+    setIsSubmitting(true);
+
     //console.log(emailRef.current, phoneRef.current, queryRef.current);
-    let query=await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/contact`,{
+    let query=await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/contact`,{
       method:'post',
       body:JSON.stringify({email:emailRef.current,
         phone:phoneRef.current,
@@ -67,9 +73,15 @@ const Contact = () => {
       }
     })
     query=await query.json()
+    emailRef.current="";
+    phoneRef.current="";
+    queryRef.current="";
     if(query.status=="success") alert('your query has been sent successfully, you would have received a mail regarding the same')
-    
     else alert('unable to send query')
+
+    setIsSubmitting(false);
+
+    e.target.reset();
   };
 
   return (
@@ -152,10 +164,11 @@ const Contact = () => {
               </Grid>
             </Grid>
             <Button
-              type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2, backgroundColor: "#0F1B4C", color: "#fff" }}
+              type="submit"
+              disabled={isSubmitting}
             >
               Submit
             </Button>
