@@ -125,8 +125,13 @@ const AddDoctor = () => {
         },
       }
     );
-    //ans=await ans.json()
+    // ans = await ans.json();
     console.log(ans);
+
+    if (ans.data.status == "success") {
+      alert("Doctor added successfully");
+      router.push("/Hospital");
+    } else [alert("There was an issue in adding doctor")];
   };
 
   return (

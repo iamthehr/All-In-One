@@ -30,15 +30,21 @@ const UserProfile = () => {
     height: "85vh",
     borderRadius: "15px",
     display: "flex",
-    margin: "1.5rem",
+    margin: "12px",
     justifyContent: "space-around",
     alignItems: "center",
+    flexDirection: "column",
     boxShadow: "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
     backdropFilter: "blur( 3px )",
     webkitFbackdropFilter: " blur( 3px )",
     borderRadius: "10px",
     border: "1px solid rgba( 255, 255, 255, 0.18 )",
+    // ":hover": {
+    //   backgroundColor: "#515c82",
+    //   borderRadius: "5px",
 
+    //   transition: "0.2s ease-in ",
+    // },
     [theme.breakpoints.down("md")]: {
       height: "80vh",
       flexDirection: "column",
@@ -50,6 +56,12 @@ const UserProfile = () => {
       webkitFbackdropFilter: " blur( 3px )",
       borderRadius: "10px",
       border: "1px solid rgba( 255, 255, 255, 0.18 )",
+      ":hover": {
+        backgroundColor: "#515c82",
+        borderRadius: "5px",
+
+        transition: "0.2s ease-in ",
+      },
     },
   }));
   const ProfileBox = styled(Box)(({ theme }) => ({
@@ -281,6 +293,51 @@ const UserProfile = () => {
             </Typography>*/}
           </Box>
         </ProfileBox>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Box
+            sx={{
+              color: "white",
+
+              backgroundColor: "#17275f",
+              borderRadius: "20px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              marginRight: "1rem",
+              marginLeft: "1rem",
+              width: "30%",
+              alignSelf: "center",
+              // ":hover": {
+              //   backgroundColor: "#6a7cba",
+              //   borderRadius: "5px",
+
+              //   cursor: "pointer",
+              //   transition: "0.2s ease-in ",
+              // },
+            }}
+          >
+            <Typography
+              sx={{
+                color: "white",
+                fontSize: { md: "40px", lg: "40px" },
+                ":hover": {
+                  backgroundColor: "#6a7cbt",
+                  color: "black",
+                  cursor: "pointer",
+                  transition: "0.2s ease-in ",
+                },
+              }}
+            >
+              Your appointments
+            </Typography>
+          </Box>
+        </Box>
         <CustomBox>
           <Box
             sx={{
@@ -289,11 +346,6 @@ const UserProfile = () => {
               justifyContent: { md: "center", lg: "space-between" },
             }}
           >
-            <Typography
-              sx={{ color: "white", fontSize: { md: "10px", lg: "25px" } }}
-            >
-              Your current appointments
-            </Typography>
             {/*<Typography
               sx={{ color: "white", fontSize: { md: "10px", lg: "25px" } }}
             >
@@ -331,14 +383,47 @@ const UserProfile = () => {
           </Typography>*/}
             <ol>
               {appointments.map((item) => (
-                <li key={item}>
+                <li style={{ color: "white", fontSize: "20px" }} key={item}>
                   <Typography
                     sx={{
                       color: "white",
                       fontSize: { md: "10px", lg: "25px" },
                     }}
                   >
-                    {`id:${item.id} doctor_name:${item.name} hospital_name:${item.hospital_name} address:${item.address} day:${item.day_of_week} start_time:${item.start_time} end_time:${item.end_time}`}
+                    <Box
+                      sx={{
+                        display: "flex",
+                        padding: "10px",
+                        gap: "30px",
+                        backgroundColor: "#6a7cba",
+                        borderRadius: "10px",
+                        marginTop: "2rem",
+                        ":hover": {
+                          backgroundColor: "#596f94",
+                          borderRadius: "20px",
+                          transition: "0.2s ease-in ",
+                        },
+                      }}
+                    >
+                      <Box sx={{ display: "flex", flexDirection: "column" }}>
+                        <Typography> {`Doctor Name: ${item.name}`}</Typography>
+                        <Typography>
+                          {` Hospital name: ${item.hospital_name}`}
+                        </Typography>
+                        <Typography> {` Day: ${item.day_of_week}`}</Typography>
+                      </Box>
+                      <Box sx={{ display: "flex", flexDirection: "column" }}>
+                        <Typography>
+                          {" "}
+                          {` Beign Time: ${item.start_time}`}
+                        </Typography>
+
+                        <Typography>
+                          {" "}
+                          {` End Time: ${item.end_time}`}
+                        </Typography>
+                      </Box>
+                    </Box>
                   </Typography>
                 </li>
               ))}
