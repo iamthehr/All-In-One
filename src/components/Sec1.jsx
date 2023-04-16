@@ -41,7 +41,7 @@ const House = () => {
 
   return (
     <>
-      <div data-Aos="fade-right" id="Features">
+      <div data-Aos="fade-up" id="Features">
         <CustomBox>
           <CustomContainer>
             <Box>
@@ -76,7 +76,7 @@ const House = () => {
           </CustomContainer>
         </CustomBox>
       </div>
-      <div data-Aos="fade-left">
+      <div data-Aos="fade-up">
         <CustomBox>
           <CustomContainer>
             <Box>

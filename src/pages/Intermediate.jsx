@@ -22,7 +22,7 @@ const House = () => {
     justifyContent: "space-around",
     alignItems: "center",
     [theme.breakpoints.down("md")]: {
-      height: "80vh",
+      height: "auto",
       flexDirection: "column",
       alignItems: "center",
       padding: theme.spacing(3, 3, 0, 3),

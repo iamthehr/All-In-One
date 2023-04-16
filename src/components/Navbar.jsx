@@ -150,19 +150,12 @@ export const Navbar = () => {
           gap: "1rem",
         }}
       >
-        <Link
-          href="/Intermediate"
-          style={{ textDecoration: "none", color: "#5E616A" }}
-        >
-          Login{" "}
-        </Link>
-
         <Link href="/Intermediate" style={{ textDecoration: "none" }}>
           {" "}
           <CustomButton
             backgroundColor="#0F1B4C"
             color="#fff"
-            buttonText="Signup"
+            buttonText="Login"
           />
         </Link>
       </Box>
