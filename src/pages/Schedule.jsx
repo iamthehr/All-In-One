@@ -434,6 +434,7 @@ import {
   Box,
   Button,
   Divider,
+  FormControl,
   IconButton,
   InputBase,
   Modal,
@@ -496,6 +497,44 @@ const Schedule = () => {
     "Friday",
     "Saturday",
   ];
+  useEffect(() => {
+    const do_stuff = async () => {
+      const token = localStorage.getItem("token");
+      //console.log(token)
+      let l = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/mainpage/hospital/searchDoctor`,
+        {
+          method: "post",
+          body: JSON.stringify({ name: "" }),
+          headers: {
+            "Content-Type": "application/json",
+            auth: token,
+          },
+        }
+      );
+      l = await l.json();
+      for (let i in l) {
+        console.log(l[i]);
+        let img = await fetch(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/mainpage/hospital/doctorImages`,
+          {
+            method: "post",
+            body: JSON.stringify({ doctor_id: l[i].id }),
+            headers: {
+              "Content-Type": "application/json",
+              auth: token,
+            },
+          }
+        );
+        img = await img.blob();
+        let newObj = { ...l[i], image: URL.createObjectURL(img) };
+        l[i] = newObj;
+      }
+      console.log(l);
+      setDoctors(l);
+    };
+    do_stuff();
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -575,7 +614,9 @@ const Schedule = () => {
     setAppoitArray(slots);
   }
 
-  async function searchDoctor() {
+  async function searchDoctor(e) {
+    e.preventDefault();
+
     const token = localStorage.getItem("token");
     //console.log(token)
     let l = await fetch(
@@ -612,8 +653,6 @@ const Schedule = () => {
   }
 
   const handleOpen = (item) => {
-    //console.log(item);
-    // console.log(event);
     setSelectedDoctor(item.id);
     setOpen(true);
   };
@@ -624,7 +663,7 @@ const Schedule = () => {
     if (!startTime || !endTime) {
       return;
     }
-    //console.log(startTime + " " + endTime);
+
     const st_time = startTime.$d.toLocaleTimeString(navigator.language, {
       hour: "2-digit",
       minute: "2-digit",
@@ -635,8 +674,6 @@ const Schedule = () => {
       minute: "2-digit",
     });
 
-    //console.log(selectedDoctor)
-    //console.log(st_time + " " + end_time);
     const token = localStorage.getItem("token");
     let l = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/mainpage/hospital/addTimeSlot`,
@@ -657,24 +694,6 @@ const Schedule = () => {
     );
     console.log(l);
     setReRender(!reRender);
-
-    /*setAppoitArray((prevVal) => [
-      ...prevVal,
-      {
-        stTime: startTime.$d
-          .toLocaleTimeString(navigator.language, {
-            hour: "2-digit",
-            minute: "2-digit",
-          }),
-          
-        endTime: endTime.$d
-          .toLocaleTimeString(navigator.language, {
-            hour: "2-digit",
-            minute: "2-digit",
-          })
-          
-      },
-    ]);*/
   };
 
   return (
@@ -698,6 +717,7 @@ const Schedule = () => {
               alignItems: "center",
               width: 400,
             }}
+            onSubmit={(e) => searchDoctor(e)}
           >
             <InputBase
               sx={{ ml: 1, flex: 1 }}
@@ -709,7 +729,7 @@ const Schedule = () => {
               type="button"
               sx={{ p: "10px" }}
               aria-label="search"
-              onClick={searchDoctor}
+              onClick={(e) => searchDoctor(e)}
             >
               <SearchIcon />
             </IconButton>

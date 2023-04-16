@@ -56,6 +56,15 @@ const ShowAppointment = () => {
   const [numOfAppo, setNumOfAppo] = useState(0);
   const [reRender, setReRender] = useState(false);
   const router = useRouter();
+  const days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
 
   useEffect(() => {
     (async () => {
@@ -146,9 +155,10 @@ const ShowAppointment = () => {
     setAppoitArray(slots);
   }
 
-  async function searchDoctor() {
+  async function searchDoctor(e) {
     const token = localStorage.getItem("token");
     //console.log(token)
+    e.preventDefault();
     let l = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/mainpage/hospital/searchDoctor`,
       {
@@ -196,6 +206,7 @@ const ShowAppointment = () => {
         >
           <Paper
             component="form"
+            onSubmit={(e) => searchDoctor(e)}
             sx={{
               p: "2px 4px",
               display: "flex",
@@ -213,7 +224,7 @@ const ShowAppointment = () => {
               type="button"
               sx={{ p: "10px" }}
               aria-label="search"
-              onClick={searchDoctor}
+              onClick={(e) => searchDoctor(e)}
             >
               <SearchIcon />
             </IconButton>
@@ -275,7 +286,7 @@ const ShowAppointment = () => {
                 <b>Weekdays</b>
               </Typography>
               <Box display={"flex"} gap={"1rem"} flexWrap={"wrap"}>
-                <a
+                {/* <a
                   style={{ color: "blue", textDecoration: "underline" }}
                   onClick={() => {
                     setDay("Sunday");
@@ -339,7 +350,22 @@ const ShowAppointment = () => {
                   style={{ color: "blue", textDecoration: "underline" }}
                 >
                   Sat
-                </a>
+                </a> */}
+                {days.map((d) => (
+                  <IconButton
+                    sx={{
+                      width: "2.5rem",
+                      height: "2.5rem",
+                      border: d === day ? "2px solid black" : "",
+                      fontWeight: "bold",
+                      fontSize: "1.1em",
+                    }}
+                    key={d}
+                    onClick={() => setDay(d)}
+                  >
+                    {d.slice(0, 1)}
+                  </IconButton>
+                ))}
               </Box>
               <Box display={"flex"} flexDirection={"column"} gap={"1rem"}>
                 <ul>

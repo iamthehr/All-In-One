@@ -15,7 +15,6 @@ import {
   Button,
   Drawer,
   IconButton,
-  Link,
   List,
   ListItem,
   ListItemButton,
@@ -25,6 +24,8 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import Home from "@/pages";
 
 import { useRouter } from "next/router";
 
@@ -59,7 +60,12 @@ export const Nav3 = (props) => {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {["Home", "Consult", "Contact"].map((text, index) => (
+        {[
+          { name: "Home", Link: "/Hospital" },
+          { name: "Schedule", Link: "/Schedule" },
+          { name: "Add Doctor", Link: "/AddDoctor" },
+          { name: "Show Appointment", Link: "/ShowAppointment" },
+        ].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <ListItemIcon>
@@ -69,7 +75,9 @@ export const Nav3 = (props) => {
                 {index === 3 && <ListAltIcon />}
                 {index === 4 && <ContactsIcon />}
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <Link href={text.Link} style={{ textDecoration: "none" }}>
+                <ListItemText primary={text.name} />
+              </Link>
             </ListItemButton>
           </ListItem>
         ))}
@@ -140,16 +148,16 @@ export const Nav3 = (props) => {
         </Box>
 
         <NavbarLinksBox>
-          <Link href="/Hospital" sx={{ textDecoration: "none" }}>
+          <Link href="/Hospital" style={{ textDecoration: "none" }}>
             <NavLink variant="body2">Home</NavLink>
           </Link>
-          <Link href="/Schedule" sx={{ textDecoration: "none" }}>
+          <Link href="/Schedule" style={{ textDecoration: "none" }}>
             <NavLink variant="body2">Schedule</NavLink>
           </Link>
-          <Link href="/AddDoctor" sx={{ textDecoration: "none" }}>
+          <Link href="/AddDoctor" style={{ textDecoration: "none" }}>
             <NavLink variant="body2">Add Doctor</NavLink>
           </Link>
-          <Link href="/ShowAppointment" sx={{ textDecoration: "none" }}>
+          <Link href="/ShowAppointment" style={{ textDecoration: "none" }}>
             <NavLink variant="body2">Show Appointment</NavLink>
           </Link>
 

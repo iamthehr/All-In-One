@@ -8,7 +8,7 @@ import Image from "next/image";
 import harsh from "../media/harsh.jpg";
 import aditya from "../media/aditya.jpeg";
 import Link from "next/link";
-import arvindh from "../media/arvindh.jpeg";
+import arvindh from "../media/Arvindh.jpeg";
 const About = () => {
   const CustomContainer = styled(Container)(({ theme }) => ({
     backgroundColor: "#000336",
