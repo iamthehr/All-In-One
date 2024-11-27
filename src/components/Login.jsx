@@ -7,6 +7,7 @@ import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import { CircularProgress, Backdrop } from "@mui/material";
 
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
@@ -46,6 +47,7 @@ const theme = createTheme({
 export default function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   //const navigate=useNavigate()
   const router = useRouter();
 
@@ -66,6 +68,7 @@ export default function Login(props) {
       alert("enter valid email");
       return;
     }
+    setLoading(true);
 
     let user = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/user/login`,
@@ -78,9 +81,18 @@ export default function Login(props) {
       }
     );
     user = await user.json();
+    if (user.status == "error") {
+      alert("incorrect credentials");
+      setEmail("");
+      setPassword("");
+      setLoading(false);
+      return;
+    }
     console.log(user);
     localStorage.setItem("token", user.data.token);
+
     router.push("./User-homepage");
+    setLoading(false);
   };
 
   const getLocation = () => {
@@ -91,6 +103,9 @@ export default function Login(props) {
 
   return (
     <ThemeProvider theme={theme}>
+      <Backdrop open={loading} style={{ zIndex: 1000, color: "#fff" }}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <Container
         component="main"
         maxWidth="xs"
@@ -128,6 +143,7 @@ export default function Login(props) {
                 <TextField
                   required
                   fullWidth
+                  value={email}
                   id="email"
                   onChange={(e) => setEmail(e.target.value)}
                   label="Email Address"
@@ -139,6 +155,7 @@ export default function Login(props) {
                 <TextField
                   required
                   fullWidth
+                  value={password}
                   name="password"
                   onChange={(e) => setPassword(e.target.value)}
                   label="Password"
@@ -159,13 +176,13 @@ export default function Login(props) {
               Login
             </Button>
 
-            <Grid container justifyContent="flex-end">
+            {/* <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="#" variant="body2">
                   Forgot password?
                 </Link>
               </Grid>
-            </Grid>
+            </Grid> */}
           </Box>
         </Box>
         <Copyright sx={{ mt: 5 }} />

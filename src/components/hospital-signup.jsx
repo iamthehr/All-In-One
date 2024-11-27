@@ -5,7 +5,8 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-
+import { Backdrop } from "@mui/material";
+import { CircularProgress } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -18,6 +19,8 @@ import dynamic from "next/dynamic";
 
 import { useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
+import { Snackbar, Alert } from "@mui/material";
 
 const LocationPicker = dynamic(
   () => import("./LocationPicker"), // replace '@components/map' with your component's location
@@ -62,8 +65,12 @@ export default function HsignUp() {
   const [password, setPassword] = useState("");
   const [cnfpassword, setcnfPassword] = useState("");
   const [image, setImage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const [coords, setCoords] = useState(null);
+
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -97,6 +104,7 @@ export default function HsignUp() {
       return;
     }
 
+    setLoading(true);
     const formData = new FormData();
     formData.append("image", image);
     formData.append("name", hospital);
@@ -116,6 +124,14 @@ export default function HsignUp() {
         },
       }
     );
+    if (ans.status == "error") {
+      alert("error in registering hospital");
+      setLoading(false);
+      return;
+    }
+    setSuccess(true);
+    router.push("/");
+    setLoading(false);
   };
 
   return (
@@ -229,14 +245,14 @@ export default function HsignUp() {
                   </Button>
                 </Box>
               </Grid>
-              <Grid item xs={12}>
+              {/* <Grid item xs={12}>
                 <FormControlLabel
                   control={
                     <Checkbox value="allowExtraEmails" color="primary" />
                   }
                   label="I want to receive updates via email."
                 />
-              </Grid>
+              </Grid> */}
             </Grid>
 
             <Button
@@ -249,17 +265,29 @@ export default function HsignUp() {
               Sign Up
             </Button>
 
-            <Grid container justifyContent="flex-end">
+            {/* <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="/Tabs-Hospital" style={{ color: "#0F1B4C" }}>
                   Already have an account? Login
                 </Link>
               </Grid>
-            </Grid>
+            </Grid> */}
           </Box>
         </Box>
         <Copyright sx={{ mt: 5 }} />
       </Container>
+      <Snackbar
+        open={success}
+        autoHideDuration={3000}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert severity="success" sx={{ width: "100%" }}>
+          Hospital Registered Successfully
+        </Alert>
+      </Snackbar>
+      <Backdrop open={loading} style={{ zIndex: 1000, color: "#fff" }}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </ThemeProvider>
   );
 }

@@ -11,7 +11,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
+import { Backdrop, CircularProgress } from "@mui/material";
 import { useState } from "react";
 import { useRouter } from "next/router";
 
@@ -44,6 +44,7 @@ const theme = createTheme({
 export default function Hlogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   /*const handleSubmit = (event) => {
@@ -66,6 +67,7 @@ export default function Hlogin() {
       alert("enter valid email");
       return;
     }
+    setLoading(true);
 
     let user = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/hospital/login`,
@@ -78,9 +80,15 @@ export default function Hlogin() {
       }
     );
     user = await user.json();
+    if (user.status == "error") {
+      alert("incorrect credentials");
+      setLoading(false);
+      return;
+    }
     console.log(user);
     localStorage.setItem("token", user.data.token);
     router.push("./Hospital");
+    setLoading(false);
   };
 
   return (
@@ -151,17 +159,20 @@ export default function Hlogin() {
               </Button>
             </Link>
 
-            <Grid container justifyContent="flex-end">
+            {/* <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="#" variant="body2">
                   Forgot password?
                 </Link>
               </Grid>
-            </Grid>
+            </Grid> */}
           </Box>
         </Box>
         <Copyright sx={{ mt: 5 }} />
       </Container>
+      <Backdrop open={loading} style={{ zIndex: 1000, color: "#fff" }}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </ThemeProvider>
   );
 }

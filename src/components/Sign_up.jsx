@@ -15,10 +15,12 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
 // import { useRouter } from "next/router";
 
+import { Backdrop, CircularProgress } from "@mui/material";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { useRouter } from "next/router";
+import { Snackbar, Alert } from "@mui/material";
 
 function Copyright(props) {
   return (
@@ -59,10 +61,13 @@ export default function SignUp() {
   const [password, setPassword] = useState("");
   const [cnfpassword, setcnfPassword] = useState("");
   const [image, setImage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const router = useRouter();
 
   const handleSubmit = async (event) => {
+    // setLoading(true)
     event.preventDefault();
     /*const data = new FormData(event.currentTarget);
     console.log({
@@ -87,7 +92,7 @@ export default function SignUp() {
       alert("enter valid email");
       return;
     }
-
+    setLoading(true);
     const formData = new FormData();
     formData.append("image", image);
     formData.append("name", fname + " " + lname);
@@ -102,12 +107,20 @@ export default function SignUp() {
         },
       }
     );
-    console.log(ans);
+    if (ans.status == "error") {
+      alert("error in registering user");
+      return;
+    }
+    setSuccess(true);
     router.push("/");
+    setLoading(false);
   };
 
   return (
     <ThemeProvider theme={theme}>
+      <Backdrop open={loading} style={{ zIndex: 1000, color: "#fff" }}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <Container
         component="main"
         maxWidth="xs"
@@ -199,14 +212,14 @@ export default function SignUp() {
                   autoComplete="new-password"
                 />
               </Grid>
-              <Grid item xs={12}>
+              {/* <Grid item xs={12}>
                 <FormControlLabel
                   control={
                     <Checkbox value="allowExtraEmails" color="primary" />
                   }
                   label="I want to receive updates via email."
                 />
-              </Grid>
+              </Grid> */}
               <Grid item xs={12}>
                 <Box
                   sx={{
@@ -237,7 +250,7 @@ export default function SignUp() {
               Sign Up
             </Button>
 
-            <Grid container justifyContent="flex-end">
+            {/* <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link
                   href="/Tabs-User"
@@ -250,11 +263,20 @@ export default function SignUp() {
                   Already have an account? Sign in
                 </Link>
               </Grid>
-            </Grid>
+            </Grid> */}
           </Box>
         </Box>
         <Copyright sx={{ mt: 5 }} />
       </Container>
+      <Snackbar
+        open={success}
+        autoHideDuration={3000}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert severity="success" sx={{ width: "100%" }}>
+          Success! The operation was completed.
+        </Alert>
+      </Snackbar>
     </ThemeProvider>
   );
 }
