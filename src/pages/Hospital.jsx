@@ -50,8 +50,14 @@ function Hospital() {
   return (
     <ThemeProvider theme={theme}>
       <Nav3 />
-      <Box display={"flex"} alignItems={"center"} justifyContent={"center"}>
-        <Typography variant="h1">{`Welcome ${profile}`}</Typography>
+      <Box
+        display={"flex"}
+        alignItems={"center"}
+        justifyContent={"center"}
+        padding={"1.2rem"}
+        textAlign={"justify"}
+      >
+        <Typography variant="h2">{`Welcome ${profile}`}</Typography>
       </Box>
       <AdminSec1 />
       <AdminSec2 />

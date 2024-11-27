@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 
-import Link from "@mui/material/Link";
+// import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 
@@ -16,6 +16,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 
 import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
+import Link from "next/link";
 
 function Copyright(props) {
   return (
@@ -25,7 +26,7 @@ function Copyright(props) {
       align="center"
       {...props}
     >
-      <Link color="inherit" href="/" sx={{ textDecoration: "none" }}>
+      <Link color="inherit" href="/" style={{ textDecoration: "none" }}>
         AllinONE
       </Link>{" "}
       {new Date().getFullYear()}

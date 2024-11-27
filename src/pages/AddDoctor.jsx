@@ -5,7 +5,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
+// import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -21,6 +21,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Nav3 from "@/components/Nav3";
+import Link from "next/link";
 function Copyright(props) {
   return (
     <Typography
@@ -125,8 +126,13 @@ const AddDoctor = () => {
         },
       }
     );
-    //ans=await ans.json()
+    // ans = await ans.json();
     console.log(ans);
+
+    if (ans.data.status == "success") {
+      alert("Doctor added successfully");
+      router.push("/Hospital");
+    } else [alert("There was an issue in adding doctor")];
   };
 
   return (

@@ -78,7 +78,7 @@ const Hero = () => {
               experienced doctors in your area with our user-friendly platform.
               Discover quality healthcare today.
             </Typography>
-            <Box data-aos="fade-right">
+            <Box data-aos="fade-up">
               <Link href="/User-homepage" style={{ textDecoration: "none" }}>
                 <CustomButton
                   backgroundColor="#0F1B4C"
@@ -101,7 +101,7 @@ const Hero = () => {
               order: { xs: -1, md: 0 },
               maxWidth: "600px",
             }}
-            data-aos="fade-left"
+            data-aos="fade-up"
           >
             <Image
               src={heroImg2}
